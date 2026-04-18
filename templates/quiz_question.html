@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='logQuiz.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="main_container quiz_container">
+    <div class="progress_indicator">
+        {% if question.part == 1 %}
+            Part 1 — Progressive Decoding · Round {{ question.round }}
+        {% else %}
+            Part 2 — Scenario
+        {% endif %}
+        &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }}
+    </div>
+
+    <div class="quiz_header">
+        <h1 class="quiz_title">{{ question.title }}</h1>
+        <p class="quiz_prompt">{{ question.prompt }}</p>
+    </div>
+
+    {% if echoed_description %}
+    <div class="echo_description">
+        <strong>You said:</strong> {{ echoed_description }}<br>
+        Pick the image that fits this description.
+    </div>
+    {% endif %}
+
+    <form method="POST" id="quiz_form">
+        <div class="option-grid">
+            {% for opt in question.options %}
+            <label class="option-card">
+                <input type="radio" name="answer" value="{{ opt.key }}">
+                <span class="option-key">{{ opt.key }}</span>
+                <span class="option-text">{{ opt.text }}</span>
+                {% if opt.image %}
+                <img class="option-image" src="{{ opt.image }}" alt="{{ opt.text }}">
+                {% endif %}
+            </label>
+            {% endfor %}
+        </div>
+
+        <div class="quiz_submit">
+            <button type="submit">Submit Answer</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,254 @@
+/* ===== Shared layout (kept in sync with the original root main.css) ===== */
+.main_container {
+    margin: 10px auto;
+    width: 900px;
+    max-width: 95%;
+}
+
+body {
+    background: #F5F0E1;
+    color: #1F2A3D;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== Quiz — owned by Yu Qiu (Part 1) and Alice (Part 2) ===== */
+.quiz_container {
+    padding: 30px;
+}
+
+.progress_indicator {
+    font-size: 12px;
+    color: #8a7a5f;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.quiz_header {
+    border-bottom: 3px solid #C8932B;
+    padding-bottom: 12px;
+    margin-bottom: 22px;
+}
+
+.quiz_title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1F2A3D;
+    margin: 0;
+}
+
+.quiz_prompt {
+    font-size: 16px;
+    color: #4a5363;
+    margin: 10px 0 0;
+    line-height: 1.5;
+}
+
+.echo_description {
+    background: #faf3df;
+    border-left: 4px solid #C8932B;
+    padding: 12px 18px;
+    font-style: italic;
+    border-radius: 4px;
+    margin-bottom: 22px;
+    color: #4a3914;
+    line-height: 1.5;
+}
+
+.option-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.option-card {
+    background: #fff;
+    border: 2px solid #e5dfc9;
+    border-left: 5px solid #C8932B;
+    border-radius: 10px;
+    padding: 18px;
+    cursor: pointer;
+    transition: all .15s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
+    display: block;
+}
+
+.option-card:hover {
+    border-color: #C8932B;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+}
+
+.option-card.selected {
+    background: #fff8e6;
+    box-shadow: 0 0 0 3px rgba(200, 147, 43, .35);
+}
+
+.option-card input[type="radio"] {
+    display: none;
+}
+
+.option-key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: #1F2A3D;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 10px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.option-text {
+    display: inline;
+    font-size: 15px;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.option-image {
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 12px;
+    display: block;
+}
+
+.quiz_submit {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.quiz_submit button {
+    background: #C8932B;
+    color: #fff;
+    border: none;
+    padding: 12px 42px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.quiz_submit button:hover {
+    background: #a87920;
+}
+
+/* ===== Feedback page ===== */
+.feedback_badge {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.feedback_badge.correct { background: #2f7d32; color: #fff; }
+.feedback_badge.incorrect { background: #b02a2a; color: #fff; }
+
+.feedback_grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.feedback_image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .1);
+}
+
+.feedback_card {
+    background: #fff;
+    border-left: 5px solid #C8932B;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.feedback_card h3 {
+    font-size: 14px;
+    margin: 0 0 10px;
+    color: #C8932B;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.feedback_card p { margin: 6px 0; line-height: 1.55; }
+
+.option_review {
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+}
+
+.option_review.safe { background: #e7f4e8; border-left: 4px solid #2f7d32; }
+.option_review.avoid { background: #fbe8e8; border-left: 4px solid #b02a2a; }
+
+.option_review .tag {
+    float: right;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+}
+.option_review.safe .tag { color: #2f7d32; }
+.option_review.avoid .tag { color: #b02a2a; }
+
+.next_button {
+    margin-top: 28px;
+    text-align: right;
+}
+
+.next_button a {
+    display: inline-block;
+    background: #1F2A3D;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.next_button a:hover { background: #0f1a2b; }
+
+/* ===== Final result page ===== */
+.result_hero { text-align: center; padding: 30px 0; }
+
+.result_score {
+    font-size: 64px;
+    font-weight: 800;
+    color: #C8932B;
+    margin: 12px 0 6px;
+    line-height: 1;
+}
+
+.result_quote {
+    font-size: 18px;
+    font-style: italic;
+    color: #4a5363;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.result_row {
+    background: #fff;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 5px solid #2f7d32;
+    font-size: 14px;
+}
+
+.result_row.wrong { border-left-color: #b02a2a; }

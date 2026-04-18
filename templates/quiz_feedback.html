@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main_container quiz_container">
+    <div class="progress_indicator">
+        {% if question.part == 1 %}
+            Part 1 — Progressive Decoding · Round {{ question.round }}
+        {% else %}
+            Part 2 — Scenario
+        {% endif %}
+        &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }} · Answer
+    </div>
+
+    <div class="quiz_header">
+        <h1 class="quiz_title">{{ question.title }} — Answer</h1>
+    </div>
+
+    <span class="feedback_badge {% if is_correct %}correct{% else %}incorrect{% endif %}">
+        {% if is_correct %}✓ Correct!{% else %}✗ Not quite — keep learning!{% endif %}
+    </span>
+
+    <div class="feedback_grid">
+        <div class="feedback_image">
+            <img src="{{ question.correct_image }}" alt="{{ question.dish }}">
+        </div>
+
+        <div>
+            <div class="feedback_card">
+                <h3>Correct Answer</h3>
+                <p>
+                    <strong>{{ question.correct }}</strong>
+                    {% for opt in question.options %}
+                        {% if opt.key == question.correct %}
+                            — {{ opt.text }}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                {% if chosen and chosen != question.correct %}
+                <p style="color:#8a6d3b;">You chose: <strong>{{ chosen }}</strong></p>
+                {% endif %}
+            </div>
+
+            {% if question.step == 'scenario' %}
+            <div class="feedback_card">
+                <h3>Why — All Four Options</h3>
+                {% for opt in question.options %}
+                <div class="option_review {% if opt.tag == 'AVOID' %}avoid{% else %}safe{% endif %}">
+                    <span class="tag">{{ opt.tag }}</span>
+                    <strong>{{ opt.key }}) {{ opt.name }}</strong> — {{ opt.detail }}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="feedback_card">
+                <h3>Why</h3>
+                <p>{{ question.explanation }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="next_button">
+        <a href="{{ next_url }}">
+            {% if question_number < total_questions %}Next Question →{% else %}See My Results →{% endif %}
+        </a>
+    </div>
+</div>
+{% endblock %}

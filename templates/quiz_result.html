@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main_container quiz_container">
+    <div class="quiz_header">
+        <h1 class="quiz_title" style="text-align:center;">Your Results</h1>
+    </div>
+
+    <div class="result_hero">
+        <p class="result_quote">
+            "You learned Chinese regional styles and cooking methods —
+            now you can predict how unfamiliar dishes will taste before you order."
+        </p>
+        <div class="result_score">{{ score }} / {{ total }}</div>
+        <p>points achieved across progressive decoding and scenario application.</p>
+    </div>
+
+    <div class="feedback_card">
+        <h3>Review</h3>
+        {% for row in review %}
+        <div class="result_row {% if not row.correct %}wrong{% endif %}">
+            <strong>Q{{ row.question.id }} — {{ row.question.dish }}</strong><br>
+            Your answer: <strong>{{ row.chosen or '(unanswered)' }}</strong>
+            &nbsp;·&nbsp; Correct: <strong>{{ row.question.correct }}</strong>
+            &nbsp;·&nbsp; {% if row.correct %}✓{% else %}✗{% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="next_button" style="text-align:center;">
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

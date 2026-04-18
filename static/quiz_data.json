@@ -1,0 +1,97 @@
+{
+  "total_points": 5,
+  "questions": [
+    {
+      "id": 1,
+      "part": 1,
+      "round": 1,
+      "step": "description",
+      "dish": "Hunan-style Stir-fried Beef",
+      "title": "Part 1, Round 1: What Is Hunan-style Stir-fried Beef?",
+      "prompt": "Step 1: Use the style + method vocabulary you learned. Which description matches Hunan-style Stir-fried Beef?",
+      "options": [
+        {"key": "A", "text": "Tender beef slow-braised in dark soy and rock sugar until glossy and sweet."},
+        {"key": "B", "text": "Beef cubes simmered in a numbing Sichuan peppercorn broth with chili oil."},
+        {"key": "C", "text": "Sliced beef quickly tossed in a hot wok with smoky dried chilies, garlic and scallion — dry, fragrant, and pungently spicy."},
+        {"key": "D", "text": "Sliced beef gently steamed with ginger and scallion, light and clear in flavor."}
+      ],
+      "correct": "C",
+      "correct_image": "https://placehold.co/640x420/A03D20/ffffff?text=Hunan+Stir-fried+Beef",
+      "explanation": "Hunan style = chili-garlic-smoky, dry not saucy. Stir-fried = fast wok-toss with fragrant, slightly charred edges. Together: a dry, intensely spicy plate of wok-tossed beef with dried chilies."
+    },
+    {
+      "id": 2,
+      "part": 1,
+      "round": 1,
+      "step": "image",
+      "dish": "Hunan-style Stir-fried Beef",
+      "title": "Part 1, Round 1: What Does It Look Like?",
+      "prompt": "Step 2: Now pick the image that matches Hunan-style Stir-fried Beef.",
+      "echo_previous_description": 1,
+      "options": [
+        {"key": "A", "text": "Glossy red-braised pork belly in dark sauce.", "image": "https://placehold.co/600x380/6B2E17/ffffff?text=Option+A"},
+        {"key": "B", "text": "Mapo tofu in a shallow bowl with red chili oil.", "image": "https://placehold.co/600x380/8C3A29/ffffff?text=Option+B"},
+        {"key": "C", "text": "Dry-tossed chili beef on a flat plate, visible dried chilies and scallions.", "image": "https://placehold.co/600x380/A03D20/ffffff?text=Option+C"},
+        {"key": "D", "text": "A whole steamed fish with ginger slivers on a long platter.", "image": "https://placehold.co/600x380/6F8E7A/ffffff?text=Option+D"}
+      ],
+      "correct": "C",
+      "correct_image": "https://placehold.co/640x420/A03D20/ffffff?text=Hunan+Stir-fried+Beef",
+      "explanation": "The dish is dry, wok-tossed with chilies — not saucy like (A), not in broth like (B), not steamed like (D)."
+    },
+    {
+      "id": 3,
+      "part": 1,
+      "round": 2,
+      "step": "description",
+      "dish": "Cantonese Steamed Fish",
+      "title": "Part 1, Round 2: What Is Cantonese Steamed Fish?",
+      "prompt": "Step 1: Which description matches Cantonese Steamed Fish?",
+      "options": [
+        {"key": "A", "text": "Whole fish deep-fried until crispy, then drowned in a thick sweet-and-sour sauce."},
+        {"key": "B", "text": "A whole fresh fish gently steamed with ginger and scallion, finished with hot oil and a light soy drizzle — clean, delicate, ingredient-forward."},
+        {"key": "C", "text": "Fish fillet braised in a fiery Sichuan chili-bean paste with numbing peppercorn."},
+        {"key": "D", "text": "Salted fish cured for weeks then pan-fried with garlic, intensely briny."}
+      ],
+      "correct": "B",
+      "correct_image": "https://placehold.co/640x420/EAE2D0/1F2A3D?text=Cantonese+Steamed+Fish",
+      "explanation": "Cantonese style = light, fresh, ingredient-forward. Steamed = gentle moist heat preserves the fish's delicate texture, no heavy sauce. Together: a clean, pale-colored plated fish with simple aromatics on top."
+    },
+    {
+      "id": 4,
+      "part": 1,
+      "round": 2,
+      "step": "image",
+      "dish": "Cantonese Steamed Fish",
+      "title": "Part 1, Round 2: What Does It Look Like?",
+      "prompt": "Step 2: Now pick the image that matches Cantonese Steamed Fish.",
+      "echo_previous_description": 3,
+      "options": [
+        {"key": "A", "text": "Deep-fried whole fish glazed in glossy red-orange sweet-and-sour sauce.", "image": "https://placehold.co/600x380/C24D1B/ffffff?text=Option+A"},
+        {"key": "B", "text": "Whole steamed fish on a long white platter, ginger and scallion slivers on top.", "image": "https://placehold.co/600x380/EAE2D0/1F2A3D?text=Option+B"},
+        {"key": "C", "text": "Fish in a deep red bowl of bubbling chili-oil broth with peppercorns.", "image": "https://placehold.co/600x380/A02020/ffffff?text=Option+C"},
+        {"key": "D", "text": "Shredded salted fish with garlic in a small ceramic dish.", "image": "https://placehold.co/600x380/8B7355/ffffff?text=Option+D"}
+      ],
+      "correct": "B",
+      "correct_image": "https://placehold.co/640x420/EAE2D0/1F2A3D?text=Cantonese+Steamed+Fish",
+      "explanation": "The chosen dish is steamed, pale, with simple aromatics — not deep-fried with heavy sauce (A), not in a spicy broth (C), not cured-salted (D)."
+    },
+    {
+      "id": 5,
+      "part": 2,
+      "round": 1,
+      "step": "scenario",
+      "dish": "Friend cannot eat spicy food",
+      "title": "Part 2: Your Friend Cannot Eat Spicy Food",
+      "prompt": "Your friend cannot eat spicy food. You are ordering main courses together. Which dish must they AVOID?",
+      "options": [
+        {"key": "A", "name": "Cantonese Steamed Sea Bass", "price": "$28", "text": "Cantonese Steamed Sea Bass — $28", "detail": "Cantonese = light / fresh. Steamed = gentle moist heat. No chili.", "tag": "SAFE"},
+        {"key": "B", "name": "Hunan-style Stir-fried Beef", "price": "$24", "text": "Hunan-style Stir-fried Beef — $24", "detail": "Hunan prefix = chili-garlic-smoky cuisine, almost always spicy. Contains dried and fresh chilies.", "tag": "AVOID"},
+        {"key": "C", "name": "Stir-fried Seasonal Greens (qing-chao)", "price": "$14", "text": "Stir-fried Seasonal Greens (qing-chao) — $14", "detail": "qing-chao literally 'clear stir-fry': just oil, garlic, salt. Not spicy.", "tag": "SAFE"},
+        {"key": "D", "name": "Red-braised Pork Belly", "price": "$22", "text": "Red-braised Pork Belly — $22", "detail": "Soy + rock sugar braise, sweet-savory. No chili.", "tag": "SAFE"}
+      ],
+      "correct": "B",
+      "correct_image": "https://placehold.co/640x420/A03D20/ffffff?text=Hunan+Stir-fried+Beef",
+      "explanation": "The Hunan prefix signals a chili-heavy regional style. Apply the style + method vocabulary and you can rule out the safe options immediately."
+    }
+  ]
+}

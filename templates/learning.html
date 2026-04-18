@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{ url_for('static', filename='logLearning.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="main_container">
+    <div id="learning_container"></div>
+</div>
+{% endblock %}

@@ -2,3 +2,19 @@
     margin: 10px;
     width: 800px;
 }
+
+#learning_container {
+    width: 100%;
+}
+
+img {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

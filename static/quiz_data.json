@@ -1,97 +1,76 @@
 {
-  "total_points": 5,
+  "total_points": 4,
   "questions": [
     {
       "id": 1,
-      "part": 1,
-      "round": 1,
-      "step": "description",
-      "dish": "Hunan-style Stir-fried Beef",
-      "title": "Part 1, Round 1: What Is Hunan-style Stir-fried Beef?",
-      "prompt": "Step 1: Use the style + method vocabulary you learned. Which description matches Hunan-style Stir-fried Beef?",
+      "part": "hook",
+      "step": "image",
+      "dish": "Fish-Fragrant Shredded Pork",
+      "title": "The Hook: What Is \u9c7c\u9999\u8089\u4e1d?",
+      "prompt": "\u9c7c\u9999\u8089\u4e1d literally means \u201cFish-Fragrant Shredded Pork.\u201d Take a guess \u2014 which of these dishes do you think it is?",
       "options": [
-        {"key": "A", "text": "Tender beef slow-braised in dark soy and rock sugar until glossy and sweet."},
-        {"key": "B", "text": "Beef cubes simmered in a numbing Sichuan peppercorn broth with chili oil."},
-        {"key": "C", "text": "Sliced beef quickly tossed in a hot wok with smoky dried chilies, garlic and scallion — dry, fragrant, and pungently spicy."},
-        {"key": "D", "text": "Sliced beef gently steamed with ginger and scallion, light and clear in flavor."}
+        {"key": "A", "text": "Whole fish gently steamed with ginger, scallion, and a light soy drizzle.", "image": "/static/images/quiz1_A_steamed_fish.png"},
+        {"key": "B", "text": "Twice-cooked pork belly stir-fried with green peppers \u2014 smoky, rich, and savory.", "image": "/static/images/quiz1_B_huiguo_rou.jpg"},
+        {"key": "C", "text": "Stir-fried shredded pork in a glossy reddish-brown sweet-sour-savory sauce \u2014 no fish at all.", "image": "/static/images/quiz1_C_yuxiang.png"},
+        {"key": "D", "text": "Shredded beef quickly wok-tossed with fresh green chili strips.", "image": "/static/images/quiz1_D_stir_fried.jpg"}
       ],
       "correct": "C",
-      "correct_image": "https://placehold.co/640x420/A03D20/ffffff?text=Hunan+Stir-fried+Beef",
-      "explanation": "Hunan style = chili-garlic-smoky, dry not saucy. Stir-fried = fast wok-toss with fragrant, slightly charred edges. Together: a dry, intensely spicy plate of wok-tossed beef with dried chilies."
+      "correct_image": "/static/images/quiz1_C_yuxiang.png",
+      "explanation": "\u9c7c\u9999 (y\u00fa-xi\u0101ng) means \u2018fish-fragrant\u2019 \u2014 but there is NO fish in this dish. It is a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies. By the end of this lesson you\u2019ll know exactly how to decode names like this."
     },
     {
       "id": 2,
       "part": 1,
       "round": 1,
-      "step": "image",
+      "step": "combined",
       "dish": "Hunan-style Stir-fried Beef",
-      "title": "Part 1, Round 1: What Does It Look Like?",
-      "prompt": "Step 2: Now pick the image that matches Hunan-style Stir-fried Beef.",
-      "echo_previous_description": 1,
+      "title": "Quiz 1: What Is Hunan-style Stir-fried Beef?",
+      "prompt": "Each option shows a different beef preparation. Which one matches Hunan-style Stir-fried Beef?",
       "options": [
-        {"key": "A", "text": "Glossy red-braised pork belly in dark sauce.", "image": "https://placehold.co/600x380/6B2E17/ffffff?text=Option+A"},
-        {"key": "B", "text": "Mapo tofu in a shallow bowl with red chili oil.", "image": "https://placehold.co/600x380/8C3A29/ffffff?text=Option+B"},
-        {"key": "C", "text": "Dry-tossed chili beef on a flat plate, visible dried chilies and scallions.", "image": "https://placehold.co/600x380/A03D20/ffffff?text=Option+C"},
-        {"key": "D", "text": "A whole steamed fish with ginger slivers on a long platter.", "image": "https://placehold.co/600x380/6F8E7A/ffffff?text=Option+D"}
+        {"key": "A", "text": "Black pepper beef tenderloin \u2014 pan-seared strips in a savory dark sauce with onion.", "image": "/static/images/quiz2_A_hei_jiao_niu.jpg"},
+        {"key": "B", "text": "Red-braised beef chunks slow-cooked in dark soy and rock sugar until glossy.", "image": "/static/images/quiz2_B_braised_beef.jpg"},
+        {"key": "C", "text": "Sliced beef quickly wok-tossed with smoky dried chilies, garlic and scallion \u2014 dry, fragrant, pungently spicy.", "image": "/static/images/quiz2_C_hunan_beef.jpg"},
+        {"key": "D", "text": "Sliced beef simmered in a numbing Sichuan peppercorn and chili-oil broth.", "image": "/static/images/quiz2_D_shuizhu_beef.jpg"}
       ],
       "correct": "C",
-      "correct_image": "https://placehold.co/640x420/A03D20/ffffff?text=Hunan+Stir-fried+Beef",
-      "explanation": "The dish is dry, wok-tossed with chilies — not saucy like (A), not in broth like (B), not steamed like (D)."
+      "correct_image": "/static/images/quiz2_C_hunan_beef.jpg",
+      "explanation": "Hunan (\u6e58) = chili-garlic-smoky, dry not saucy \u2014 direct chili heat with no numbing. Stir-fried (\u7206\u7092) = fast wok-toss giving fragrant, slightly charred edges. Together: a dry, intensely spicy plate. Black pepper (A) is a Western-influenced sauce style. Red-braised (B) is slow and saucy. Sichuan broth (D) numbs rather than burns."
     },
     {
       "id": 3,
       "part": 1,
       "round": 2,
-      "step": "description",
+      "step": "combined",
       "dish": "Cantonese Steamed Fish",
-      "title": "Part 1, Round 2: What Is Cantonese Steamed Fish?",
-      "prompt": "Step 1: Which description matches Cantonese Steamed Fish?",
+      "title": "Quiz 2: What Is Cantonese Steamed Fish?",
+      "prompt": "Each option shows a different fish preparation. Which one matches Cantonese Steamed Fish?",
       "options": [
-        {"key": "A", "text": "Whole fish deep-fried until crispy, then drowned in a thick sweet-and-sour sauce."},
-        {"key": "B", "text": "A whole fresh fish gently steamed with ginger and scallion, finished with hot oil and a light soy drizzle — clean, delicate, ingredient-forward."},
-        {"key": "C", "text": "Fish fillet braised in a fiery Sichuan chili-bean paste with numbing peppercorn."},
-        {"key": "D", "text": "Salted fish cured for weeks then pan-fried with garlic, intensely briny."}
+        {"key": "A", "text": "West Lake Vinegar Fish \u2014 whole fish in a glossy sweet-sour vinegar sauce, a Hangzhou classic.", "image": "/static/images/quiz3_A_xihu_cu_yu.jpg"},
+        {"key": "B", "text": "Whole fresh fish gently steamed with ginger and scallion, finished with hot oil and a light soy drizzle \u2014 clean and delicate.", "image": "/static/images/quiz3_B_cantonese_fish.jpg"},
+        {"key": "C", "text": "Sichuan water-boiled fish \u2014 fish fillet in a deep red bowl of bubbling chili-oil broth with peppercorns.", "image": "/static/images/quiz3_C_shuizhu_fish.jpg"},
+        {"key": "D", "text": "Shunde raw fish \u2014 paper-thin slices of fresh fish served with ginger, scallion and sesame oil.", "image": "/static/images/quiz3_D_shunde_fish.svg"}
       ],
       "correct": "B",
-      "correct_image": "https://placehold.co/640x420/EAE2D0/1F2A3D?text=Cantonese+Steamed+Fish",
-      "explanation": "Cantonese style = light, fresh, ingredient-forward. Steamed = gentle moist heat preserves the fish's delicate texture, no heavy sauce. Together: a clean, pale-colored plated fish with simple aromatics on top."
+      "correct_image": "/static/images/quiz3_B_cantonese_fish.jpg",
+      "explanation": "Cantonese (\u7ca4) = light, fresh, ingredient-forward. Steamed (\u84b8) = gentle moist heat, no oil crust, no heavy sauce. Together: a clean pale dish with simple aromatics. West Lake fish (A) is Hangzhou-style with sauce. Sichuan water-boiled (C) is intensely spicy. Shunde raw fish (D) is served uncooked."
     },
     {
       "id": 4,
-      "part": 1,
-      "round": 2,
-      "step": "image",
-      "dish": "Cantonese Steamed Fish",
-      "title": "Part 1, Round 2: What Does It Look Like?",
-      "prompt": "Step 2: Now pick the image that matches Cantonese Steamed Fish.",
-      "echo_previous_description": 3,
-      "options": [
-        {"key": "A", "text": "Deep-fried whole fish glazed in glossy red-orange sweet-and-sour sauce.", "image": "https://placehold.co/600x380/C24D1B/ffffff?text=Option+A"},
-        {"key": "B", "text": "Whole steamed fish on a long white platter, ginger and scallion slivers on top.", "image": "https://placehold.co/600x380/EAE2D0/1F2A3D?text=Option+B"},
-        {"key": "C", "text": "Fish in a deep red bowl of bubbling chili-oil broth with peppercorns.", "image": "https://placehold.co/600x380/A02020/ffffff?text=Option+C"},
-        {"key": "D", "text": "Shredded salted fish with garlic in a small ceramic dish.", "image": "https://placehold.co/600x380/8B7355/ffffff?text=Option+D"}
-      ],
-      "correct": "B",
-      "correct_image": "https://placehold.co/640x420/EAE2D0/1F2A3D?text=Cantonese+Steamed+Fish",
-      "explanation": "The chosen dish is steamed, pale, with simple aromatics — not deep-fried with heavy sauce (A), not in a spicy broth (C), not cured-salted (D)."
-    },
-    {
-      "id": 5,
       "part": 2,
-      "round": 1,
       "step": "scenario",
-      "dish": "Friend cannot eat spicy food",
-      "title": "Part 2: Your Friend Cannot Eat Spicy Food",
-      "prompt": "Your friend cannot eat spicy food. You are ordering main courses together. Which dish must they AVOID?",
+      "multi_select": true,
+      "dish": "Spicy food avoidance",
+      "title": "Final Scenario: Your Friend Cannot Eat Spicy Food",
+      "prompt": "Your friend cannot eat spicy food. You are ordering together at a Chinese restaurant. Select ALL dishes they must AVOID.",
       "options": [
-        {"key": "A", "name": "Cantonese Steamed Sea Bass", "price": "$28", "text": "Cantonese Steamed Sea Bass — $28", "detail": "Cantonese = light / fresh. Steamed = gentle moist heat. No chili.", "tag": "SAFE"},
-        {"key": "B", "name": "Hunan-style Stir-fried Beef", "price": "$24", "text": "Hunan-style Stir-fried Beef — $24", "detail": "Hunan prefix = chili-garlic-smoky cuisine, almost always spicy. Contains dried and fresh chilies.", "tag": "AVOID"},
-        {"key": "C", "name": "Stir-fried Seasonal Greens (qing-chao)", "price": "$14", "text": "Stir-fried Seasonal Greens (qing-chao) — $14", "detail": "qing-chao literally 'clear stir-fry': just oil, garlic, salt. Not spicy.", "tag": "SAFE"},
-        {"key": "D", "name": "Red-braised Pork Belly", "price": "$22", "text": "Red-braised Pork Belly — $22", "detail": "Soy + rock sugar braise, sweet-savory. No chili.", "tag": "SAFE"}
+        {"key": "A", "name": "Hunan Steamed Cured Pork", "text": "Hunan Steamed Cured Pork (\u6e58\u5f0f\u84b8\u814a\u8089)", "detail": "Hunan (\u6e58) prefix = chili-garlic-smoky. The cured pork is steamed with dried chilies and garlic \u2014 direct, unforgiving heat.", "tag": "AVOID", "image": "/static/images/quiz4_A_xiang_la_rou.webp"},
+        {"key": "B", "name": "Mala Maoxuewang", "text": "Mala Maoxuewang (\u9ebb\u8fa3\u6bdb\u8840\u65fa)", "detail": "Mala (\u9ebb\u8fa3) = numbing + burning. A Sichuan hotpot-style dish with two layers of spice: chili burn and peppercorn numbness.", "tag": "AVOID", "image": "/static/images/quiz4_B_mao_xue_wang.jpg"},
+        {"key": "C", "name": "Cantonese White-cut Chicken", "text": "Cantonese White-cut Chicken (\u7ca4\u5f0f\u767d\u5207\u9e21)", "detail": "Cantonese = light / fresh. Poached in plain water with ginger and scallion, served with a mild dipping sauce. No chili.", "tag": "SAFE", "image": "/static/images/quiz4_C_bai_qie_ji.jpg"},
+        {"key": "D", "name": "Fish-Fragrant Eggplant", "text": "Fish-Fragrant Eggplant (\u9c7c\u9999\u8304\u5b50)", "detail": "\u9c7c\u9999 = sweet-sour-savory with mild pickled chili. Much gentler than Hunan or mala \u2014 the chili is in the sauce, not the heat.", "tag": "SAFE", "image": "/static/images/quiz4_D_yuxiang_eggplant.jpg"}
       ],
-      "correct": "B",
-      "correct_image": "https://placehold.co/640x420/A03D20/ffffff?text=Hunan+Stir-fried+Beef",
-      "explanation": "The Hunan prefix signals a chili-heavy regional style. Apply the style + method vocabulary and you can rule out the safe options immediately."
+      "correct": ["A", "B"],
+      "correct_image": "/static/images/quiz4_B_mao_xue_wang.jpg",
+      "explanation": "Hunan (A) and mala (B) are both high-heat styles your friend must avoid. Cantonese white-cut chicken (C) is mild. Fish-fragrant eggplant (D) uses \u9c7c\u9999 sauce which has pickled chili but is far milder \u2014 and now you know what \u9c7c\u9999 actually means!"
     }
   ]
 }

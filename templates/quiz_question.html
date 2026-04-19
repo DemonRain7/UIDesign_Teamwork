@@ -6,13 +6,23 @@
 
 {% block content %}
 <div class="main_container quiz_container">
-    <div class="progress_indicator">
-        {% if question.part == 1 %}
-            Part 1 — Progressive Decoding · Round {{ question.round }}
-        {% else %}
-            Part 2 — Scenario
-        {% endif %}
-        &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }}
+
+    <div class="progress_header">
+        <div class="progress_label">
+            {% if question.part == "hook" %}
+                The Hook — Warm-up
+            {% elif question.part == 1 %}
+                Part 1 — Progressive Decoding &nbsp;·&nbsp; Quiz {{ question.round }}
+            {% elif question.step == "decode" %}
+                Part 2 — Put It All Together
+            {% else %}
+                Part 2 — Final Scenario
+            {% endif %}
+            &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }}
+        </div>
+        <div class="progress_track">
+            <div class="progress_fill" style="width: {{ (question_number / total_questions * 100) | int }}%"></div>
+        </div>
     </div>
 
     <div class="quiz_header">
@@ -30,10 +40,16 @@
     <form method="POST" id="quiz_form">
         <div class="option-grid">
             {% for opt in question.options %}
-            <label class="option-card">
+            <label class="option-card {% if question.multi_select %}multi{% endif %}">
+                {% if question.multi_select %}
+                <input type="checkbox" name="answer" value="{{ opt.key }}">
+                {% else %}
                 <input type="radio" name="answer" value="{{ opt.key }}">
-                <span class="option-key">{{ opt.key }}</span>
-                <span class="option-text">{{ opt.text }}</span>
+                {% endif %}
+                <div class="option-header">
+                    <span class="option-key">{{ opt.key }}</span>
+                    <span class="option-text">{{ opt.text }}</span>
+                </div>
                 {% if opt.image %}
                 <img class="option-image" src="{{ opt.image }}" alt="{{ opt.text }}">
                 {% endif %}
@@ -41,8 +57,12 @@
             {% endfor %}
         </div>
 
-        <div class="quiz_submit">
-            <button type="submit">Submit Answer</button>
+        <div class="quiz_actions">
+            <button type="submit" class="btn_submit">Submit Answer</button>
+            <a class="btn_skip"
+               href="{% if question_number < total_questions %}/quiz/{{ question_number + 1 }}{% else %}/quiz/result{% endif %}">
+               Skip
+            </a>
         </div>
     </form>
 </div>

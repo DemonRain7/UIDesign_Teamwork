@@ -24,7 +24,10 @@ def load_quiz_data():
         return json.load(f)
 
 
-QUIZ_DATA = load_quiz_data()
+def get_quiz_data():
+    return load_quiz_data()
+
+QUIZ_DATA = get_quiz_data()
 TOTAL_QUESTIONS = len(QUIZ_DATA['questions'])
 
 
@@ -74,8 +77,13 @@ def quiz(n):
         return redirect(url_for('quiz_result'))
 
     if request.method == 'POST':
-        chosen = request.form.get('answer')
-        is_correct = (chosen == question['correct'])
+        if question.get('multi_select'):
+            chosen = sorted(request.form.getlist('answer'))
+            correct = sorted(question['correct']) if isinstance(question['correct'], list) else [question['correct']]
+            is_correct = (chosen == correct)
+        else:
+            chosen = request.form.get('answer')
+            is_correct = (chosen == question['correct'])
 
         user_state['quiz_answers'][n] = {
             'chosen': chosen,
@@ -88,9 +96,12 @@ def quiz(n):
         user_state['quiz_total'] = TOTAL_QUESTIONS
 
         next_n = n + 1
-        next_url = (url_for('quiz', n=next_n)
-                    if next_n <= TOTAL_QUESTIONS
-                    else url_for('quiz_result'))
+        if n == 3:
+            next_url = url_for('quiz_decode')
+        elif next_n <= TOTAL_QUESTIONS:
+            next_url = url_for('quiz', n=next_n)
+        else:
+            next_url = url_for('quiz_result')
 
         return render_template(
             'quiz_feedback.html',
@@ -130,6 +141,11 @@ def quiz(n):
     )
 
 
+@app.route('/quiz/decode')
+def quiz_decode():
+    return render_template('quiz_decode.html', total_questions=TOTAL_QUESTIONS)
+
+
 @app.route('/quiz/result')
 def quiz_result():
     review = []
@@ -156,3 +172,6 @@ def debug_state():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
+ 
+ 

@@ -1,90 +1,131 @@
-/* ===== Shared layout (kept in sync with the original root main.css) ===== */
-.main_container {
-    margin: 10px auto;
-    width: 900px;
-    max-width: 95%;
-}
-
+/* ===== Shared layout ===== */
 body {
-    background: #F5F0E1;
+    background: #F0EAD6;
     color: #1F2A3D;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 48px 20px 64px;
+    min-height: 100vh;
 }
 
-/* ===== Quiz — owned by Yu Qiu (Part 1) and Alice (Part 2) ===== */
+.main_container {
+    margin: 0 auto;
+    width: 860px;
+    max-width: 100%;
+}
+
+/* ===== Quiz card — elevated from the warm background ===== */
 .quiz_container {
-    padding: 30px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow:
+        0 1px 2px rgba(0,0,0,.04),
+        0 4px 12px rgba(0,0,0,.06),
+        0 16px 40px rgba(0,0,0,.08);
+    padding: 44px 48px 40px;
 }
 
-.progress_indicator {
-    font-size: 12px;
-    color: #8a7a5f;
+/* ===== Progress header ===== */
+.progress_header {
+    margin-bottom: 28px;
+}
+
+.progress_label {
+    font-size: 11px;
+    color: #9a8a6e;
     text-transform: uppercase;
-    letter-spacing: 1.4px;
-    font-weight: 600;
-    margin-bottom: 6px;
+    letter-spacing: 1.6px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
+.progress_track {
+    height: 4px;
+    background: #EDE7D5;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.progress_fill {
+    height: 100%;
+    background: linear-gradient(90deg, #C8932B, #e0a93c);
+    border-radius: 99px;
+    transition: width .4s ease;
+}
+
+/* ===== Header ===== */
 .quiz_header {
-    border-bottom: 3px solid #C8932B;
-    padding-bottom: 12px;
-    margin-bottom: 22px;
+    border-bottom: 2px solid #EDE7D5;
+    padding-bottom: 16px;
+    margin-bottom: 28px;
 }
 
 .quiz_title {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     color: #1F2A3D;
-    margin: 0;
+    margin: 0 0 8px;
+    line-height: 1.3;
+    letter-spacing: -.3px;
 }
 
 .quiz_prompt {
-    font-size: 16px;
-    color: #4a5363;
-    margin: 10px 0 0;
-    line-height: 1.5;
+    font-size: 15px;
+    color: #5a6375;
+    margin: 0;
+    line-height: 1.6;
 }
 
+/* ===== Echo box ===== */
 .echo_description {
-    background: #faf3df;
+    background: #fdf8ec;
     border-left: 4px solid #C8932B;
-    padding: 12px 18px;
+    padding: 14px 18px;
     font-style: italic;
-    border-radius: 4px;
-    margin-bottom: 22px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 24px;
     color: #4a3914;
-    line-height: 1.5;
+    line-height: 1.55;
+    font-size: 14px;
 }
 
+/* ===== Option grid ===== */
 .option-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    gap: 14px;
 }
 
 .option-card {
-    background: #fff;
-    border: 2px solid #e5dfc9;
-    border-left: 5px solid #C8932B;
-    border-radius: 10px;
-    padding: 18px;
+    background: #FAFAF8;
+    border: 1.5px solid #E8E2D0;
+    border-radius: 12px;
+    padding: 18px 20px;
     cursor: pointer;
-    transition: all .15s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
-    display: block;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 }
 
 .option-card:hover {
     border-color: #C8932B;
+    background: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    box-shadow: 0 4px 8px rgba(0,0,0,.06), 0 8px 20px rgba(200,147,43,.12);
 }
 
 .option-card.selected {
-    background: #fff8e6;
-    box-shadow: 0 0 0 3px rgba(200, 147, 43, .35);
+    background: #FFFBF0;
+    border-color: #C8932B;
+    box-shadow: 0 0 0 3px rgba(200,147,43,.2), 0 4px 12px rgba(200,147,43,.1);
 }
 
 .option-card input[type="radio"] {
@@ -92,52 +133,81 @@ body {
 }
 
 .option-key {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     background: #1F2A3D;
     color: #fff;
     border-radius: 50%;
     font-weight: 700;
-    margin-right: 10px;
-    font-size: 14px;
-    vertical-align: middle;
+    font-size: 13px;
+    margin-top: 1px;
+    transition: background .15s ease;
+}
+
+.option-card.selected .option-key {
+    background: #C8932B;
 }
 
 .option-text {
-    display: inline;
-    font-size: 15px;
-    line-height: 1.5;
-    vertical-align: middle;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: #2a3344;
 }
 
 .option-image {
     width: 100%;
-    border-radius: 6px;
-    margin-top: 12px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
     display: block;
 }
 
-.quiz_submit {
-    margin-top: 30px;
-    text-align: center;
+/* ===== Submit + Skip row ===== */
+.quiz_actions {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
-.quiz_submit button {
+.btn_submit {
     background: #C8932B;
     color: #fff;
     border: none;
-    padding: 12px 42px;
-    font-size: 16px;
+    padding: 13px 44px;
+    font-size: 15px;
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
+    letter-spacing: .2px;
+    transition: background .15s ease, transform .1s ease;
+    box-shadow: 0 2px 8px rgba(200,147,43,.35);
 }
 
-.quiz_submit button:hover {
+.btn_submit:hover {
     background: #a87920;
+    transform: translateY(-1px);
+}
+
+.btn_skip {
+    font-size: 14px;
+    color: #9a8a6e;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: .2px;
+    border-bottom: 1px dashed #c4b89a;
+    padding-bottom: 1px;
+    transition: color .15s ease;
+}
+
+.btn_skip:hover {
+    color: #5a4a30;
+    border-bottom-color: #5a4a30;
 }
 
 /* ===== Feedback page ===== */
@@ -221,6 +291,117 @@ body {
 }
 
 .next_button a:hover { background: #0f1a2b; }
+
+/* ===== Multi-select checkbox card ===== */
+.option-card.multi input[type="checkbox"] { display: none; }
+
+.option-card.multi .option-key {
+    border-radius: 6px;
+}
+
+.option-card.multi.selected .option-key {
+    background: #C8932B;
+}
+
+/* ===== Decode page ===== */
+.decode_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.decode_card {
+    background: #FAFAF8;
+    border: 1.5px solid #E8E2D0;
+    border-top: 4px solid #C8932B;
+    border-radius: 12px;
+    padding: 22px 20px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.decode_card_label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: #C8932B;
+    margin-bottom: 10px;
+}
+
+.decode_card_chinese {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1F2A3D;
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.decode_card_pinyin {
+    font-size: 12px;
+    color: #9a8a6e;
+    font-style: italic;
+    margin-bottom: 12px;
+    letter-spacing: .3px;
+}
+
+.decode_card_body {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #3a4455;
+    margin: 0;
+}
+
+.decode_vibe {
+    background: #1F2A3D;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.decode_vibe_label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: #C8932B;
+    flex-shrink: 0;
+    padding-top: 2px;
+    min-width: 90px;
+}
+
+.decode_vibe_text {
+    font-size: 14.5px;
+    color: #F5F0E1;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.decode_reveal {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.decode_dish_img {
+    width: 100%;
+    max-width: 520px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    display: block;
+    margin: 0 auto 14px;
+}
+
+.decode_caption {
+    font-size: 14px;
+    color: #7a6a50;
+    font-style: italic;
+    margin: 0;
+}
 
 /* ===== Final result page ===== */
 .result_hero { text-align: center; padding: 30px 0; }

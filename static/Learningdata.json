@@ -11,10 +11,10 @@ const lesson1Contents = {
         {"Cooking Method": "Deep-fried", "Chinese": "炸", "Texture Outcome": "Crispy golden outside, tender inside"}
     ]),
     "images": [
-        "/static/images/lesson1/stir_fried.jpg",
-        "/static/images/lesson1/braised.jpg",
-        "/static/images/lesson1/qing_chao.jpg",
-        "/static/images/lesson1/steamed.jpg"
+        "/static/images/stir_fried.jpg",
+        "/static/images/braised.jpg",
+        "/static/images/qing_chao.jpg",
+        "/static/images/steamed.jpg"
     ]
 };
 
@@ -29,9 +29,9 @@ const lesson2Contents = {
         {"Flavor/Style Word": "Yu-xiang / \"Fish-Fragrant\"", "Chinese": "鱼香", "Taste Outcome": "Contains NO fish. Sweet-sour-savory-spicy sauce (garlic, pickled chili, vinegar)."}
     ]),
     "images": [
-        "/static/images/lesson2/hunan.jpg",
-        "/static/images/lesson2/cantonese.jpg",
-        "/static/images/lesson2/mala.jpg",
-        "/static/images/lesson2/yuxiang.jpg"
+        "/static/images/hunan.jpg",
+        "/static/images/cantonese.jpg",
+        "/static/images/mala.jpg",
+        "/static/images/yuxiang.jpg"
     ]
 };

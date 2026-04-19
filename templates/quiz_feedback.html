@@ -3,20 +3,36 @@
 {% block content %}
 <div class="main_container quiz_container">
     <div class="progress_indicator">
-        {% if question.part == 1 %}
-            Part 1 — Progressive Decoding · Round {{ question.round }}
+        {% if question.part == "hook" %}
+            The Hook — Warm-up
+        {% elif question.part == 1 %}
+            Part 1 — Progressive Decoding · Quiz {{ question.round }}
+        {% elif question.step == "decode" %}
+            Part 2 — Put It All Together
         {% else %}
-            Part 2 — Scenario
+            Part 2 — Final Scenario
         {% endif %}
         &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }} · Answer
     </div>
 
     <div class="quiz_header">
-        <h1 class="quiz_title">{{ question.title }} — Answer</h1>
+        <h1 class="quiz_title">
+            {% if question.part == "hook" %}The Reveal — Did You Guess Right?
+            {% elif question.step == "decode" %}Decoded!
+            {% else %}{{ question.title }} — Answer{% endif %}
+        </h1>
     </div>
 
     <span class="feedback_badge {% if is_correct %}correct{% else %}incorrect{% endif %}">
-        {% if is_correct %}✓ Correct!{% else %}✗ Not quite — keep learning!{% endif %}
+        {% if question.part == "hook" %}
+            {% if is_correct %}✓ Great guess — you already have good instincts!{% else %}✗ Surprising, right? Here's why…{% endif %}
+        {% elif question.step == "decode" %}
+            {% if is_correct %}✓ Perfectly decoded!{% else %}✗ Close — let's break it down.{% endif %}
+        {% elif question.step == "scenario" %}
+            {% if is_correct %}✓ Your friend is safe!{% else %}✗ Watch out — your friend would have ordered something spicy!{% endif %}
+        {% else %}
+            {% if is_correct %}✓ Correct!{% else %}✗ Not quite — keep going!{% endif %}
+        {% endif %}
     </span>
 
     <div class="feedback_grid">
@@ -27,16 +43,25 @@
         <div>
             <div class="feedback_card">
                 <h3>Correct Answer</h3>
-                <p>
-                    <strong>{{ question.correct }}</strong>
+                {% if question.multi_select %}
                     {% for opt in question.options %}
-                        {% if opt.key == question.correct %}
-                            — {{ opt.text }}
+                        {% if opt.key in question.correct %}
+                        <p><strong>{{ opt.key }}</strong> — {{ opt.text }}</p>
                         {% endif %}
                     {% endfor %}
-                </p>
-                {% if chosen and chosen != question.correct %}
-                <p style="color:#8a6d3b;">You chose: <strong>{{ chosen }}</strong></p>
+                    {% if chosen %}
+                    <p style="color:#8a6d3b;">You selected: <strong>{{ chosen | join(', ') }}</strong></p>
+                    {% endif %}
+                {% else %}
+                    <p>
+                        <strong>{{ question.correct }}</strong>
+                        {% for opt in question.options %}
+                            {% if opt.key == question.correct %}— {{ opt.text }}{% endif %}
+                        {% endfor %}
+                    </p>
+                    {% if chosen and chosen != question.correct %}
+                    <p style="color:#8a6d3b;">You chose: <strong>{{ chosen }}</strong></p>
+                    {% endif %}
                 {% endif %}
             </div>
 

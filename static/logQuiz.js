@@ -3,15 +3,10 @@ $(function () {
     var isMulti = $('.option-card.multi').length > 0;
 
     if (isMulti) {
-        // Checkbox: toggle individual cards
-        $('.option-card.multi').on('click', function () {
-            var cb = $(this).find('input[type="checkbox"]');
-            cb.prop('checked', !cb.prop('checked'));
-            $(this).toggleClass('selected', cb.prop('checked'));
-        });
-        // Prevent double-toggle when clicking directly on the checkbox
-        $('.option-card.multi input[type="checkbox"]').on('click', function (e) {
-            e.stopPropagation();
+        // The card is a <label> wrapping a hidden checkbox, so the browser
+        // toggles the checkbox automatically on label-click. We only need to
+        // mirror that state into the .selected class for styling.
+        $('.option-card.multi input[type="checkbox"]').on('change', function () {
             $(this).closest('.option-card').toggleClass('selected', $(this).prop('checked'));
         });
     } else {

@@ -45,10 +45,10 @@
       "title": "Quiz 2: What Is Cantonese Steamed Fish?",
       "prompt": "Each option shows a different fish preparation. Which one matches Cantonese Steamed Fish?",
       "options": [
-        {"key": "A", "text": "West Lake Vinegar Fish \u2014 whole fish in a glossy sweet-sour vinegar sauce, a Hangzhou classic.", "image": "/static/images/quiz3_A_xihu_cu_yu.jpg"},
+        {"key": "A", "text": "Whole fish in a glossy sweet-sour vinegar sauce, a Hangzhou classic.", "image": "/static/images/quiz3_A_xihu_cu_yu.jpg"},
         {"key": "B", "text": "Whole fresh fish gently steamed with ginger and scallion, finished with hot oil and a light soy drizzle \u2014 clean and delicate.", "image": "/static/images/quiz3_B_cantonese_fish.jpg"},
-        {"key": "C", "text": "Sichuan water-boiled fish \u2014 fish fillet in a deep red bowl of bubbling chili-oil broth with peppercorns.", "image": "/static/images/quiz3_C_shuizhu_fish.jpg"},
-        {"key": "D", "text": "Shunde raw fish \u2014 paper-thin slices of fresh fish served with ginger, scallion and sesame oil.", "image": "/static/images/quiz3_D_shunde_fish.svg"}
+        {"key": "C", "text": "Fish fillet in a deep red bowl of bubbling chili-oil broth with peppercorns.", "image": "/static/images/quiz3_C_shuizhu_fish.jpg"},
+        {"key": "D", "text": "Paper-thin slices of fresh fish served with ginger, scallion and sesame oil.", "image": "/static/images/quiz3_D_shunde_fish.png"}
       ],
       "correct": "B",
       "correct_image": "/static/images/quiz3_B_cantonese_fish.jpg",

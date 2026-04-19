@@ -55,10 +55,7 @@ def get_question(n):
 # ===========================================================================
 @app.route('/')
 def home():
-    return ('<h2>Home (stub)</h2>'
-            '<p>Placeholder until the learning team implements the home page '
-            'with a Start button.</p>'
-            '<p><a href="/quiz/1">Jump to Quiz (owned by Yu Qiu / Alice)</a></p>')
+    return render_template('home.html')
 
 @app.route('/learn/<int:n>')
 def learn(n):

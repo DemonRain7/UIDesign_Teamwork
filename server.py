@@ -31,6 +31,16 @@ QUIZ_DATA = get_quiz_data()
 TOTAL_QUESTIONS = len(QUIZ_DATA['questions'])
 
 
+def load_learning_data():
+    path = os.path.join(app.root_path, 'learningData.json')
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+LEARNING_DATA = load_learning_data()
+TOTAL_LESSONS = len(LEARNING_DATA)
+
+
 def get_question(n):
     for q in QUIZ_DATA['questions']:
         if q['id'] == n:
@@ -52,12 +62,20 @@ def home():
 
 @app.route('/learn/<int:n>')
 def learn(n):
+    lesson = LEARNING_DATA.get(str(n))
+    if lesson is None:
+        return redirect(url_for('home'))
     user_state["learning_log"].append({
         "timestamp": datetime.now().isoformat(),
         "lesson": n,
         "action": "visit"
     })
-    return render_template('learning.html', lesson_number=n)
+    return render_template(
+        'learning.html',
+        lesson=lesson,
+        lesson_number=n,
+        total_lessons=TOTAL_LESSONS
+    )
 # ===========================================================================
 # QUIZ ROUTES
 # Part 1 (Progressive Decoding, rounds 1 & 2) — Yu Qiu

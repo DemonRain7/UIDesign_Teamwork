@@ -1,4 +1,14 @@
 /* ===== Shared layout ===== */
+#learning_container {
+    width: 100%;
+}
+
+img {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+}
+
 body {
     background: #F0EAD6;
     color: #1F2A3D;

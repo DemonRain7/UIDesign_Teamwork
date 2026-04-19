@@ -3,6 +3,11 @@
 {% block scripts %}
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        const learningContents = {{ lesson | tojson }};
+        const LESSON_ID = {{ lesson_number }};
+        const TOTAL_LESSONS = {{ total_lessons }};
+    </script>
     <script src="{{ url_for('static', filename='logLearning.js') }}"></script>
 {% endblock %}
 

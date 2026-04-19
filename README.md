@@ -18,7 +18,7 @@ them in a guided quiz that ends with a real-world ordering scenario.
 |------|--------|------|
 | Yu Qiu | @DemonRain7 | Quiz Part I — Progressive Decoding (rounds 1 & 2) + shared quiz infrastructure |
 | Ray Tang | @LisiruiTang | Learning module — backend |
-| Zhonghao Liu | — | Learning module — frontend |
+| Zhonghao Liu | @zeeliu7 | Learning module — frontend |
 | Shurong Zhang (Alice) | @alice20030504 | Quiz Part II — Final Scenario |
 
 **TA:** Max-Zhang63

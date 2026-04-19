@@ -27,13 +27,13 @@ $( function() {
     if (LESSON_ID <= 1) {
         prevBtn.prop('disabled', true);
     } else {
-        prevBtn.on('click', function() { window.location.href = `/learn/${LESSON_ID - 1}`; });
+        prevBtn.click(function() { window.location.href = `/learn/${LESSON_ID - 1}`; });
     }
 
     if (LESSON_ID >= TOTAL_LESSONS) {
-        nextBtn.text('Start Quiz').on('click', function() { window.location.href = '/quiz/1'; });
+        nextBtn.text('Start Quiz').click(function() { window.location.href = '/quiz/1'; });
     } else {
-        nextBtn.on('click', function() { window.location.href = `/learn/${LESSON_ID + 1}`; });
+        nextBtn.click(function() { window.location.href = `/learn/${LESSON_ID + 1}`; });
     }
 
     // Render lesson content
@@ -49,8 +49,8 @@ $( function() {
     let learningTable = `<table class="table"><thead><tr>${headerRow}</tr></thead><tbody>${bodyRows}</tbody></table>`;
     learningTableContainerElem.html(learningTable);
 
-    learningImage0ContainerElem.html(`<img src="${learningContents.images[0]}"`);
-    learningImage1ContainerElem.html(`<img src="${learningContents.images[1]}"`);
-    learningImage2ContainerElem.html(`<img src="${learningContents.images[2]}"`);
-    learningImage3ContainerElem.html(`<img src="${learningContents.images[3]}"`);
+    learningImage0ContainerElem.html(`<img src="${learningContents.images[0]}">`);
+    learningImage1ContainerElem.html(`<img src="${learningContents.images[1]}">`);
+    learningImage2ContainerElem.html(`<img src="${learningContents.images[2]}">`);
+    learningImage3ContainerElem.html(`<img src="${learningContents.images[3]}">`);
 })

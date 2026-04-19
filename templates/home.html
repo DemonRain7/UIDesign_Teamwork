@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main_container quiz_container home_container">
+
+    <div class="home_eyebrow">UI Design · Final Project</div>
+    <h1 class="home_title">How to Order Classic Chinese Dishes<br>from an Unfamiliar Menu</h1>
+    <p class="home_subtitle">
+        An interactive lesson that teaches you to decode English-translated Chinese
+        menu names — regional styles, cooking methods, and flavor words — so you
+        can order with confidence.
+    </p>
+
+    <div class="home_cards">
+        <a class="home_card" href="{{ url_for('learn', n=1) }}">
+            <div class="home_card_step">Step 1</div>
+            <div class="home_card_title">Learn the Building Blocks</div>
+            <p class="home_card_body">
+                Two short lessons: cooking methods that decide texture, and
+                flavor / regional words that preview taste.
+            </p>
+            <span class="home_card_cta">Start Learning →</span>
+        </a>
+
+        <a class="home_card" href="{{ url_for('quiz', n=1) }}">
+            <div class="home_card_step">Step 2</div>
+            <div class="home_card_title">Take the Quiz</div>
+            <p class="home_card_body">
+                Decode dish names round by round, then handle a real-world
+                ordering scenario for a friend who can't eat spicy food.
+            </p>
+            <span class="home_card_cta">Take the Quiz →</span>
+        </a>
+    </div>
+
+    <p class="home_footnote">
+        Tip: complete the lessons first — the quiz assumes you know the decoding rules.
+    </p>
+</div>
+{% endblock %}

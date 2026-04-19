@@ -1,0 +1,37 @@
+// Lesson 1
+const lesson1Contents = {
+    "title": "Cooking Methods = Texture",
+    "beginning": "The cooking method tells you exactly what texture to expect before the food arrives.",
+    "table": JSON.stringify([
+        {"Cooking Method": "Stir-fried", "Chinese": "爆炒", "Texture Outcome": "Savory, quick wok toss, lightly charred"},
+        {"Cooking Method": "Braised", "Chinese": "炖", "Texture Outcome": "Fall-apart tender, rich in liquid"},
+        {"Cooking Method": "Smoked", "Chinese": "熏", "Texture Outcome": "Deep, earthy, smoky complexity"},
+        {"Cooking Method": "Steamed", "Chinese": "蒸", "Texture Outcome": "Light, tender, clean natural taste"},
+        {"Cooking Method": "Qing-chao (Light)", "Chinese": "清炒", "Texture Outcome": "Fresh, bright, crisp — minimal seasoning"},
+        {"Cooking Method": "Deep-fried", "Chinese": "炸", "Texture Outcome": "Crispy golden outside, tender inside"}
+    ]),
+    "images": [
+        "/static/images/lesson1/stir_fried.jpg",
+        "/static/images/lesson1/braised.jpg",
+        "/static/images/lesson1/qing_chao.jpg",
+        "/static/images/lesson1/steamed.jpg"
+    ]
+};
+
+// Lesson 2
+const lesson2Contents = {
+    "title": "Flavor & Style Words = Taste Preview",
+    "beginning": "These words in a dish name are a preview of what your taste buds will experience.",
+    "table": JSON.stringify([
+        {"Flavor/Style Word": "Hunan-style", "Chinese": "湘", "Taste Outcome": "Intensely spicy, smoky, garlicky. Direct chili heat — no numbing. Dry and fragrant."},
+        {"Flavor/Style Word": "Cantonese-style", "Chinese": "粤", "Taste Outcome": "Light, fresh, ingredient-forward. Minimal seasoning; clean and elegant."},
+        {"Flavor/Style Word": "Mala / Numbing-Spicy", "Chinese": "麻辣", "Taste Outcome": "Ma (麻) = numbing from peppercorn + La (辣) = chili burn. Layered and electric."},
+        {"Flavor/Style Word": "Yu-xiang / \"Fish-Fragrant\"", "Chinese": "鱼香", "Taste Outcome": "Contains NO fish. Sweet-sour-savory-spicy sauce (garlic, pickled chili, vinegar)."}
+    ]),
+    "images": [
+        "/static/images/lesson2/hunan.jpg",
+        "/static/images/lesson2/cantonese.jpg",
+        "/static/images/lesson2/mala.jpg",
+        "/static/images/lesson2/yuxiang.jpg"
+    ]
+};

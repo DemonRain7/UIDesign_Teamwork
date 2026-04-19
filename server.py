@@ -34,6 +34,56 @@ def get_question(n):
             return q
     return None
 
+# ---------------------------------------------------------------------------
+# Learning content data (lives on the server, not in static)
+# ---------------------------------------------------------------------------
+LEARNING_CONTENTS = {
+    1: {
+        "title": "Cooking Methods = Texture",
+        "beginning": "The cooking method tells you exactly what texture to expect before the food arrives.",
+        "table": json.dumps([
+            {"Cooking Method": "Stir-fried", "Chinese": "爆炒", "Texture Outcome": "Savory, quick wok toss, lightly charred"},
+            {"Cooking Method": "Braised", "Chinese": "炖", "Texture Outcome": "Fall-apart tender, rich in liquid"},
+            {"Cooking Method": "Smoked", "Chinese": "熏", "Texture Outcome": "Deep, earthy, smoky complexity"},
+            {"Cooking Method": "Steamed", "Chinese": "蒸", "Texture Outcome": "Light, tender, clean natural taste"},
+            {"Cooking Method": "Qing-chao (Light)", "Chinese": "清炒", "Texture Outcome": "Fresh, bright, crisp — minimal seasoning"},
+            {"Cooking Method": "Deep-fried", "Chinese": "炸", "Texture Outcome": "Crispy golden outside, tender inside"}
+        ]),
+        "images": [
+            "https://upload.wikimedia.org/wikipedia/commons/5/52/Ginger_chicken_%283168342551%29.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Red_braised_pork_%2820141106191221%29.JPG/1920px-Red_braised_pork_%2820141106191221%29.JPG",
+            "https://upload.wikimedia.org/wikipedia/commons/d/d0/Ipomoea_stir_fry.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/9/95/CantoneseSteamedfish.jpg"
+        ]
+    },
+    2: {
+        "title": "Flavor & Style Words = Taste Preview",
+        "beginning": "These words in a dish name are a preview of what your taste buds will experience.",
+        "table": json.dumps([
+            {"Flavor/Style Word": "Hunan-style", "Chinese": "湘", "Taste Outcome": "Intensely spicy, smoky, garlicky. Direct chili heat — no numbing. Dry and fragrant."},
+            {"Flavor/Style Word": "Cantonese-style", "Chinese": "粤", "Taste Outcome": "Light, fresh, ingredient-forward. Minimal seasoning; clean and elegant."},
+            {"Flavor/Style Word": "Mala / Numbing-Spicy", "Chinese": "麻辣", "Taste Outcome": "Ma (麻) = numbing from peppercorn + La (辣) = chili burn. Layered and electric."},
+            {"Flavor/Style Word": "Yu-xiang / \"Fish-Fragrant\"", "Chinese": "鱼香", "Taste Outcome": "Contains NO fish. Sweet-sour-savory-spicy sauce (garlic, pickled chili, vinegar)."}
+        ]),
+        "images": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Saut%C3%A9ed_pork_with_chili_pepper_at_Yinxiang_Restaurant_%2820210522180012%29.jpg/1920px-Saut%C3%A9ed_pork_with_chili_pepper_at_Yinxiang_Restaurant_%2820210522180012%29.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg/1920px-Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Homemade_Hotpot.jpg/960px-Homemade_Hotpot.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Qiezi.jpg/1920px-Qiezi.jpg"
+        ]
+    }
+}
+
+# ---------------------------------------------------------------------------
+# API endpoint — frontend fetches learning data via AJAX
+# ---------------------------------------------------------------------------
+@app.route('/api/learn/<int:n>')
+def api_learn(n):
+    contents = LEARNING_CONTENTS.get(n)
+    if contents is None:
+        return jsonify({"error": "Lesson not found"}), 404
+    return jsonify(contents)
+
 
 # ===========================================================================
 # HOME + LEARNING ROUTES
@@ -45,6 +95,7 @@ def get_question(n):
 def home():
     return ('<h2>Home (stub)</h2>'
             '<p>Placeholder until the learning team implements the home page '
+            'home.html'
             'with a Start button.</p>'
             '<p><a href="/quiz/1">Jump to Quiz (owned by Yu Qiu / Alice)</a></p>')
 

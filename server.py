@@ -37,7 +37,6 @@ def get_question(n):
             return q
     return None
 
-
 # ===========================================================================
 # HOME + LEARNING ROUTES
 # Owner: Ray Tang (backend) and Zhonghao Liu (frontend)
@@ -51,7 +50,6 @@ def home():
             'with a Start button.</p>'
             '<p><a href="/quiz/1">Jump to Quiz (owned by Yu Qiu / Alice)</a></p>')
 
-
 @app.route('/learn/<int:n>')
 def learn(n):
     user_state["learning_log"].append({
@@ -59,9 +57,7 @@ def learn(n):
         "lesson": n,
         "action": "visit"
     })
-    return f'<h2>Learning Page {n} (stub)</h2><p>Owned by the learning team.</p>'
-
-
+    return render_template('learning.html', lesson_number=n)
 # ===========================================================================
 # QUIZ ROUTES
 # Part 1 (Progressive Decoding, rounds 1 & 2) — Yu Qiu

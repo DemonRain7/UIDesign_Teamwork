@@ -6,6 +6,24 @@ from datetime import datetime
 app = Flask(__name__)
 
 
+def nav_ctx():
+    """Return top-nav context vars for non-home pages."""
+    total = 6
+    done = sum([
+        1 in user_state['quiz_answers'],           # Hook
+        any(l['lesson'] == 1 for l in user_state['learning_log']),  # Lesson 1
+        2 in user_state['quiz_answers'],           # Quiz 1
+        any(l['lesson'] == 2 for l in user_state['learning_log']),  # Lesson 2
+        3 in user_state['quiz_answers'],           # Quiz 2
+        4 in user_state['quiz_answers'],           # Final
+    ])
+    return {
+        "show_home_nav": True,
+        "nav_progress": round(done / total * 100),
+        "nav_label": f"{done} / {total} stages"
+    }
+
+
 # ---------------------------------------------------------------------------
 # In-memory user state (HW10 spec: app only needs to support one user at a time)
 # ---------------------------------------------------------------------------
@@ -90,7 +108,7 @@ def transition(n):
     t = TRANSITIONS.get(n)
     if not t:
         return redirect(url_for('home'))
-    return render_template('transition.html', t=t)
+    return render_template('transition.html', t=t, **nav_ctx())
 
 
 @app.route('/')
@@ -170,7 +188,8 @@ def learn(n):
         'learning.html',
         lesson=lesson,
         lesson_number=n,
-        total_lessons=TOTAL_LESSONS
+        total_lessons=TOTAL_LESSONS,
+        **nav_ctx()
     )
 # ===========================================================================
 # QUIZ ROUTES
@@ -225,7 +244,8 @@ def quiz(n):
             is_correct=is_correct,
             next_url=next_url,
             question_number=n,
-            total_questions=TOTAL_QUESTIONS
+            total_questions=TOTAL_QUESTIONS,
+            **nav_ctx()
         )
 
     # GET — record a visit and render the question.
@@ -252,13 +272,14 @@ def quiz(n):
         question=question,
         question_number=n,
         total_questions=TOTAL_QUESTIONS,
-        echoed_description=echoed_description
+        echoed_description=echoed_description,
+        **nav_ctx()
     )
 
 
 @app.route('/quiz/decode')
 def quiz_decode():
-    return render_template('quiz_decode.html', total_questions=TOTAL_QUESTIONS)
+    return render_template('quiz_decode.html', total_questions=TOTAL_QUESTIONS, **nav_ctx())
 
 
 @app.route('/quiz/result')
@@ -275,7 +296,8 @@ def quiz_result():
         'quiz_result.html',
         score=user_state['quiz_score'],
         total=TOTAL_QUESTIONS,
-        review=review
+        review=review,
+        **nav_ctx()
     )
 
 

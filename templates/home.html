@@ -4,6 +4,19 @@
 <div class="main_container">
 <div class="quiz_container home_v2">
 
+    {% if all_done %}
+    <div class="completion_banner" id="completion_banner">
+        <div class="completion_banner_text">
+            <h2>🎉 You've completed all stages!</h2>
+            <p>You can now decode Chinese menu names — cooking methods, regional styles, and flavor words. Great work.</p>
+        </div>
+        <div class="completion_banner_actions">
+            <a href="{{ url_for('quiz_result') }}" class="completion_banner_cta">See My Results →</a>
+            <button class="completion_banner_close" onclick="document.getElementById('completion_banner').style.display='none'" aria-label="Dismiss">×</button>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="home_eyebrow">UI Design · Final Project</div>
     <h1 class="home_title">Your Menu Decoding Journey</h1>
     <p class="home_subtitle">
@@ -66,8 +79,7 @@
     <!-- Main CTA -->
     <div class="home_main_cta">
         {% if all_done %}
-        <a href="{{ url_for('quiz_result') }}" class="learn_btn learn_btn_primary">See Your Results →</a>
-        <p class="home_footnote">You've completed all stages — great work!</p>
+        <a href="{{ url_for('quiz_result') }}" class="learn_btn learn_btn_primary">See My Results →</a>
         {% elif next_stage %}
         <a href="{{ next_stage.url }}" class="learn_btn learn_btn_primary">Continue: {{ next_stage.label }} →</a>
         <p class="home_footnote">Complete each stage in order to unlock the next.</p>

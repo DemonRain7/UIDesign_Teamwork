@@ -15,6 +15,12 @@
             "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Red_braised_pork_%2820141106191221%29.JPG/1920px-Red_braised_pork_%2820141106191221%29.JPG",
             "https://upload.wikimedia.org/wikipedia/commons/d/d0/Ipomoea_stir_fry.jpg",
             "https://upload.wikimedia.org/wikipedia/commons/9/95/CantoneseSteamedfish.jpg"
+        ],
+        "captions": [
+            "Stir-fried: wok-tossed with high heat",
+            "Braised: slow-cooked until fall-apart tender",
+            "Qing-chao: lightly stir-fried, fresh & crisp",
+            "Steamed: gentle heat, clean natural flavor"
         ]
     },
     "2": {
@@ -31,6 +37,12 @@
             "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg/1920px-Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg",
             "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Homemade_Hotpot.jpg/960px-Homemade_Hotpot.jpg",
             "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Qiezi.jpg/1920px-Qiezi.jpg"
+        ],
+        "captions": [
+            "Hunan-style: smoky, dry, chili-forward heat",
+            "Cantonese: light, delicate, ingredient-first",
+            "Mala: numbing peppercorn + chili burn",
+            "Yu-xiang: sweet-sour-savory"
         ]
     }
 }

@@ -1,8 +1,6 @@
 {% extends "layout.html" %}
 
 {% block scripts %}
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
         const learningContents = {{ lesson | tojson }};
         const LESSON_ID = {{ lesson_number }};
@@ -13,31 +11,35 @@
 
 {% block content %}
 <div class="main_container">
-    <div id="learning_container">
-        <div class="row" id="learning_title_container"></div>
-        <div class="row" id="learning_beginning_container"></div>
-        <div class="row">
-            <div class="col-6" id="learing_table_container"></div>
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-6" id="learning_image_0_container"></div>
-                    <div class="col-6" id="learning_image_1_container"></div>
-                </div>
-                <div class="row">
-                    <div class="col-6" id="learning_image_2_container"></div>
-                    <div class="col-6" id="learning_image_3_container"></div>
-                </div>
+    <div class="learn_container">
+
+        <div class="progress_header">
+            <div class="progress_label" id="learn_progress_label"></div>
+            <div class="progress_track">
+                <div class="progress_fill" id="learn_progress_fill"></div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-2">
-                <button type="button" class="btn btn-primary" id="prev_button">Prev</button>
-            </div>
-            <div class="col-8"></div>
-            <div class="col-2">
-                <button type="button" class="btn btn-primary" id="next_button">Next</button>
+
+        <div class="learn_header">
+            <h1 class="learn_title" id="learning_title_container"></h1>
+            <p class="learn_subtitle" id="learning_beginning_container"></p>
+        </div>
+
+        <div class="learn_body">
+            <div id="learing_table_container"></div>
+            <div class="learn_image_grid">
+                <div id="learning_image_0_container"></div>
+                <div id="learning_image_1_container"></div>
+                <div id="learning_image_2_container"></div>
+                <div id="learning_image_3_container"></div>
             </div>
         </div>
+
+        <div class="learn_nav">
+            <button type="button" class="learn_btn" id="prev_button">← Prev</button>
+            <button type="button" class="learn_btn learn_btn_primary" id="next_button">Next →</button>
+        </div>
+
     </div>
 </div>
 {% endblock %}

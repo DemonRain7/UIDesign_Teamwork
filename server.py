@@ -142,11 +142,13 @@ def home():
             "done": 4 in user_state['quiz_answers']
         },
     ]
-    for i, s in enumerate(stages):
+    found_active = False
+    for s in stages:
         if s['done']:
             s['status'] = 'done'
-        elif i == 0 or stages[i - 1]['done']:
+        elif not found_active:
             s['status'] = 'active'
+            found_active = True
         else:
             s['status'] = 'upcoming'
 

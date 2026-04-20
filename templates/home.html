@@ -30,21 +30,36 @@
     <!-- Stage cards -->
     <div class="home_stages">
         {% for s in stages %}
+
+        {% if s.status == 'upcoming' %}
+        <div class="home_stage_card upcoming">
+            <div class="home_stage_top">
+                <span class="home_stage_num">{{ s.label }}</span>
+                <span class="home_stage_status_badge upcoming">🔒 Locked</span>
+            </div>
+            <div class="home_stage_title">{{ s.title }}</div>
+            <p class="home_stage_desc">{{ s.desc }}</p>
+            <div class="home_stage_locked_hint">
+                Complete {{ stages[loop.index0 - 1].label }} first
+            </div>
+        </div>
+
+        {% else %}
         <a class="home_stage_card {{ s.status }}" href="{{ s.url }}">
             <div class="home_stage_top">
                 <span class="home_stage_num">{{ s.label }}</span>
                 <span class="home_stage_status_badge {{ s.status }}">
-                    {% if s.status == 'done' %}Completed{% elif s.status == 'active' %}Up Next{% else %}Upcoming{% endif %}
+                    {% if s.status == 'done' %}✓ Completed{% else %}Up Next{% endif %}
                 </span>
             </div>
             <div class="home_stage_title">{{ s.title }}</div>
             <p class="home_stage_desc">{{ s.desc }}</p>
-            {% if s.status != 'upcoming' %}
             <div class="home_stage_cta">
                 {% if s.status == 'done' %}Review →{% else %}Start →{% endif %}
             </div>
-            {% endif %}
         </a>
+        {% endif %}
+
         {% endfor %}
     </div>
 
@@ -55,10 +70,7 @@
         <p class="home_footnote">You've completed all stages — great work!</p>
         {% elif next_stage %}
         <a href="{{ next_stage.url }}" class="learn_btn learn_btn_primary">Continue: {{ next_stage.label }} →</a>
-        <p class="home_footnote">Complete the lessons before the quiz — they give you the decoding rules.</p>
-        {% else %}
-        <a href="{{ url_for('learn', n=1) }}" class="learn_btn learn_btn_primary">Start Lesson 1 →</a>
-        <p class="home_footnote">Complete the lessons before the quiz — they give you the decoding rules.</p>
+        <p class="home_footnote">Complete each stage in order to unlock the next.</p>
         {% endif %}
     </div>
 

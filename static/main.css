@@ -1008,6 +1008,30 @@ body {
     color: #C8932B;
 }
 
+.home_stage_card.upcoming {
+    cursor: default;
+    opacity: .55;
+    filter: grayscale(30%);
+    border-top-color: #d0c9b8;
+}
+
+.home_stage_card.upcoming:hover {
+    transform: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+
+.home_stage_locked_hint {
+    font-size: 12px;
+    color: #b0a48a;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+.home_stage_status_badge.upcoming {
+    background: #ede7d5;
+    color: #a89878;
+}
+
 .home_main_cta {
     text-align: center;
     padding-top: 8px;

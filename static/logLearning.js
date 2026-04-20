@@ -13,11 +13,9 @@ $(function() {
         prevBtn.click(function() { window.location.href = `/learn/${LESSON_ID - 1}`; });
     }
 
+    nextBtn.click(function() { window.location.href = `/transition/${LESSON_ID}`; });
     if (LESSON_ID >= TOTAL_LESSONS) {
-        nextBtn.text('Start Quiz →').addClass('learn_btn_quiz')
-               .click(function() { window.location.href = '/quiz/1'; });
-    } else {
-        nextBtn.click(function() { window.location.href = `/learn/${LESSON_ID + 1}`; });
+        nextBtn.addClass('learn_btn_quiz');
     }
 
     // Title + subtitle

@@ -1,40 +1,67 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="main_container quiz_container home_container">
+<div class="main_container">
+<div class="quiz_container home_v2">
 
     <div class="home_eyebrow">UI Design · Final Project</div>
-    <h1 class="home_title">How to Order Classic Chinese Dishes<br>from an Unfamiliar Menu</h1>
+    <h1 class="home_title">Your Menu Decoding Journey</h1>
     <p class="home_subtitle">
-        An interactive lesson that teaches you to decode English-translated Chinese
-        menu names — regional styles, cooking methods, and flavor words — so you
+        An interactive lesson that teaches you to read English-translated Chinese
+        menu names — cooking methods, regional styles, and flavor words — so you
         can order with confidence.
     </p>
 
-    <div class="home_cards">
-        <a class="home_card" href="{{ url_for('learn', n=1) }}">
-            <div class="home_card_step">Step 1</div>
-            <div class="home_card_title">Learn the Building Blocks</div>
-            <p class="home_card_body">
-                Two short lessons: cooking methods that decide texture, and
-                flavor / regional words that preview taste.
-            </p>
-            <span class="home_card_cta">Start Learning →</span>
-        </a>
-
-        <a class="home_card" href="{{ url_for('quiz', n=1) }}">
-            <div class="home_card_step">Step 2</div>
-            <div class="home_card_title">Take the Quiz</div>
-            <p class="home_card_body">
-                Decode dish names round by round, then handle a real-world
-                ordering scenario for a friend who can't eat spicy food.
-            </p>
-            <span class="home_card_cta">Take the Quiz →</span>
-        </a>
+    <!-- Progress timeline -->
+    <div class="home_timeline">
+        {% for s in stages %}
+        <div class="home_tl_node {{ s.status }}">
+            <div class="home_tl_dot">
+                {% if s.status == 'done' %}✓{% else %}{{ s.number }}{% endif %}
+            </div>
+            <div class="home_tl_label">{{ s.label }}</div>
+        </div>
+        {% if not loop.last %}
+        <div class="home_tl_line {{ s.status }}"></div>
+        {% endif %}
+        {% endfor %}
     </div>
 
-    <p class="home_footnote">
-        Tip: complete the lessons first — the quiz assumes you know the decoding rules.
-    </p>
+    <!-- Stage cards -->
+    <div class="home_stages">
+        {% for s in stages %}
+        <a class="home_stage_card {{ s.status }}" href="{{ s.url }}">
+            <div class="home_stage_top">
+                <span class="home_stage_num">{{ s.label }}</span>
+                <span class="home_stage_status_badge {{ s.status }}">
+                    {% if s.status == 'done' %}Completed{% elif s.status == 'active' %}Up Next{% else %}Upcoming{% endif %}
+                </span>
+            </div>
+            <div class="home_stage_title">{{ s.title }}</div>
+            <p class="home_stage_desc">{{ s.desc }}</p>
+            {% if s.status != 'upcoming' %}
+            <div class="home_stage_cta">
+                {% if s.status == 'done' %}Review →{% else %}Start →{% endif %}
+            </div>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- Main CTA -->
+    <div class="home_main_cta">
+        {% if all_done %}
+        <a href="{{ url_for('quiz_result') }}" class="learn_btn learn_btn_primary">See Your Results →</a>
+        <p class="home_footnote">You've completed all stages — great work!</p>
+        {% elif next_stage %}
+        <a href="{{ next_stage.url }}" class="learn_btn learn_btn_primary">Continue: {{ next_stage.label }} →</a>
+        <p class="home_footnote">Complete the lessons before the quiz — they give you the decoding rules.</p>
+        {% else %}
+        <a href="{{ url_for('learn', n=1) }}" class="learn_btn learn_btn_primary">Start Lesson 1 →</a>
+        <p class="home_footnote">Complete the lessons before the quiz — they give you the decoding rules.</p>
+        {% endif %}
+    </div>
+
+</div>
 </div>
 {% endblock %}

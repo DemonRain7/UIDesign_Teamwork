@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
 
-    <body>
+    <body {% if show_home_nav %}class="with_nav"{% endif %}>
         {% if show_home_nav %}
         <div class="top_nav">
             <a href="/" class="top_nav_home">← Home</a>

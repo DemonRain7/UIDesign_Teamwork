@@ -49,8 +49,11 @@ $( function() {
     let learningTable = `<table class="table"><thead><tr>${headerRow}</tr></thead><tbody>${bodyRows}</tbody></table>`;
     learningTableContainerElem.html(learningTable);
 
-    learningImage0ContainerElem.html(`<img src="${learningContents.images[0]}">`);
-    learningImage1ContainerElem.html(`<img src="${learningContents.images[1]}">`);
-    learningImage2ContainerElem.html(`<img src="${learningContents.images[2]}">`);
-    learningImage3ContainerElem.html(`<img src="${learningContents.images[3]}">`);
+    [learningImage0ContainerElem, learningImage1ContainerElem,
+     learningImage2ContainerElem, learningImage3ContainerElem].forEach((elem, i) => {
+        elem.html(`<div class="card h-100">
+            <img src="${learningContents.images[i]}" class="card-img-top">
+            <div class="card-body"><p class="card-text">${learningContents.captions[i]}</p></div>
+        </div>`);
+    });
 })

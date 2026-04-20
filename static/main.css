@@ -709,3 +709,320 @@ body {
 .learn_btn_quiz:hover {
     background: #a87920;
 }
+
+/* ===== Transition page ===== */
+.transition_card {
+    text-align: center;
+}
+
+.transition_badge {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1.5px solid #a5d6a7;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.transition_title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1F2A3D;
+    margin: 0 0 12px;
+    letter-spacing: -.3px;
+    line-height: 1.25;
+}
+
+.transition_body {
+    font-size: 15px;
+    color: #5a6375;
+    line-height: 1.65;
+    max-width: 560px;
+    margin: 0 auto 28px;
+}
+
+.transition_recap {
+    background: #FAFAF8;
+    border: 1.5px solid #EDE7D5;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 0 auto 28px;
+    max-width: 560px;
+    text-align: left;
+}
+
+.transition_recap_label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: #C8932B;
+    margin-bottom: 14px;
+}
+
+.transition_recap_row {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid #EDE7D5;
+}
+
+.transition_recap_row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.transition_term {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1F2A3D;
+    min-width: 160px;
+    flex-shrink: 0;
+}
+
+.transition_desc {
+    font-size: 13.5px;
+    color: #5a6375;
+    line-height: 1.5;
+}
+
+.transition_bridge {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: #1F2A3D;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 0 auto 24px;
+    max-width: 560px;
+    text-align: left;
+}
+
+.transition_bridge_arrow {
+    font-size: 20px;
+    color: #C8932B;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.transition_bridge p {
+    margin: 0;
+    font-size: 14.5px;
+    color: #F5F0E1;
+    line-height: 1.65;
+}
+
+.transition_tease {
+    font-size: 14px;
+    font-style: italic;
+    color: #7a6a50;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+    border-left: 3px solid #C8932B;
+    padding-left: 14px;
+    text-align: left;
+}
+
+.transition_cta {
+    margin-top: 4px;
+}
+
+.transition_btn {
+    padding: 13px 44px;
+    font-size: 15px;
+}
+
+/* ===== Home v2 — Progress tracker ===== */
+.home_v2 {
+    padding: 44px 48px 48px;
+}
+
+/* Timeline */
+.home_timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 32px 0 36px;
+    gap: 0;
+}
+
+.home_tl_node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.home_tl_dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid #EDE7D5;
+    background: #F5F0E1;
+    color: #c4b89a;
+    transition: all .2s ease;
+}
+
+.home_tl_node.done .home_tl_dot {
+    background: #C8932B;
+    border-color: #C8932B;
+    color: #fff;
+}
+
+.home_tl_node.active .home_tl_dot {
+    background: #1F2A3D;
+    border-color: #1F2A3D;
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(31,42,61,.15);
+}
+
+.home_tl_label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #c4b89a;
+    letter-spacing: .5px;
+    white-space: nowrap;
+}
+
+.home_tl_node.done .home_tl_label { color: #C8932B; }
+.home_tl_node.active .home_tl_label { color: #1F2A3D; }
+
+.home_tl_line {
+    flex: 1;
+    height: 2px;
+    background: #EDE7D5;
+    margin-bottom: 22px;
+    min-width: 24px;
+    max-width: 60px;
+    transition: background .2s ease;
+}
+
+.home_tl_line.done { background: #C8932B; }
+
+/* Stage cards grid */
+.home_stages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.home_stages .home_stage_card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
+.home_stage_card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: #FAFAF8;
+    border: 1.5px solid #EDE7D5;
+    border-top: 4px solid #EDE7D5;
+    border-radius: 12px;
+    padding: 18px 20px 16px;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+
+.home_stage_card.done {
+    border-top-color: #C8932B;
+    opacity: .75;
+}
+
+.home_stage_card.active {
+    border-top-color: #1F2A3D;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06), 0 8px 24px rgba(31,42,61,.08);
+}
+
+.home_stage_card.active:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,.08), 0 14px 32px rgba(200,147,43,.12);
+}
+
+.home_stage_card.done:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.home_stage_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.home_stage_num {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #9a8a6e;
+}
+
+.home_stage_status_badge {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: #EDE7D5;
+    color: #9a8a6e;
+}
+
+.home_stage_status_badge.done { background: #fdf3e0; color: #C8932B; }
+.home_stage_status_badge.active { background: #1F2A3D; color: #fff; }
+
+.home_stage_title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1F2A3D;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.home_stage_desc {
+    font-size: 13px;
+    color: #5a6375;
+    line-height: 1.55;
+    margin: 0 0 10px;
+}
+
+.home_stage_cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: #C8932B;
+}
+
+.home_main_cta {
+    text-align: center;
+    padding-top: 8px;
+    border-top: 2px solid #EDE7D5;
+}
+
+.home_main_cta .learn_btn {
+    font-size: 15px;
+    padding: 13px 44px;
+    margin-bottom: 12px;
+}
+
+.home_footnote {
+    font-size: 13px;
+    color: #9a8a6e;
+    font-style: italic;
+    margin: 8px 0 0;
+}

@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main_container">
+<div class="quiz_container transition_card">
+
+    <div class="transition_badge">✓ {{ t.badge }}</div>
+    <h1 class="transition_title">{{ t.title }}</h1>
+    <p class="transition_body">{{ t.body }}</p>
+
+    <div class="transition_recap">
+        <div class="transition_recap_label">What you just learned</div>
+        {% for term, desc in t.recap %}
+        <div class="transition_recap_row">
+            <span class="transition_term">{{ term }}</span>
+            <span class="transition_desc">{{ desc }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="transition_bridge">
+        <span class="transition_bridge_arrow">→</span>
+        <p>{{ t.bridge }}</p>
+    </div>
+
+    <div class="transition_tease">{{ t.tease }}</div>
+
+    <div class="transition_cta">
+        <a href="{{ t.next_url }}" class="learn_btn learn_btn_primary transition_btn">{{ t.cta }}</a>
+    </div>
+
+</div>
+</div>
+{% endblock %}

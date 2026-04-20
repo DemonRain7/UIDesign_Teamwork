@@ -53,9 +53,99 @@ def get_question(n):
 # These stubs exist so the app runs end-to-end while the learning team builds
 # their pages. Replace the stub bodies, not the route signatures.
 # ===========================================================================
+TRANSITIONS = {
+    1: {
+        "badge": "Lesson 1 Complete",
+        "title": "You can now read texture from a menu.",
+        "body": "Stir-fried, braised, steamed — each cooking word is a texture promise before the food arrives. You've unlocked the first decoding layer.",
+        "recap": [
+            ("爆炒 Stir-fried", "Quick wok-toss → charred edges, high heat"),
+            ("炖 Braised", "Slow-cooked → fall-apart tender, rich liquid"),
+            ("蒸 Steamed", "Gentle moist heat → light, clean natural taste"),
+        ],
+        "bridge": "But knowing the cooking method is only half the story. What does 'Hunan-style' actually mean for your taste buds?",
+        "tease": "Quiz 1: Can you identify a Hunan-style stir-fried dish from a lineup of four beef preparations?",
+        "cta": "Take Quiz 1 →",
+        "next_url": "/quiz/2"
+    },
+    2: {
+        "badge": "Lesson 2 Complete",
+        "title": "You decoded 'stir-fried' in Quiz 1 — now for the tricky part.",
+        "body": "You aced the cooking method. Lesson 2 gave you the flavor layer — regional styles and taste words that preview what you'll experience.",
+        "recap": [
+            ("湘 Hunan-style", "Chili heat, smoky, garlicky — dry and direct"),
+            ("粤 Cantonese", "Light, fresh, ingredient-forward — minimal seasoning"),
+            ("鱼香 Yu-xiang", "No fish! Sweet-sour-savory sauce with pickled chili"),
+        ],
+        "bridge": "You decoded 'stir-fried' from Lesson 1 — but how did you know '鱼香' means no fish? That's what Lesson 2 just gave you.",
+        "tease": "Quiz 2: Does '鱼香肉丝' (Fish-Fragrant Shredded Pork) actually contain fish? Only one way to find out.",
+        "cta": "Take Quiz 2 →",
+        "next_url": "/quiz/1"
+    }
+}
+
+
+@app.route('/transition/<int:n>')
+def transition(n):
+    t = TRANSITIONS.get(n)
+    if not t:
+        return redirect(url_for('home'))
+    return render_template('transition.html', t=t)
+
+
 @app.route('/')
 def home():
-    return render_template('home.html')
+    def lesson_visited(n):
+        return any(l['lesson'] == n for l in user_state['learning_log'])
+
+    stages = [
+        {
+            "number": 1, "label": "Lesson 1",
+            "title": "Cooking Methods = Texture",
+            "desc": "Learn how technique words predict texture before the food arrives.",
+            "url": url_for('learn', n=1),
+            "done": lesson_visited(1)
+        },
+        {
+            "number": 2, "label": "Quiz 1",
+            "title": "Spot the Hunan Stir-fry",
+            "desc": "Apply your texture knowledge: identify a dish from its cooking clues.",
+            "url": "/quiz/2",
+            "done": 2 in user_state['quiz_answers']
+        },
+        {
+            "number": 3, "label": "Lesson 2",
+            "title": "Flavor Words = Taste Preview",
+            "desc": "Regional styles and flavor words that tell you exactly what you'll taste.",
+            "url": url_for('learn', n=2),
+            "done": lesson_visited(2)
+        },
+        {
+            "number": 4, "label": "Quiz 2",
+            "title": "Decode 鱼香 & Cantonese",
+            "desc": "Test your flavor-word decoding on two classic Chinese dish names.",
+            "url": "/quiz/1",
+            "done": 1 in user_state['quiz_answers'] and 3 in user_state['quiz_answers']
+        },
+        {
+            "number": 5, "label": "Final Challenge",
+            "title": "Order for a Friend",
+            "desc": "Put it all together: protect your spice-averse friend using everything you've learned.",
+            "url": "/quiz/4",
+            "done": 4 in user_state['quiz_answers']
+        },
+    ]
+    for i, s in enumerate(stages):
+        if s['done']:
+            s['status'] = 'done'
+        elif i == 0 or stages[i - 1]['done']:
+            s['status'] = 'active'
+        else:
+            s['status'] = 'upcoming'
+
+    next_stage = next((s for s in stages if not s['done']), None)
+    all_done = next_stage is None
+    return render_template('home.html', stages=stages, next_stage=next_stage, all_done=all_done)
 
 @app.route('/learn/<int:n>')
 def learn(n):
@@ -106,13 +196,18 @@ def quiz(n):
         )
         user_state['quiz_total'] = TOTAL_QUESTIONS
 
-        next_n = n + 1
-        if n == 3:
+        if n == 2:
+            # Quiz 1 done → go to Lesson 2
+            next_url = url_for('learn', n=2)
+        elif n == 1:
+            # Hook question (Quiz 2a) done → go to Quiz 2b
+            next_url = url_for('quiz', n=3)
+        elif n == 3:
+            # Quiz 2b done → decode reveal
             next_url = url_for('quiz_decode')
-        elif next_n <= TOTAL_QUESTIONS:
-            next_url = url_for('quiz', n=next_n)
         else:
-            next_url = url_for('quiz_result')
+            next_n = n + 1
+            next_url = url_for('quiz', n=next_n) if next_n <= TOTAL_QUESTIONS else url_for('quiz_result')
 
         return render_template(
             'quiz_feedback.html',

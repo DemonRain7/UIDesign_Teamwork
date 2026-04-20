@@ -29,7 +29,10 @@ $(function() {
     let headers = Object.keys(tableData[0]);
     let headerRow = headers.map(h => `<th>${h}</th>`).join("");
     let bodyRows = tableData.map(row =>
-        `<tr>${headers.map(h => `<td>${row[h]}</td>`).join("")}</tr>`
+        `<tr>${headers.map(h => {
+            const cls = h === 'Chinese' ? ' class="learn_chinese_cell"' : '';
+            return `<td${cls}>${row[h]}</td>`;
+        }).join("")}</tr>`
     ).join("");
     $("#learing_table_container").html(
         `<table class="learn_table">

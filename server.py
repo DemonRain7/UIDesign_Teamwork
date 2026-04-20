@@ -32,7 +32,15 @@ user_state = {
     "quiz_visits": [],       # [{timestamp, question_id}]
     "quiz_answers": {},      # {question_id: {chosen, correct, timestamp}}
     "quiz_score": 0,
-    "quiz_total": 0
+    "quiz_total": 0,
+    "streak": 0,
+}
+
+NEXT_LABELS = {
+    1: ("Lesson 1", "Cooking Methods = Texture"),
+    2: ("Lesson 2", "Flavor Words = Taste Preview"),
+    3: ("Decode Reveal", "鱼香肉丝 — Full Breakdown"),
+    4: ("Results", "Your Final Score"),
 }
 
 
@@ -223,6 +231,11 @@ def quiz(n):
             1 for a in user_state['quiz_answers'].values() if a['correct']
         )
         user_state['quiz_total'] = TOTAL_QUESTIONS
+        if is_correct:
+            user_state['streak'] += 1
+        else:
+            user_state['streak'] = 0
+        current_streak = user_state['streak']
 
         if n == 1:
             # Hook done → go to Lesson 1
@@ -237,6 +250,7 @@ def quiz(n):
             next_n = n + 1
             next_url = url_for('quiz', n=next_n) if next_n <= TOTAL_QUESTIONS else url_for('quiz_result')
 
+        next_label = NEXT_LABELS.get(n, ("Next", ""))
         return render_template(
             'quiz_feedback.html',
             question=question,
@@ -245,6 +259,8 @@ def quiz(n):
             next_url=next_url,
             question_number=n,
             total_questions=TOTAL_QUESTIONS,
+            streak=current_streak,
+            next_label=next_label,
             **nav_ctx()
         )
 

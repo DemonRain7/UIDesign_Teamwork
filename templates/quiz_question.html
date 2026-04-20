@@ -25,6 +25,13 @@
         </div>
     </div>
 
+    {% if question.step == "scenario" %}
+    <div class="scenario_scene">
+        <div class="scenario_scene_label">Final Challenge — Real-world Scenario</div>
+        <p>You're at the restaurant. Your friend leans over and whispers: <strong style="color:#e8c87a;">"I can't eat anything spicy — please help me order."</strong> The waiter is waiting.</p>
+    </div>
+    {% endif %}
+
     <div class="quiz_header">
         <h1 class="quiz_title">{{ question.title }}</h1>
         <p class="quiz_prompt">{{ question.prompt }}</p>

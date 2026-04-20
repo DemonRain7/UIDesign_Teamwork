@@ -24,6 +24,56 @@ body {
     max-width: 100%;
 }
 
+.main_container.quiz_wide {
+    width: 1160px;
+}
+
+body.with_nav {
+    padding-top: 8px;
+}
+
+/* ===== Two-column quiz layout ===== */
+.quiz_container_wide {
+    padding: 28px 36px 28px;
+}
+
+.quiz_split {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 36px;
+    align-items: start;
+    margin-top: 4px;
+}
+
+.quiz_split_left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: 80px;
+}
+
+.quiz_split_left .quiz_header {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.quiz_split_left .quiz_title {
+    font-size: 20px;
+}
+
+.quiz_actions_left {
+    margin-top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.quiz_split_right .option-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
 /* ===== Quiz card — elevated from the warm background ===== */
 .quiz_container {
     background: #fff;
@@ -170,7 +220,7 @@ body {
 
 .option-image {
     width: 100%;
-    height: 160px;
+    height: 130px;
     object-fit: cover;
     border-radius: 8px;
     display: block;

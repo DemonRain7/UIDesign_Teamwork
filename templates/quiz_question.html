@@ -5,18 +5,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="main_container quiz_container">
+<div class="main_container quiz_wide">
+<div class="quiz_container quiz_container_wide">
 
     <div class="progress_header">
         <div class="progress_label">
-            {% if question.part == "hook" %}
-                The Hook — Warm-up
-            {% elif question.part == 1 %}
-                Part 1 — Progressive Decoding &nbsp;·&nbsp; Quiz {{ question.round }}
-            {% elif question.step == "decode" %}
-                Part 2 — Put It All Together
-            {% else %}
-                Part 2 — Final Scenario
+            {% if question.part == "hook" %}The Hook — Warm-up
+            {% elif question.part == 1 %}Part 1 — Progressive Decoding &nbsp;·&nbsp; Quiz {{ question.round }}
+            {% elif question.step == "decode" %}Part 2 — Put It All Together
+            {% else %}Part 2 — Final Scenario
             {% endif %}
             &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }}
         </div>
@@ -25,52 +22,66 @@
         </div>
     </div>
 
-    {% if question.step == "scenario" %}
-    <div class="scenario_scene">
-        <div class="scenario_scene_label">Final Challenge — Real-world Scenario</div>
-        <p>You're at the restaurant. Your friend leans over and whispers: <strong style="color:#e8c87a;">"I can't eat anything spicy — please help me order."</strong> The waiter is waiting.</p>
-    </div>
-    {% endif %}
-
-    <div class="quiz_header">
-        <h1 class="quiz_title">{{ question.title }}</h1>
-        <p class="quiz_prompt">{{ question.prompt }}</p>
-    </div>
-
-    {% if echoed_description %}
-    <div class="echo_description">
-        <strong>You said:</strong> {{ echoed_description }}<br>
-        Pick the image that fits this description.
-    </div>
-    {% endif %}
-
     <form method="POST" id="quiz_form">
-        <div class="option-grid">
-            {% for opt in question.options %}
-            <label class="option-card {% if question.multi_select %}multi{% endif %}">
-                {% if question.multi_select %}
-                <input type="checkbox" name="answer" value="{{ opt.key }}">
-                {% else %}
-                <input type="radio" name="answer" value="{{ opt.key }}">
-                {% endif %}
-                <div class="option-header">
-                    <span class="option-key">{{ opt.key }}</span>
-                    <span class="option-text">{{ opt.text }}</span>
-                </div>
-                {% if opt.image %}
-                <img class="option-image" src="{{ opt.image }}" alt="{{ opt.text }}">
-                {% endif %}
-            </label>
-            {% endfor %}
+    <div class="quiz_split">
+
+        <!-- Left: context + question info + submit -->
+        <div class="quiz_split_left">
+
+            {% if question.step == "scenario" %}
+            <div class="scenario_scene">
+                <div class="scenario_scene_label">Final Challenge — Real-world Scenario</div>
+                <p>You're at the restaurant. Your friend leans over and whispers: <strong style="color:#e8c87a;">"I can't eat anything spicy — please help me order."</strong> The waiter is waiting.</p>
+            </div>
+            {% endif %}
+
+            <div class="quiz_header">
+                <h1 class="quiz_title">{{ question.title }}</h1>
+                <p class="quiz_prompt">{{ question.prompt }}</p>
+            </div>
+
+            {% if echoed_description %}
+            <div class="echo_description">
+                <strong>You said:</strong> {{ echoed_description }}<br>
+                Pick the image that fits this description.
+            </div>
+            {% endif %}
+
+            <div class="quiz_actions quiz_actions_left">
+                <button type="submit" class="btn_submit">Submit Answer</button>
+                <a class="btn_skip"
+                   href="{% if question_number < total_questions %}/quiz/{{ question_number + 1 }}{% else %}/quiz/result{% endif %}">
+                   Skip
+                </a>
+            </div>
+
         </div>
 
-        <div class="quiz_actions">
-            <button type="submit" class="btn_submit">Submit Answer</button>
-            <a class="btn_skip"
-               href="{% if question_number < total_questions %}/quiz/{{ question_number + 1 }}{% else %}/quiz/result{% endif %}">
-               Skip
-            </a>
+        <!-- Right: option cards -->
+        <div class="quiz_split_right">
+            <div class="option-grid">
+                {% for opt in question.options %}
+                <label class="option-card {% if question.multi_select %}multi{% endif %}">
+                    {% if question.multi_select %}
+                    <input type="checkbox" name="answer" value="{{ opt.key }}">
+                    {% else %}
+                    <input type="radio" name="answer" value="{{ opt.key }}">
+                    {% endif %}
+                    <div class="option-header">
+                        <span class="option-key">{{ opt.key }}</span>
+                        <span class="option-text">{{ opt.text }}</span>
+                    </div>
+                    {% if opt.image %}
+                    <img class="option-image" src="{{ opt.image }}" alt="{{ opt.text }}">
+                    {% endif %}
+                </label>
+                {% endfor %}
+            </div>
         </div>
+
+    </div>
     </form>
+
+</div>
 </div>
 {% endblock %}

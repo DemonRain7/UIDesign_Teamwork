@@ -542,6 +542,164 @@ body {
 
 .result_row.wrong { border-left-color: #b02a2a; }
 
+/* ===== Micro-interaction animations ===== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%  { transform: translateX(-8px); }
+    40%  { transform: translateX(8px); }
+    60%  { transform: translateX(-5px); }
+    80%  { transform: translateX(5px); }
+}
+
+@keyframes correctGlow {
+    0%   { box-shadow: 0 0 0 0 rgba(47,125,50,.55); }
+    60%  { box-shadow: 0 0 0 14px rgba(47,125,50,0); }
+    100% { box-shadow: 0 0 0 0 rgba(47,125,50,0); }
+}
+
+@keyframes btnPulse {
+    0%, 100% { box-shadow: 0 2px 8px rgba(200,147,43,.35); }
+    50%       { box-shadow: 0 0 0 8px rgba(200,147,43,.18), 0 2px 8px rgba(200,147,43,.35); }
+}
+
+@keyframes streakPop {
+    from { transform: scale(0.6); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes bannerSlideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate_correct .feedback_image img {
+    animation: correctGlow 0.9s ease forwards;
+    border-radius: 10px;
+    border: 2px solid #2f7d32;
+}
+
+.animate_wrong .feedback_image img {
+    animation: shake 0.45s ease;
+}
+
+.next_btn_pulse a {
+    animation: btnPulse 1.8s ease infinite;
+}
+
+/* Streak badge */
+.streak_badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #e65c00, #f9a825);
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    margin-bottom: 18px;
+    animation: streakPop 0.4s cubic-bezier(.22,1,.36,1);
+}
+
+/* Hook revelation block */
+.hook_reveal {
+    background: #1F2A3D;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin: 20px 0 24px;
+    text-align: center;
+}
+
+.hook_reveal_chinese {
+    font-size: 56px;
+    font-weight: 800;
+    color: #C8932B;
+    letter-spacing: 8px;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.hook_reveal_headline {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: -.2px;
+}
+
+.hook_reveal_sub {
+    font-size: 14px;
+    color: #8a9ab8;
+    line-height: 1.65;
+    margin: 0 auto;
+    max-width: 440px;
+}
+
+/* Next step hint below Next button */
+.next_step_hint {
+    font-size: 12px;
+    color: #9a8a6e;
+    margin-top: 8px;
+    font-style: italic;
+    text-align: right;
+}
+
+/* Scenario scene-setting block */
+.scenario_scene {
+    background: #1F2A3D;
+    border-left: 5px solid #C8932B;
+    border-radius: 0 14px 14px 0;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    animation: bannerSlideDown .35s ease;
+}
+
+.scenario_scene_label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: #C8932B;
+    margin-bottom: 8px;
+}
+
+.scenario_scene p {
+    font-size: 15px;
+    color: #F5F0E1;
+    line-height: 1.65;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Learning table — Chinese column */
+.learn_chinese_cell {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #1F2A3D;
+    line-height: 1.2;
+}
+
+/* Result page — verdict */
+.result_verdict {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1F2A3D;
+    margin: 10px 0 4px;
+    letter-spacing: -.2px;
+}
+
+.result_verdict_sub {
+    font-size: 15px;
+    color: #5a6375;
+    margin: 0 0 28px;
+    line-height: 1.6;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* ===== Top nav bar ===== */
 .top_nav {
     position: sticky;

@@ -1,39 +1,51 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="main_container quiz_container">
-    <div class="progress_indicator">
-        {% if question.part == "hook" %}
-            The Hook — Warm-up
-        {% elif question.part == 1 %}
-            Part 1 — Progressive Decoding · Quiz {{ question.round }}
-        {% elif question.step == "decode" %}
-            Part 2 — Put It All Together
-        {% else %}
-            Part 2 — Final Scenario
-        {% endif %}
-        &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }} · Answer
+<div class="main_container quiz_container {% if is_correct %}animate_correct{% else %}animate_wrong{% endif %}">
+
+    <div class="progress_header">
+        <div class="progress_label">
+            {% if question.part == "hook" %}The Hook — Warm-up
+            {% elif question.part == 1 %}Part 1 — Progressive Decoding · Quiz {{ question.round }}
+            {% else %}Part 2 — Final Scenario
+            {% endif %}
+            &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }} · Answer
+        </div>
+        <div class="progress_track">
+            <div class="progress_fill" style="width: {{ (question_number / total_questions * 100) | int }}%"></div>
+        </div>
     </div>
 
-    <div class="quiz_header">
-        <h1 class="quiz_title">
-            {% if question.part == "hook" %}The Reveal — Did You Guess Right?
-            {% elif question.step == "decode" %}Decoded!
-            {% else %}{{ question.title }} — Answer{% endif %}
-        </h1>
+    <!-- Streak badge -->
+    {% if streak >= 2 %}
+    <div style="text-align:center;">
+        <span class="streak_badge">🔥 {{ streak }} in a row!</span>
     </div>
+    {% endif %}
 
+    <!-- Correct / wrong badge -->
     <span class="feedback_badge {% if is_correct %}correct{% else %}incorrect{% endif %}">
         {% if question.part == "hook" %}
-            {% if is_correct %}✓ Great guess — you already have good instincts!{% else %}✗ Surprising, right? Here's why…{% endif %}
-        {% elif question.step == "decode" %}
-            {% if is_correct %}✓ Perfectly decoded!{% else %}✗ Close — let's break it down.{% endif %}
+            {% if is_correct %}✓ Good instincts — let's see why{% else %}✗ Surprising, right? Here's the truth…{% endif %}
         {% elif question.step == "scenario" %}
             {% if is_correct %}✓ Your friend is safe!{% else %}✗ Watch out — your friend would have ordered something spicy!{% endif %}
         {% else %}
-            {% if is_correct %}✓ Correct!{% else %}✗ Not quite — keep going!{% endif %}
+            {% if is_correct %}✓ Correct!{% else %}✗ Not quite — here's why{% endif %}
         {% endif %}
     </span>
+
+    <!-- ===== HOOK: special revelation block ===== -->
+    {% if question.part == "hook" %}
+    <div class="hook_reveal">
+        <div class="hook_reveal_chinese">鱼香肉丝</div>
+        <div class="hook_reveal_headline">There is NO fish in this dish.</div>
+        <p class="hook_reveal_sub">
+            鱼香 (yú-xiāng) literally means "fish-fragrant" — but it's actually a
+            sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies.
+            Zero fish. Lesson 1 will teach you how to decode names like this.
+        </p>
+    </div>
+    {% endif %}
 
     <div class="feedback_grid">
         <div class="feedback_image">
@@ -84,10 +96,15 @@
         </div>
     </div>
 
-    <div class="next_button">
+    <!-- Next button + preview -->
+    <div class="next_button {% if is_correct %}next_btn_pulse{% endif %}">
         <a href="{{ next_url }}">
-            {% if question_number < total_questions %}Next Question →{% else %}See My Results →{% endif %}
+            {% if question_number < total_questions %}Next →{% else %}See My Results →{% endif %}
         </a>
+        {% if next_label %}
+        <p class="next_step_hint">Up next: {{ next_label[0] }} — {{ next_label[1] }}</p>
+        {% endif %}
     </div>
+
 </div>
 {% endblock %}

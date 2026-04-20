@@ -100,38 +100,45 @@ def home():
 
     stages = [
         {
-            "number": 1, "label": "Lesson 1",
+            "number": 1, "label": "Hook",
+            "title": "Can You Guess This Dish?",
+            "desc": "A mystery dish name to spark your curiosity before the learning begins.",
+            "url": "/quiz/1",
+            "done": 1 in user_state['quiz_answers']
+        },
+        {
+            "number": 2, "label": "Lesson 1",
             "title": "Cooking Methods = Texture",
             "desc": "Learn how technique words predict texture before the food arrives.",
             "url": url_for('learn', n=1),
             "done": lesson_visited(1)
         },
         {
-            "number": 2, "label": "Quiz 1",
+            "number": 3, "label": "Quiz 1",
             "title": "Spot the Hunan Stir-fry",
             "desc": "Apply your texture knowledge: identify a dish from its cooking clues.",
             "url": "/quiz/2",
             "done": 2 in user_state['quiz_answers']
         },
         {
-            "number": 3, "label": "Lesson 2",
+            "number": 4, "label": "Lesson 2",
             "title": "Flavor Words = Taste Preview",
             "desc": "Regional styles and flavor words that tell you exactly what you'll taste.",
             "url": url_for('learn', n=2),
             "done": lesson_visited(2)
         },
         {
-            "number": 4, "label": "Quiz 2",
-            "title": "Decode 鱼香 & Cantonese",
-            "desc": "Test your flavor-word decoding on two classic Chinese dish names.",
-            "url": "/quiz/1",
-            "done": 1 in user_state['quiz_answers'] and 3 in user_state['quiz_answers']
+            "number": 5, "label": "Quiz 2",
+            "title": "Decode Cantonese Steamed Fish",
+            "desc": "Combine cooking method + regional style to identify the right dish.",
+            "url": "/quiz/3",
+            "done": 3 in user_state['quiz_answers']
         },
         {
-            "number": 5, "label": "Final Challenge",
-            "title": "Order for a Friend",
-            "desc": "Put it all together: protect your spice-averse friend using everything you've learned.",
-            "url": "/quiz/4",
+            "number": 6, "label": "Final Challenge",
+            "title": "Decode & Order for a Friend",
+            "desc": "Full decode reveal, then protect your spice-averse friend with what you've learned.",
+            "url": "/quiz/decode",
             "done": 4 in user_state['quiz_answers']
         },
     ]
@@ -196,12 +203,12 @@ def quiz(n):
         )
         user_state['quiz_total'] = TOTAL_QUESTIONS
 
-        if n == 2:
+        if n == 1:
+            # Hook done → go to Lesson 1
+            next_url = url_for('learn', n=1)
+        elif n == 2:
             # Quiz 1 done → go to Lesson 2
             next_url = url_for('learn', n=2)
-        elif n == 1:
-            # Hook question (Quiz 2a) done → go to Quiz 2b
-            next_url = url_for('quiz', n=3)
         elif n == 3:
             # Quiz 2b done → decode reveal
             next_url = url_for('quiz_decode')

@@ -1,61 +1,61 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="main_container quiz_container">
+<div class="main_container quiz_wide">
+<div class="quiz_container quiz_container_wide">
 
-    <div class="quiz_header" style="text-align:center; border-bottom: none; margin-bottom: 0;">
-        <h1 class="quiz_title">Your Results</h1>
-    </div>
-
-    <div class="result_hero">
-        <div class="result_score">{{ score }} / {{ total }}</div>
-
-        {% if score == total %}
-        <div class="result_verdict">Expert Decoder 🏆</div>
-        <p class="result_verdict_sub">
-            Perfect score. You can read cooking methods, regional styles, and flavor words
-            — and apply them under pressure. Next time you see a Chinese menu, you'll know
-            exactly what to order.
-        </p>
-        {% elif score >= total - 1 %}
-        <div class="result_verdict">Strong Instincts 🎯</div>
-        <p class="result_verdict_sub">
-            You decoded most of it. One dish slipped through, but you've already built the
-            vocabulary to read a Chinese menu with confidence.
-        </p>
-        {% elif score >= total / 2 %}
-        <div class="result_verdict">Good Foundation 📖</div>
-        <p class="result_verdict_sub">
-            You're getting there. Review the lessons and try again — the decoding rules
-            are simple once they click.
-        </p>
-        {% else %}
-        <div class="result_verdict">The Menu Has More Secrets 🔍</div>
-        <p class="result_verdict_sub">
-            Chinese menu names are deceptively tricky. Go back through Lessons 1 and 2
-            — the patterns will start to feel natural.
-        </p>
-        {% endif %}
-    </div>
-
-    <div class="feedback_card">
-        <h3>Review</h3>
-        {% for row in review %}
-        <div class="result_row {% if not row.correct %}wrong{% endif %}">
-            <strong>
-                {% if row.question.part == "hook" %}Hook{% else %}Q{{ row.question.id }}{% endif %}
-                — {{ row.question.dish }}
-            </strong><br>
-            Your answer: <strong>{{ row.chosen or '(unanswered)' }}</strong>
-            &nbsp;·&nbsp; Correct: <strong>{{ row.question.correct }}</strong>
-            &nbsp;·&nbsp; {% if row.correct %}✓{% else %}✗{% endif %}
+    <div class="progress_header">
+        <div class="progress_label">Your Results</div>
+        <div class="progress_track">
+            <div class="progress_fill" style="width: 100%"></div>
         </div>
-        {% endfor %}
     </div>
 
-    <div class="next_button" style="text-align:center;">
-        <a href="{{ url_for('home') }}">← Back to Home</a>
+    <div class="result_split">
+
+        <!-- Left: score + verdict -->
+        <div class="result_split_left">
+            <div class="result_score">{{ score }} / {{ total }}</div>
+
+            {% if score == total %}
+            <div class="result_verdict">Expert Decoder 🏆</div>
+            <p class="result_verdict_sub">Perfect score. You can read cooking methods, regional styles, and flavor words — and apply them under pressure.</p>
+            {% elif score >= total - 1 %}
+            <div class="result_verdict">Strong Instincts 🎯</div>
+            <p class="result_verdict_sub">You decoded most of it. One dish slipped through, but you've built real vocabulary to read a Chinese menu with confidence.</p>
+            {% elif score >= total / 2 %}
+            <div class="result_verdict">Good Foundation 📖</div>
+            <p class="result_verdict_sub">You're getting there. Review the lessons and try again — the decoding rules are simple once they click.</p>
+            {% else %}
+            <div class="result_verdict">The Menu Has More Secrets 🔍</div>
+            <p class="result_verdict_sub">Chinese menu names are deceptively tricky. Go back through Lessons 1 and 2 — the patterns will start to feel natural.</p>
+            {% endif %}
+
+            <div class="result_actions">
+                <a href="{{ url_for('home') }}" class="learn_btn">← Back to Home</a>
+            </div>
+        </div>
+
+        <!-- Right: review list -->
+        <div class="result_split_right">
+            <div class="result_review_label">Answer Review</div>
+            {% for row in review %}
+            <div class="result_row {% if not row.correct %}wrong{% endif %}">
+                <div class="result_row_title">
+                    {% if row.question.part == "hook" %}Hook{% else %}Q{{ row.question.id }}{% endif %}
+                    — {{ row.question.dish }}
+                    <span class="result_row_mark">{% if row.correct %}✓{% else %}✗{% endif %}</span>
+                </div>
+                <div class="result_row_detail">
+                    Your answer: <strong>{{ row.chosen or '(unanswered)' }}</strong>
+                    &nbsp;·&nbsp; Correct: <strong>{{ row.question.correct }}</strong>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
     </div>
 
+</div>
 </div>
 {% endblock %}

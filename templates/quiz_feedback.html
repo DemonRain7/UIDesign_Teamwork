@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="main_container quiz_container {% if is_correct %}animate_correct{% else %}animate_wrong{% endif %}">
+<div class="main_container quiz_wide">
+<div class="quiz_container quiz_container_wide {% if is_correct %}animate_correct{% else %}animate_wrong{% endif %}">
 
     <div class="progress_header">
         <div class="progress_label">
@@ -17,9 +18,9 @@
     </div>
 
     <!-- Streak badge -->
-    {% if streak >= 2 %}
+    {% if (streak | default(0)) >= 2 %}
     <div style="text-align:center;">
-        <span class="streak_badge">🔥 {{ streak }} in a row!</span>
+        <span class="streak_badge">🔥 {{ streak | default(0) }} in a row!</span>
     </div>
     {% endif %}
 
@@ -106,5 +107,6 @@
         {% endif %}
     </div>
 
+</div>
 </div>
 {% endblock %}

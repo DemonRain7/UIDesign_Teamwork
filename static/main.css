@@ -292,6 +292,8 @@ body.with_nav {
 
 .feedback_image img {
     width: 100%;
+    max-height: 240px;
+    object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, .1);
 }
@@ -315,11 +317,11 @@ body.with_nav {
 .feedback_card p { margin: 6px 0; line-height: 1.55; }
 
 .option_review {
-    padding: 10px 14px;
+    padding: 7px 10px;
     border-radius: 8px;
-    margin-bottom: 8px;
-    font-size: 14px;
-    line-height: 1.5;
+    margin-bottom: 6px;
+    font-size: 12.5px;
+    line-height: 1.45;
     position: relative;
 }
 
@@ -562,35 +564,66 @@ body.with_nav {
 }
 
 /* ===== Final result page ===== */
-.result_hero { text-align: center; padding: 30px 0; }
-
-.result_score {
-    font-size: 64px;
-    font-weight: 800;
-    color: #C8932B;
-    margin: 12px 0 6px;
-    line-height: 1;
+.result_split {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 36px;
+    align-items: start;
 }
 
-.result_quote {
-    font-size: 18px;
-    font-style: italic;
-    color: #4a5363;
-    max-width: 620px;
-    margin: 0 auto;
-    line-height: 1.5;
+.result_split_left {
+    text-align: center;
+    padding-top: 8px;
+}
+
+.result_score {
+    font-size: 56px;
+    font-weight: 800;
+    color: #C8932B;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.result_actions {
+    margin-top: 20px;
+}
+
+.result_review_label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: #9a8a6e;
+    margin-bottom: 10px;
 }
 
 .result_row {
-    background: #fff;
-    padding: 14px 18px;
-    margin-bottom: 10px;
+    background: #f8f5ef;
+    padding: 10px 14px;
+    margin-bottom: 8px;
     border-radius: 8px;
-    border-left: 5px solid #2f7d32;
-    font-size: 14px;
+    border-left: 4px solid #2f7d32;
 }
 
 .result_row.wrong { border-left-color: #b02a2a; }
+
+.result_row_title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1F2A3D;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.result_row_mark {
+    font-weight: 700;
+}
+
+.result_row_detail {
+    font-size: 12px;
+    color: #5a6375;
+}
 
 /* ===== Micro-interaction animations ===== */
 @keyframes shake {
@@ -733,21 +766,19 @@ body.with_nav {
 
 /* Result page — verdict */
 .result_verdict {
-    font-size: 22px;
+    font-size: 17px;
     font-weight: 800;
     color: #1F2A3D;
-    margin: 10px 0 4px;
+    margin: 8px 0 4px;
     letter-spacing: -.2px;
 }
 
 .result_verdict_sub {
-    font-size: 15px;
+    font-size: 13px;
     color: #5a6375;
-    margin: 0 0 28px;
-    line-height: 1.6;
-    max-width: 580px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;
+    line-height: 1.55;
+    max-width: 100%;
 }
 
 /* ===== Top nav bar ===== */

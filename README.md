@@ -19,7 +19,7 @@ them in a guided quiz that ends with a real-world ordering scenario.
 | Yu Qiu | @DemonRain7 | Quiz Part I — Progressive Decoding (rounds 1 & 2) + shared quiz infrastructure |
 | Ray Tang | @LisiruiTang | Learning module — backend |
 | Zhonghao Liu | @zeeliu7 | Learning module — frontend |
-| Shurong Zhang (Alice) | @alice20030504 | Quiz Part II — Final Scenario |
+| Shurong Zhang (Alice) | @alice20030504 | Quiz Part II — Final Scenario · Full UI/UX redesign: home progress tracker, sticky nav, viewport-fit layout system · CSS design system (main.css) — all visual styles, animations, micro-interactions (streak, shake/glow, hook reveal, scenario scene) · App flow restructuring (Home → Hook → Lesson → Quiz → Decode → Scenario → Results) · Decode page two-column layout · Image curation |
 
 **TA:** Max-Zhang63
 

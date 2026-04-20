@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="main_container quiz_container">
+<div class="main_container quiz_wide">
+<div class="quiz_container quiz_container_wide">
 
     <div class="progress_header">
         <div class="progress_label">
@@ -17,40 +18,48 @@
         <p class="quiz_prompt">You now have the vocabulary. Let's break this dish name down completely.</p>
     </div>
 
-    <div class="decode_grid">
-        <div class="decode_card">
-            <div class="decode_card_label">Flavor Word</div>
-            <div class="decode_card_chinese">鱼香</div>
-            <div class="decode_card_pinyin">yú-xiāng</div>
-            <p class="decode_card_body">NOT fish — a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies. No fish is used or needed.</p>
+    <div class="decode_split">
+
+        <!-- Left: cards + vibe -->
+        <div class="decode_split_left">
+            <div class="decode_grid">
+                <div class="decode_card">
+                    <div class="decode_card_label">Flavor Word</div>
+                    <div class="decode_card_chinese">鱼香</div>
+                    <div class="decode_card_pinyin">yú-xiāng</div>
+                    <p class="decode_card_body">NOT fish — a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies. No fish is used or needed.</p>
+                </div>
+                <div class="decode_card">
+                    <div class="decode_card_label">Cooking Method</div>
+                    <div class="decode_card_chinese">炒</div>
+                    <div class="decode_card_pinyin">chǎo / stir-fried</div>
+                    <p class="decode_card_body">Quick wok toss over high heat — the ingredients stay crisp and the sauce glazes the pork perfectly in seconds.</p>
+                </div>
+                <div class="decode_card">
+                    <div class="decode_card_label">Main Ingredient</div>
+                    <div class="decode_card_chinese">肉丝</div>
+                    <div class="decode_card_pinyin">ròu-sī / shredded pork</div>
+                    <p class="decode_card_body">Thin pork strips, often with wood ear mushrooms and bamboo shoots for varied texture.</p>
+                </div>
+            </div>
+
+            <div class="decode_vibe">
+                <div class="decode_vibe_label">Overall Vibe</div>
+                <p class="decode_vibe_text">Complex — sweet + sour + savory + mild spice. A glossy reddish-brown sauce clings to tender shredded pork. <strong>No fish anywhere.</strong></p>
+            </div>
         </div>
-        <div class="decode_card">
-            <div class="decode_card_label">Cooking Method</div>
-            <div class="decode_card_chinese">炒</div>
-            <div class="decode_card_pinyin">chǎo / stir-fried</div>
-            <p class="decode_card_body">Quick wok toss over high heat — the ingredients stay crisp and the sauce glazes the pork perfectly in seconds.</p>
+
+        <!-- Right: image + caption + next -->
+        <div class="decode_split_right">
+            <img src="/static/images/quiz1_C_yuxiang.png" alt="鱼香肉丝" class="decode_dish_img_right">
+            <p class="decode_caption">You decoded your first Chinese dish name. One final challenge awaits.</p>
+            <div class="next_button" style="margin-top:18px;">
+                <a href="/quiz/4">Final Challenge →</a>
+            </div>
         </div>
-        <div class="decode_card">
-            <div class="decode_card_label">Main Ingredient</div>
-            <div class="decode_card_chinese">肉丝</div>
-            <div class="decode_card_pinyin">ròu-sī / shredded pork</div>
-            <p class="decode_card_body">Thin pork strips, often with wood ear mushrooms and bamboo shoots for varied texture.</p>
-        </div>
+
     </div>
 
-    <div class="decode_vibe">
-        <div class="decode_vibe_label">Overall Vibe</div>
-        <p class="decode_vibe_text">Complex — sweet + sour + savory + mild spice. A glossy reddish-brown sauce clings to tender shredded pork. <strong>No fish anywhere.</strong></p>
-    </div>
-
-    <div class="decode_reveal">
-        <img src="/static/images/quiz1_C_yuxiang.png" alt="鱼香肉丝" class="decode_dish_img">
-        <p class="decode_caption">You decoded your first Chinese dish name. One final challenge awaits.</p>
-    </div>
-
-    <div class="next_button">
-        <a href="/quiz/4">Final Challenge →</a>
-    </div>
-
+</div>
 </div>
 {% endblock %}

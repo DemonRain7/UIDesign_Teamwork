@@ -24,4 +24,34 @@ $(function () {
             alert('Please select at least one option before submitting.');
         }
     });
+
+    // Keyboard shortcuts: A/B/C/D pick an option, Enter submits.
+    // Skip when the user is typing in a real input/textarea.
+    $(document).on('keydown', function (e) {
+        var tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+        var key = (e.key || '').toUpperCase();
+        if (['A', 'B', 'C', 'D'].indexOf(key) !== -1) {
+            var $card = $('.option-card').filter(function () {
+                return $(this).find('.option-key').text().trim().toUpperCase() === key;
+            }).first();
+            if (!$card.length) return;
+            e.preventDefault();
+            if (isMulti) {
+                var $cb = $card.find('input[type="checkbox"]');
+                $cb.prop('checked', !$cb.prop('checked')).trigger('change');
+            } else {
+                $('.option-card').removeClass('selected');
+                $card.addClass('selected');
+                $card.find('input[type="radio"]').prop('checked', true);
+            }
+        } else if (key === 'ENTER') {
+            if ($('#quiz_form').length && $('input[name="answer"]:checked').length) {
+                e.preventDefault();
+                $('#quiz_form').trigger('submit');
+            }
+        }
+    });
 });

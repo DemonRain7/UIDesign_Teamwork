@@ -16,7 +16,8 @@
       ],
       "correct": "C",
       "correct_image": "/static/images/quiz1_C_yuxiang.png",
-      "explanation": "\u9c7c\u9999 (y\u00fa-xi\u0101ng) means \u2018fish-fragrant\u2019 \u2014 but there is NO fish in this dish. It is a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies. By the end of this lesson you\u2019ll know exactly how to decode names like this."
+      "explanation": "\u9c7c\u9999 (y\u00fa-xi\u0101ng) means \u2018fish-fragrant\u2019 \u2014 but there is NO fish in this dish. It is a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies. By the end of this lesson you\u2019ll know exactly how to decode names like this.",
+      "rules": []
     },
     {
       "id": 2,
@@ -34,7 +35,10 @@
       ],
       "correct": "C",
       "correct_image": "/static/images/quiz2_C_hunan_beef.jpg",
-      "explanation": "Hunan (\u6e58) = chili-garlic-smoky, dry not saucy \u2014 direct chili heat with no numbing. Stir-fried (\u7206\u7092) = fast wok-toss giving fragrant, slightly charred edges. Together: a dry, intensely spicy plate. Black pepper (A) is a Western-influenced sauce style. Red-braised (B) is slow and saucy. Sichuan broth (D) numbs rather than burns."
+      "explanation": "Hunan (\u6e58) = chili-garlic-smoky, dry not saucy \u2014 direct chili heat with no numbing. Stir-fried (\u7206\u7092) = fast wok-toss giving fragrant, slightly charred edges. Together: a dry, intensely spicy plate. Black pepper (A) is a Western-influenced sauce style. Red-braised (B) is slow and saucy. Sichuan broth (D) numbs rather than burns.",
+      "rules": [
+        {"lesson": 1, "rule_key": "Stir-fried", "rule_label": "\u7206\u7092 Stir-fried"}
+      ]
     },
     {
       "id": 3,
@@ -52,7 +56,11 @@
       ],
       "correct": "B",
       "correct_image": "/static/images/quiz3_B_cantonese_fish.jpg",
-      "explanation": "Cantonese (\u7ca4) = light, fresh, ingredient-forward. Steamed (\u84b8) = gentle moist heat, no oil crust, no heavy sauce. Together: a clean pale dish with simple aromatics. West Lake fish (A) is Hangzhou-style with sauce. Sichuan water-boiled (C) is intensely spicy. Shunde raw fish (D) is served uncooked."
+      "explanation": "Cantonese (\u7ca4) = light, fresh, ingredient-forward. Steamed (\u84b8) = gentle moist heat, no oil crust, no heavy sauce. Together: a clean pale dish with simple aromatics. West Lake fish (A) is Hangzhou-style with sauce. Sichuan water-boiled (C) is intensely spicy. Shunde raw fish (D) is served uncooked.",
+      "rules": [
+        {"lesson": 1, "rule_key": "Steamed", "rule_label": "\u84b8 Steamed"},
+        {"lesson": 2, "rule_key": "Cantonese-style", "rule_label": "\u7ca4 Cantonese-style"}
+      ]
     },
     {
       "id": 4,
@@ -70,7 +78,11 @@
       ],
       "correct": ["A", "B"],
       "correct_image": "/static/images/quiz4_B_mao_xue_wang.jpg",
-      "explanation": "Hunan (A) and mala (B) are both high-heat styles your friend must avoid. Cantonese white-cut chicken (C) is mild. Fish-fragrant eggplant (D) uses \u9c7c\u9999 sauce which has pickled chili but is far milder \u2014 and now you know what \u9c7c\u9999 actually means!"
+      "explanation": "Hunan (A) and mala (B) are both high-heat styles your friend must avoid. Cantonese white-cut chicken (C) is mild. Fish-fragrant eggplant (D) uses \u9c7c\u9999 sauce which has pickled chili but is far milder \u2014 and now you know what \u9c7c\u9999 actually means!",
+      "rules": [
+        {"lesson": 2, "rule_key": "Hunan-style", "rule_label": "\u6e58 Hunan-style"},
+        {"lesson": 2, "rule_key": "Mala", "rule_label": "\u9ebb\u8fa3 Mala / Numbing-Spicy"}
+      ]
     }
   ]
 }

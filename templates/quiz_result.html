@@ -33,6 +33,7 @@
 
             <div class="result_actions">
                 <a href="{{ url_for('home') }}" class="learn_btn">← Back to Home</a>
+                <p class="result_retake_hint">Tap <strong>↻ Retry</strong> on any row to redo just that question.</p>
             </div>
         </div>
 
@@ -50,6 +51,7 @@
                     Your answer: <strong>{{ row.chosen or '(unanswered)' }}</strong>
                     &nbsp;·&nbsp; Correct: <strong>{{ row.question.correct }}</strong>
                 </div>
+                <a class="result_row_retry" href="{{ url_for('quiz_retake', n=row.question.id) }}">↻ Retry this question</a>
             </div>
             {% endfor %}
         </div>

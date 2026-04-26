@@ -6,8 +6,13 @@ from datetime import datetime
 app = Flask(__name__)
 
 
-def nav_ctx():
-    """Return top-nav context vars for non-home pages."""
+def nav_ctx(jump=None):
+    """Return top-nav context vars for non-home pages.
+
+    `jump` is an optional ('source', n) tuple that drives the persistent
+    Learning ↔ Quiz cross-section button the TA asked us to add. The button
+    appears on every page except the main menu.
+    """
     total = 6
     done = sum([
         1 in user_state['quiz_answers'],           # Hook
@@ -17,11 +22,42 @@ def nav_ctx():
         3 in user_state['quiz_answers'],           # Quiz 2
         4 in user_state['quiz_answers'],           # Final
     ])
-    return {
+    ctx = {
         "show_home_nav": True,
         "nav_progress": round(done / total * 100),
-        "nav_label": f"{done} / {total} stages"
+        "nav_label": f"{done} / {total} stages",
+        "jump_url": None,
+        "jump_label": None,
     }
+    if jump is not None:
+        source, n = jump
+        if source == 'quiz':
+            # The hook (n=1) runs BEFORE any lesson, so "Review" is the wrong
+            # verb — it's a forward jump, not a review. Quiz 2+ has a relevant
+            # lesson to review.
+            if n == 1:
+                ctx["jump_url"] = url_for('learn', n=1)
+                ctx["jump_label"] = "→ Skip to Lesson 1"
+            elif n == 2:
+                ctx["jump_url"] = url_for('learn', n=1)
+                ctx["jump_label"] = "↔ Review Lesson 1"
+            else:
+                ctx["jump_url"] = url_for('learn', n=2)
+                ctx["jump_label"] = "↔ Review Lesson 2"
+        elif source == 'learn':
+            target = 2 if n == 1 else 3   # learn/1 → Quiz 1 (q2); learn/2 → Quiz 2 (q3)
+            ctx["jump_url"] = url_for('quiz', n=target)
+            ctx["jump_label"] = f"↔ Skip to Quiz {n}"
+        elif source == 'decode':
+            ctx["jump_url"] = url_for('learn', n=2)
+            ctx["jump_label"] = "↔ Review Lesson 2"
+        elif source == 'transition':
+            ctx["jump_url"] = url_for('learn', n=n)
+            ctx["jump_label"] = f"↔ Review Lesson {n}"
+        elif source == 'result':
+            ctx["jump_url"] = url_for('learn', n=1)
+            ctx["jump_label"] = "↔ Back to Learning"
+    return ctx
 
 
 # ---------------------------------------------------------------------------
@@ -34,13 +70,23 @@ user_state = {
     "quiz_score": 0,
     "quiz_total": 0,
     "streak": 0,
+    "retake_target": None,   # set when the user is retaking a single question;
+                             # after they re-submit it we send them back to results.
 }
 
+# Each quiz question now declares its own `rules[]` directly inside
+# static/quiz_data.json — see the "rules" arrays. The feedback page renders
+# one Review-this-rule pill per entry. Hook (id=1) has rules=[] on purpose:
+# the user hasn't seen a lesson yet, so there's no rule to review.
+
+# After answering question N, where does the "Continue" button send the user?
+# Each tuple is (button_label, hint_subtitle). Phrased as the destination so
+# users aren't surprised when "Next →" actually goes to a Lesson page.
 NEXT_LABELS = {
-    1: ("Lesson 1", "Cooking Methods = Texture"),
-    2: ("Lesson 2", "Flavor Words = Taste Preview"),
-    3: ("Decode Reveal", "鱼香肉丝 — Full Breakdown"),
-    4: ("Results", "Your Final Score"),
+    1: ("Continue to Lesson 1 →", "Cooking Methods = Texture"),
+    2: ("Continue to Lesson 2 →", "Flavor Words = Taste Preview"),
+    3: ("Continue to Decode Reveal →", "鱼香肉丝 — Full Breakdown"),
+    4: ("See My Results →", "Your Final Score"),
 }
 
 
@@ -116,7 +162,7 @@ def transition(n):
     t = TRANSITIONS.get(n)
     if not t:
         return redirect(url_for('home'))
-    return render_template('transition.html', t=t, **nav_ctx())
+    return render_template('transition.html', t=t, **nav_ctx(jump=('transition', n)))
 
 
 @app.route('/')
@@ -197,7 +243,7 @@ def learn(n):
         lesson=lesson,
         lesson_number=n,
         total_lessons=TOTAL_LESSONS,
-        **nav_ctx()
+        **nav_ctx(jump=('learn', n))
     )
 # ===========================================================================
 # QUIZ ROUTES
@@ -250,7 +296,29 @@ def quiz(n):
             next_n = n + 1
             next_url = url_for('quiz', n=next_n) if next_n <= TOTAL_QUESTIONS else url_for('quiz_result')
 
-        next_label = NEXT_LABELS.get(n, ("Next", ""))
+        # If the user came in via "Retry this question" from the result page,
+        # short-circuit the normal forward flow and send them back to results.
+        is_retake = (user_state.get('retake_target') == n)
+        if is_retake:
+            user_state['retake_target'] = None
+            next_url = url_for('quiz_result')
+            next_label = ("← Back to Results", "Return to your score breakdown")
+        else:
+            next_label = NEXT_LABELS.get(n, ("Continue →", ""))
+
+        # Wrong-answer "Review this rule" pills. Each rule entry on the
+        # question (declared in quiz_data.json) becomes a deep-link of the
+        # form /learn/<lesson>?highlight=<rule_key>, so the lesson page
+        # auto-scrolls to the exact row. Hook (id=1) has rules=[] so nothing
+        # renders for it.
+        review_pills = [
+            {
+                "lesson": r["lesson"],
+                "rule_label": r["rule_label"],
+                "url": url_for('learn', n=r["lesson"]),
+            }
+            for r in question.get("rules", [])
+        ]
         return render_template(
             'quiz_feedback.html',
             question=question,
@@ -261,7 +329,9 @@ def quiz(n):
             total_questions=TOTAL_QUESTIONS,
             streak=current_streak,
             next_label=next_label,
-            **nav_ctx()
+            review_pills=review_pills,
+            is_retake=is_retake,
+            **nav_ctx(jump=('quiz', n))
         )
 
     # GET — record a visit and render the question.
@@ -289,13 +359,13 @@ def quiz(n):
         question_number=n,
         total_questions=TOTAL_QUESTIONS,
         echoed_description=echoed_description,
-        **nav_ctx()
+        **nav_ctx(jump=('quiz', n))
     )
 
 
 @app.route('/quiz/decode')
 def quiz_decode():
-    return render_template('quiz_decode.html', total_questions=TOTAL_QUESTIONS, **nav_ctx())
+    return render_template('quiz_decode.html', total_questions=TOTAL_QUESTIONS, **nav_ctx(jump=('decode', None)))
 
 
 @app.route('/quiz/result')
@@ -313,8 +383,26 @@ def quiz_result():
         score=user_state['quiz_score'],
         total=TOTAL_QUESTIONS,
         review=review,
-        **nav_ctx()
+        **nav_ctx(jump=('result', None))
     )
+
+
+@app.route('/quiz/retake/<int:n>', methods=['GET', 'POST'])
+def quiz_retake(n):
+    """Per-question retake: clear just question n's recorded answer, recompute
+    the score, mark `retake_target` so the next POST on /quiz/n bounces back
+    to the result page (instead of advancing to question n+1), then redirect
+    to the question itself.
+    """
+    if n not in user_state['quiz_answers'] and get_question(n) is None:
+        return redirect(url_for('quiz_result'))
+    user_state['quiz_answers'].pop(n, None)
+    user_state['quiz_score'] = sum(
+        1 for a in user_state['quiz_answers'].values() if a['correct']
+    )
+    user_state['streak'] = 0
+    user_state['retake_target'] = n
+    return redirect(url_for('quiz', n=n))
 
 
 # Development-only endpoint to inspect what's being recorded on the backend.

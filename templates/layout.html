@@ -12,7 +12,11 @@
     <body {% if show_home_nav %}class="with_nav"{% endif %}>
         {% if show_home_nav %}
         <div class="top_nav">
-            <a href="/" class="top_nav_home">← Home</a>
+            <button type="button" class="top_nav_back" onclick="if(history.length>1){history.back();}else{window.location='/';}">← Back</button>
+            <a href="/" class="top_nav_home">⌂ Home</a>
+            {% if jump_url %}
+            <a href="{{ jump_url }}" class="top_nav_jump">{{ jump_label }}</a>
+            {% endif %}
             <div class="top_nav_progress">
                 <div class="top_nav_fill" style="width: {{ nav_progress }}%"></div>
             </div>

@@ -26,14 +26,19 @@ $(function() {
 
     // Table
     let tableData = learningContents.table;
-    let headers = Object.keys(tableData[0]);
-    let headerRow = headers.map(h => `<th>${h}</th>`).join("");
-    let bodyRows = tableData.map(row =>
-        `<tr>${headers.map(h => {
+    const skipKeys = new Set(['Image', 'Caption']);
+    let headers = Object.keys(tableData[0]).filter(h => !skipKeys.has(h));
+    let headerRow = headers.map(h => `<th>${h}</th>`).join("") + '<th></th>';
+    let bodyRows = tableData.map((row, i) => {
+        const hasImage = row['Image'] && row['Image'].trim();
+        const viewCell = hasImage
+            ? `<td><button class="view_pic_btn" data-index="${i}">View Picture</button></td>`
+            : '<td><span class="view_pic_none">—</span></td>';
+        return `<tr>${headers.map(h => {
             const cls = h === 'Chinese' ? ' class="learn_chinese_cell"' : '';
-            return `<td${cls}>${row[h]}</td>`;
-        }).join("")}</tr>`
-    ).join("");
+            return `<td${cls}>${row[h] ?? ''}</td>`;
+        }).join("")}${viewCell}</tr>`;
+    }).join("");
     $("#learing_table_container").html(
         `<table class="learn_table">
             <thead><tr>${headerRow}</tr></thead>
@@ -41,13 +46,30 @@ $(function() {
         </table>`
     );
 
-    // Image cards
-    [0, 1, 2, 3].forEach(i => {
-        $(`#learning_image_${i}_container`).html(
-            `<div class="learn_image_card">
-                <img src="${learningContents.images[i]}" alt="${learningContents.captions[i]}">
-                <div class="learn_image_caption">${learningContents.captions[i]}</div>
-            </div>`
-        );
+    // Single image card
+    function showCard(index) {
+        const row = tableData[index];
+        const img = row['Image'] || '';
+        const cap = row['Caption'] || '';
+        if (img) {
+            $('#learning_image_container').html(
+                `<div class="learn_image_card">
+                    <img src="${img}" alt="${cap}">
+                    <div class="learn_image_caption">${cap}</div>
+                </div>`
+            );
+        } else {
+            $('#learning_image_container').html(
+                `<div class="learn_image_empty">No image available</div>`
+            );
+        }
+        $('.view_pic_btn').removeClass('active');
+        $(`.view_pic_btn[data-index="${index}"]`).addClass('active');
+    }
+
+    showCard(0);
+
+    $(document).on('click', '.view_pic_btn', function() {
+        showCard(parseInt($(this).data('index')));
     });
 });

@@ -21,8 +21,8 @@
                 "Cooking Method": "Smoked",
                 "Chinese": "熏",
                 "Texture Outcome": "Deep, earthy, smoky complexity",
-                "Image": "",
-                "Caption": ""
+                "Image": "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjFnbXp3c2Exa3I3MWNqNHQzOXdienVteWdqNmlvZ3VyaTZtNDZ1NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HEd9G2nA94DE4/giphy.gif",
+                "Caption": "Smoked: deep, earthy, smoky complexity"
             },
             {
                 "Cooking Method": "Steamed",
@@ -42,8 +42,8 @@
                 "Cooking Method": "Deep-fried",
                 "Chinese": "炸",
                 "Texture Outcome": "Crispy golden outside, tender inside",
-                "Image": "",
-                "Caption": ""
+                "Image": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjhld3FheTNtNXkzMDJ6dmU0bDN6YTU4czl5cXZtdmJldHpzNzU1eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d9NQPpxTT4PB2yqALx/giphy.gif",
+                "Caption": "Deep-fried: crispy golden outside, tender inside"
             }
         ]
     },

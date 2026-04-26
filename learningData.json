@@ -3,46 +3,82 @@
         "title": "Cooking Methods = Texture",
         "beginning": "The cooking method tells you exactly what texture to expect before the food arrives.",
         "table": [
-            {"Cooking Method": "Stir-fried", "Chinese": "爆炒", "Texture Outcome": "Savory, quick wok toss, lightly charred"},
-            {"Cooking Method": "Braised", "Chinese": "炖", "Texture Outcome": "Fall-apart tender, rich in liquid"},
-            {"Cooking Method": "Smoked", "Chinese": "熏", "Texture Outcome": "Deep, earthy, smoky complexity"},
-            {"Cooking Method": "Steamed", "Chinese": "蒸", "Texture Outcome": "Light, tender, clean natural taste"},
-            {"Cooking Method": "Qing-chao (Light)", "Chinese": "清炒", "Texture Outcome": "Fresh, bright, crisp — minimal seasoning"},
-            {"Cooking Method": "Deep-fried", "Chinese": "炸", "Texture Outcome": "Crispy golden outside, tender inside"}
-        ],
-        "images": [
-            "https://upload.wikimedia.org/wikipedia/commons/5/52/Ginger_chicken_%283168342551%29.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Red_braised_pork_%2820141106191221%29.JPG/1920px-Red_braised_pork_%2820141106191221%29.JPG",
-            "https://upload.wikimedia.org/wikipedia/commons/d/d0/Ipomoea_stir_fry.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/9/95/CantoneseSteamedfish.jpg"
-        ],
-        "captions": [
-            "Stir-fried: wok-tossed with high heat",
-            "Braised: slow-cooked until fall-apart tender",
-            "Qing-chao: lightly stir-fried, fresh & crisp",
-            "Steamed: gentle heat, clean natural flavor"
+            {
+                "Cooking Method": "Stir-fried",
+                "Chinese": "爆炒",
+                "Texture Outcome": "Savory, quick wok toss, lightly charred",
+                "Image": "https://upload.wikimedia.org/wikipedia/commons/5/52/Ginger_chicken_%283168342551%29.jpg",
+                "Caption": "Stir-fried: wok-tossed with high heat"
+            },
+            {
+                "Cooking Method": "Braised",
+                "Chinese": "炖",
+                "Texture Outcome": "Fall-apart tender, rich in liquid",
+                "Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Red_braised_pork_%2820141106191221%29.JPG/1920px-Red_braised_pork_%2820141106191221%29.JPG",
+                "Caption": "Braised: slow-cooked until fall-apart tender"
+            },
+            {
+                "Cooking Method": "Smoked",
+                "Chinese": "熏",
+                "Texture Outcome": "Deep, earthy, smoky complexity",
+                "Image": "",
+                "Caption": ""
+            },
+            {
+                "Cooking Method": "Steamed",
+                "Chinese": "蒸",
+                "Texture Outcome": "Light, tender, clean natural taste",
+                "Image": "https://upload.wikimedia.org/wikipedia/commons/9/95/CantoneseSteamedfish.jpg",
+                "Caption": "Steamed: gentle heat, clean natural flavor"
+            },
+            {
+                "Cooking Method": "Qing-chao (Light)",
+                "Chinese": "清炒",
+                "Texture Outcome": "Fresh, bright, crisp — minimal seasoning",
+                "Image": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Ipomoea_stir_fry.jpg",
+                "Caption": "Qing-chao: lightly stir-fried, fresh & crisp"
+            },
+            {
+                "Cooking Method": "Deep-fried",
+                "Chinese": "炸",
+                "Texture Outcome": "Crispy golden outside, tender inside",
+                "Image": "",
+                "Caption": ""
+            }
         ]
     },
     "2": {
         "title": "Flavor & Style Words = Taste Preview",
         "beginning": "These words in a dish name are a preview of what your taste buds will experience.",
         "table": [
-            {"Flavor/Style Word": "Hunan-style", "Chinese": "湘", "Taste Outcome": "Intensely spicy, smoky, garlicky. Direct chili heat — no numbing. Dry and fragrant."},
-            {"Flavor/Style Word": "Cantonese-style", "Chinese": "粤", "Taste Outcome": "Light, fresh, ingredient-forward. Minimal seasoning; clean and elegant."},
-            {"Flavor/Style Word": "Mala / Numbing-Spicy", "Chinese": "麻辣", "Taste Outcome": "Ma (麻) = numbing from peppercorn + La (辣) = chili burn. Layered and electric."},
-            {"Flavor/Style Word": "Yu-xiang / \"Fish-Fragrant\"", "Chinese": "鱼香", "Taste Outcome": "Contains NO fish. Sweet-sour-savory-spicy sauce (garlic, pickled chili, vinegar)."}
-        ],
-        "images": [
-            "/static/images/learn2_hunan_style.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg/1920px-Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Homemade_Hotpot.jpg/960px-Homemade_Hotpot.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Qiezi.jpg/1920px-Qiezi.jpg"
-        ],
-        "captions": [
-            "Hunan-style: smoky, dry, chili-forward heat",
-            "Cantonese: light, delicate, ingredient-first",
-            "Mala: numbing peppercorn + chili burn",
-            "Yu-xiang: sweet-sour-savory"
+            {
+                "Flavor/Style Word": "Hunan-style",
+                "Chinese": "湘",
+                "Taste Outcome": "Intensely spicy, smoky, garlicky. Direct chili heat — no numbing. Dry and fragrant.",
+                "Image": "/static/images/learn2_hunan_style.jpg",
+                "Caption": "Hunan-style: smoky, dry, chili-forward heat"
+            },
+            {
+                "Flavor/Style Word": "Cantonese-style",
+                "Chinese": "粤",
+                "Taste Outcome": "Light, fresh, ingredient-forward. Minimal seasoning; clean and elegant.",
+                "Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg/1920px-Har_gow_served_at_a_Chinese_restaurant_in_the_Sunset_District_of_SF.jpg",
+                "Caption": "Cantonese: light, delicate, ingredient-first"
+            },
+            {
+                "Flavor/Style Word": "Mala / Numbing-Spicy",
+                "Chinese": "麻辣",
+                "Taste Outcome": "Ma (麻) = numbing from peppercorn + La (辣) = chili burn. Layered and electric.",
+                "Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Homemade_Hotpot.jpg/960px-Homemade_Hotpot.jpg",
+                "Caption": "Mala: numbing peppercorn + chili burn"
+            },
+            {
+                "Flavor/Style Word": "Yu-xiang / \"Fish-Fragrant\"",
+                "Chinese": "鱼香",
+                "Taste Outcome": "Contains NO fish. Sweet-sour-savory-spicy sauce (garlic, pickled chili, vinegar).",
+                "Image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Qiezi.jpg/1920px-Qiezi.jpg",
+                "Caption": "Yu-xiang: sweet-sour-savory"
+            }
         ]
     }
 }

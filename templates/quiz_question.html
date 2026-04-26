@@ -49,11 +49,10 @@
 
             <div class="quiz_actions quiz_actions_left">
                 <button type="submit" class="btn_submit">Submit Answer</button>
-                <a class="btn_skip"
-                   href="{% if question_number < total_questions %}/quiz/{{ question_number + 1 }}{% else %}/quiz/result{% endif %}">
-                   Skip
-                </a>
             </div>
+            <p class="keyboard_hint">
+                Tip: press <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> to pick · <kbd>Enter</kbd> to submit.
+            </p>
 
         </div>
 

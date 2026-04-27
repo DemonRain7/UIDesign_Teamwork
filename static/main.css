@@ -406,8 +406,17 @@ body.with_nav {
 .option_review.safe .tag { color: #2f7d32; }
 .option_review.avoid .tag { color: #b02a2a; }
 
-.next_button {
+.feedback_actions {
     margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.next_button {
+    margin-top: 0;
     text-align: right;
 }
 
@@ -422,6 +431,26 @@ body.with_nav {
 }
 
 .next_button a:hover { background: #0f1a2b; }
+
+/* ===== "Review Lesson N" detour button — secondary style ===== */
+.btn_review_lesson {
+    display: inline-block;
+    background: #fdf8ec;
+    color: #5a4a30;
+    border: 1.5px solid #C8932B;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .2px;
+    transition: background .15s ease, color .15s ease;
+}
+
+.btn_review_lesson:hover {
+    background: #C8932B;
+    color: #fff;
+}
 
 /* ===== Multi-select checkbox card ===== */
 .option-card.multi input[type="checkbox"] { display: none; }

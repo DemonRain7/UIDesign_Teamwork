@@ -124,11 +124,16 @@
     </div>
     {% endif %}
 
-    <!-- Next button + preview -->
-    <div class="next_button {% if is_correct %}next_btn_pulse{% endif %}">
-        <a href="{{ next_url }}" class="js_enter">
-            {% if question_number < total_questions %}Next →{% else %}See My Results →{% endif %}
-        </a>
+    <!-- Action row: optional Review Lesson detour + main Continue button -->
+    <div class="feedback_actions">
+        {% if review_url %}
+        <a href="{{ review_url }}" class="btn_review_lesson">{{ review_label }}</a>
+        {% endif %}
+        <div class="next_button {% if is_correct %}next_btn_pulse{% endif %}">
+            <a href="{{ next_url }}" class="js_enter">
+                {% if question_number < total_questions %}Next →{% else %}See My Results →{% endif %}
+            </a>
+        </div>
     </div>
 
 </div>

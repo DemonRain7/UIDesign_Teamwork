@@ -25,6 +25,7 @@
       "round": 1,
       "step": "combined",
       "dish": "Hunan-style Stir-fried Beef",
+      "chinese_title": "湘式炒牛肉",
       "title": "Quiz 1: What Is Hunan-style Stir-fried Beef?",
       "prompt": "Each option shows a different beef preparation. Which one matches Hunan-style Stir-fried Beef?",
       "options": [
@@ -46,6 +47,7 @@
       "round": 2,
       "step": "combined",
       "dish": "Cantonese Steamed Fish",
+      "chinese_title": "粤式蒸鱼",
       "title": "Quiz 2: What Is Cantonese Steamed Fish?",
       "prompt": "Each option shows a different fish preparation. Which one matches Cantonese Steamed Fish?",
       "options": [

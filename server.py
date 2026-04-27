@@ -7,57 +7,77 @@ app = Flask(__name__)
 
 
 def nav_ctx(jump=None):
-    """Return top-nav context vars for non-home pages.
+    """Return top-nav context vars (stepper) for non-home pages.
 
-    `jump` is an optional ('source', n) tuple that drives the persistent
-    Learning ↔ Quiz cross-section button the TA asked us to add. The button
-    appears on every page except the main menu.
+    Three stepper variants depending on entry mode:
+      learn_only → 3 nodes: Home → Lesson 1 → Lesson 2
+      quiz_only  → 5 nodes: Hook → Quiz 1 → Quiz 2 → Final → Results
+      original   → 7 nodes: Hook → Lesson 1 → Quiz 1 → Lesson 2 → Quiz 2 → Decode → Final
     """
-    total = 6
-    done = sum([
-        1 in user_state['quiz_answers'],           # Hook
-        any(l['lesson'] == 1 for l in user_state['learning_log']),  # Lesson 1
-        2 in user_state['quiz_answers'],           # Quiz 1
-        any(l['lesson'] == 2 for l in user_state['learning_log']),  # Lesson 2
-        3 in user_state['quiz_answers'],           # Quiz 2
-        4 in user_state['quiz_answers'],           # Final
-    ])
-    ctx = {
-        "show_home_nav": True,
-        "nav_progress": round(done / total * 100),
-        "nav_label": f"{done} / {total} stages",
-        "jump_url": None,
-        "jump_label": None,
+    _qa  = user_state['quiz_answers']
+    _ll  = user_state['learning_log']
+    quiz_only  = user_state.get('quiz_only_mode',  False)
+    learn_only = user_state.get('learn_only_mode', False)
+
+    step_key = None
+
+    if learn_only:
+        stepper_nodes = [
+            {'key': 'home',    'label': 'Home',     'done': True},
+            {'key': 'lesson1', 'label': 'Lesson 1', 'done': any(l['lesson'] == 1 for l in _ll)},
+            {'key': 'lesson2', 'label': 'Lesson 2', 'done': any(l['lesson'] == 2 for l in _ll)},
+        ]
+        if jump:
+            src, jn = jump
+            if src in ('learn', 'transition') and jn:
+                step_key = f'lesson{jn}'
+
+    elif quiz_only:
+        stepper_nodes = [
+            {'key': 'hook',    'label': 'Hook',    'done': 1 in _qa},
+            {'key': 'quiz1',   'label': 'Quiz 1',  'done': 2 in _qa},
+            {'key': 'quiz2',   'label': 'Quiz 2',  'done': 3 in _qa},
+            {'key': 'final',   'label': 'Final',   'done': 4 in _qa},
+            {'key': 'results', 'label': 'Results', 'done': all(i in _qa for i in [1,2,3,4])},
+        ]
+        if jump:
+            src, jn = jump
+            step_key = {
+                'quiz':   {1:'hook', 2:'quiz1', 3:'quiz2', 4:'final'}.get(jn),
+                'decode': 'final',
+                'result': 'results',
+            }.get(src)
+
+    else:
+        # Original 7-node path
+        stepper_nodes = [
+            {'key': 'hook',    'label': 'Hook',     'done': 1 in _qa},
+            {'key': 'lesson1', 'label': 'Lesson 1', 'done': any(l['lesson'] == 1 for l in _ll)},
+            {'key': 'quiz1',   'label': 'Quiz 1',   'done': 2 in _qa},
+            {'key': 'lesson2', 'label': 'Lesson 2', 'done': any(l['lesson'] == 2 for l in _ll)},
+            {'key': 'quiz2',   'label': 'Quiz 2',   'done': 3 in _qa},
+            {'key': 'decode',  'label': 'Decode',   'done': user_state.get('decode_visited', False)},
+            {'key': 'final',   'label': 'Final',    'done': 4 in _qa},
+        ]
+        if jump:
+            src, jn = jump
+            step_key = {
+                'quiz':       {1:'hook', 2:'quiz1', 3:'quiz2', 4:'final'}.get(jn),
+                'learn':      {1:'lesson1', 2:'lesson2'}.get(jn),
+                'transition': {1:'lesson1', 2:'lesson2'}.get(jn),
+                'decode':     'decode',
+                'result':     'final',
+            }.get(src)
+
+    return {
+        "show_home_nav":   True,
+        "show_stepper":    True,
+        "stepper_nodes":   stepper_nodes,
+        "stepper_current": step_key,
+        # kept for backward-compat (templates may reference these)
+        "jump_url": None, "jump_label": None, "current_section": None,
+        "nav_progress": 0, "nav_label": "",
     }
-    if jump is not None:
-        source, n = jump
-        if source == 'quiz':
-            # The hook (n=1) runs BEFORE any lesson, so "Review" is the wrong
-            # verb — it's a forward jump, not a review. Quiz 2+ has a relevant
-            # lesson to review.
-            if n == 1:
-                ctx["jump_url"] = url_for('learn', n=1)
-                ctx["jump_label"] = "→ Skip to Lesson 1"
-            elif n == 2:
-                ctx["jump_url"] = url_for('learn', n=1)
-                ctx["jump_label"] = "↔ Review Lesson 1"
-            else:
-                ctx["jump_url"] = url_for('learn', n=2)
-                ctx["jump_label"] = "↔ Review Lesson 2"
-        elif source == 'learn':
-            target = 2 if n == 1 else 3   # learn/1 → Quiz 1 (q2); learn/2 → Quiz 2 (q3)
-            ctx["jump_url"] = url_for('quiz', n=target)
-            ctx["jump_label"] = f"↔ Skip to Quiz {n}"
-        elif source == 'decode':
-            ctx["jump_url"] = url_for('learn', n=2)
-            ctx["jump_label"] = "↔ Review Lesson 2"
-        elif source == 'transition':
-            ctx["jump_url"] = url_for('learn', n=n)
-            ctx["jump_label"] = f"↔ Review Lesson {n}"
-        elif source == 'result':
-            ctx["jump_url"] = url_for('learn', n=1)
-            ctx["jump_label"] = "↔ Back to Learning"
-    return ctx
 
 
 # ---------------------------------------------------------------------------
@@ -72,6 +92,9 @@ user_state = {
     "streak": 0,
     "retake_target": None,   # set when the user is retaking a single question;
                              # after they re-submit it we send them back to results.
+    "quiz_only_mode": False,   # True when user enters via "Go to Quiz" — skips lessons
+    "learn_only_mode": False,  # True when user enters via "Start Learning" — skips quizzes
+    "decode_visited": False,   # True once the decode reveal page is visited
 }
 
 # Each quiz question now declares its own `rules[]` directly inside
@@ -175,42 +198,42 @@ def home():
             "number": 1, "label": "Hook",
             "title": "Can You Guess This Dish?",
             "desc": "A mystery dish name to spark your curiosity before the learning begins.",
-            "url": "/quiz/1",
+            "url": "/quiz/1?mode=full",
             "done": 1 in user_state['quiz_answers']
         },
         {
             "number": 2, "label": "Lesson 1",
             "title": "Cooking Methods = Texture",
             "desc": "Learn how technique words predict texture before the food arrives.",
-            "url": url_for('learn', n=1),
+            "url": url_for('learn', n=1) + "?mode=full",
             "done": lesson_visited(1)
         },
         {
             "number": 3, "label": "Quiz 1",
             "title": "Spot the Hunan Stir-fry",
             "desc": "Apply your texture knowledge: identify a dish from its cooking clues.",
-            "url": "/quiz/2",
+            "url": "/quiz/2?mode=full",
             "done": 2 in user_state['quiz_answers']
         },
         {
             "number": 4, "label": "Lesson 2",
             "title": "Flavor Words = Taste Preview",
             "desc": "Regional styles and flavor words that tell you exactly what you'll taste.",
-            "url": url_for('learn', n=2),
+            "url": url_for('learn', n=2) + "?mode=full",
             "done": lesson_visited(2)
         },
         {
             "number": 5, "label": "Quiz 2",
             "title": "Decode Cantonese Steamed Fish",
             "desc": "Combine cooking method + regional style to identify the right dish.",
-            "url": "/quiz/3",
+            "url": "/quiz/3?mode=full",
             "done": 3 in user_state['quiz_answers']
         },
         {
             "number": 6, "label": "Final Challenge",
             "title": "Decode & Order for a Friend",
             "desc": "Full decode reveal, then protect your spice-averse friend with what you've learned.",
-            "url": "/quiz/decode",
+            "url": "/quiz/decode?mode=full",
             "done": 4 in user_state['quiz_answers']
         },
     ]
@@ -233,6 +256,13 @@ def learn(n):
     lesson = LEARNING_DATA.get(str(n))
     if lesson is None:
         return redirect(url_for('home'))
+    if request.args.get('mode') == 'full':
+        user_state['learn_only_mode'] = False
+        user_state['quiz_only_mode'] = False
+    elif n == 1 and request.args.get('mode') == 'learn_only':
+        user_state['learn_only_mode'] = True
+        user_state['quiz_only_mode'] = False
+        user_state['learning_log'] = []
     user_state["learning_log"].append({
         "timestamp": datetime.now().isoformat(),
         "lesson": n,
@@ -243,6 +273,7 @@ def learn(n):
         lesson=lesson,
         lesson_number=n,
         total_lessons=TOTAL_LESSONS,
+        learn_only=user_state['learn_only_mode'],
         **nav_ctx(jump=('learn', n))
     )
 # ===========================================================================
@@ -283,18 +314,32 @@ def quiz(n):
             user_state['streak'] = 0
         current_streak = user_state['streak']
 
-        if n == 1:
-            # Hook done → go to Lesson 1
-            next_url = url_for('learn', n=1)
-        elif n == 2:
-            # Quiz 1 done → go to Lesson 2
-            next_url = url_for('learn', n=2)
-        elif n == 3:
-            # Quiz 2b done → decode reveal
-            next_url = url_for('quiz_decode')
+        quiz_only = user_state.get('quiz_only_mode', False)
+        if quiz_only:
+            if n == 1:
+                next_url = url_for('quiz', n=2)
+            elif n == 2:
+                next_url = url_for('quiz', n=3)
+            elif n == 3:
+                next_url = url_for('quiz', n=4)
+            else:
+                next_url = url_for('quiz_result')
         else:
-            next_n = n + 1
-            next_url = url_for('quiz', n=next_n) if next_n <= TOTAL_QUESTIONS else url_for('quiz_result')
+            if n == 1:
+                next_url = url_for('learn', n=1)
+            elif n == 2:
+                next_url = url_for('learn', n=2)
+            elif n == 3:
+                next_url = url_for('quiz_decode')
+            else:
+                next_n = n + 1
+                next_url = url_for('quiz', n=next_n) if next_n <= TOTAL_QUESTIONS else url_for('quiz_result')
+
+        NEXT_LABELS_QUIZ_ONLY = {
+            1: ("Continue to Quiz 1 →", "Spot the Hunan Stir-fry"),
+            2: ("Continue to Quiz 2 →", "Decode Cantonese Steamed Fish"),
+            3: ("Go to Final Challenge →", "Protect your spice-averse friend"),
+        }
 
         # If the user came in via "Retry this question" from the result page,
         # short-circuit the normal forward flow and send them back to results.
@@ -303,6 +348,8 @@ def quiz(n):
             user_state['retake_target'] = None
             next_url = url_for('quiz_result')
             next_label = ("← Back to Results", "Return to your score breakdown")
+        elif quiz_only:
+            next_label = NEXT_LABELS_QUIZ_ONLY.get(n, ("Continue →", ""))
         else:
             next_label = NEXT_LABELS.get(n, ("Continue →", ""))
 
@@ -335,6 +382,17 @@ def quiz(n):
         )
 
     # GET — record a visit and render the question.
+    if request.args.get('mode') == 'full':
+        user_state['learn_only_mode'] = False
+        user_state['quiz_only_mode'] = False
+    elif n == 1 and request.args.get('mode') == 'quiz_only':
+        user_state['quiz_only_mode'] = True
+        user_state['learn_only_mode'] = False
+        user_state['quiz_answers'] = {}
+        user_state['quiz_score'] = 0
+        user_state['quiz_total'] = 0
+        user_state['streak'] = 0
+        user_state['retake_target'] = None
     user_state['quiz_visits'].append({
         "timestamp": datetime.now().isoformat(),
         "question_id": n
@@ -365,6 +423,10 @@ def quiz(n):
 
 @app.route('/quiz/decode')
 def quiz_decode():
+    if request.args.get('mode') == 'full':
+        user_state['learn_only_mode'] = False
+        user_state['quiz_only_mode'] = False
+    user_state['decode_visited'] = True
     return render_template('quiz_decode.html', total_questions=TOTAL_QUESTIONS, **nav_ctx(jump=('decode', None)))
 
 
@@ -403,6 +465,33 @@ def quiz_retake(n):
     user_state['streak'] = 0
     user_state['retake_target'] = n
     return redirect(url_for('quiz', n=n))
+
+
+@app.route('/quiz/retake-all')
+def quiz_retake_all():
+    user_state['quiz_answers'] = {}
+    user_state['quiz_score'] = 0
+    user_state['quiz_total'] = 0
+    user_state['streak'] = 0
+    user_state['retake_target'] = None
+    user_state['quiz_only_mode'] = True
+    user_state['learn_only_mode'] = False
+    return redirect(url_for('quiz', n=1))
+
+
+@app.route('/reset')
+def reset():
+    user_state['learning_log'] = []
+    user_state['quiz_visits'] = []
+    user_state['quiz_answers'] = {}
+    user_state['quiz_score'] = 0
+    user_state['quiz_total'] = 0
+    user_state['streak'] = 0
+    user_state['retake_target'] = None
+    user_state['quiz_only_mode'] = False
+    user_state['learn_only_mode'] = False
+    user_state['decode_visited'] = False
+    return redirect(url_for('home'))
 
 
 # Development-only endpoint to inspect what's being recorded on the backend.

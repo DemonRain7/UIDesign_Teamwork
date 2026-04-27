@@ -13,7 +13,14 @@ $(function() {
         prevBtn.click(function() { window.location.href = `/learn/${LESSON_ID - 1}`; });
     }
 
-    if (LESSON_ID >= TOTAL_LESSONS) {
+    if (LEARN_ONLY) {
+        if (LESSON_ID >= TOTAL_LESSONS) {
+            nextBtn.text('Back to Home →')
+                   .click(function() { window.location.href = '/'; });
+        } else {
+            nextBtn.click(function() { window.location.href = `/learn/${LESSON_ID + 1}`; });
+        }
+    } else if (LESSON_ID >= TOTAL_LESSONS) {
         nextBtn.addClass('learn_btn_quiz')
                .click(function() { window.location.href = '/quiz/3'; });
     } else {
@@ -46,9 +53,12 @@ $(function() {
         </table>`
     );
 
+    let currentIndex = 0;
+
     // Single image card
     function showCard(index) {
-        const row = tableData[index];
+        currentIndex = Math.max(0, Math.min(index, tableData.length - 1));
+        const row = tableData[currentIndex];
         const img = row['Image'] || '';
         const cap = row['Caption'] || '';
         if (img) {
@@ -64,12 +74,23 @@ $(function() {
             );
         }
         $('.view_pic_btn').removeClass('active');
-        $(`.view_pic_btn[data-index="${index}"]`).addClass('active');
+        $(`.view_pic_btn[data-index="${currentIndex}"]`).addClass('active');
+        // Highlight selected row
+        $('tbody tr').removeClass('learn_row_selected');
+        $('tbody tr').eq(currentIndex).addClass('learn_row_selected');
     }
 
     showCard(0);
 
     $(document).on('click', '.view_pic_btn', function() {
         showCard(parseInt($(this).data('index')));
+    });
+
+    // Arrow key navigation between rows
+    $(document).on('keydown', function(e) {
+        var tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); showCard(currentIndex + 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); showCard(currentIndex - 1); }
     });
 });

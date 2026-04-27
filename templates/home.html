@@ -19,11 +19,13 @@
 
     <div class="home_eyebrow">UI Design · Final Project</div>
     <h1 class="home_title">Your Menu Decoding Journey</h1>
-    <p class="home_subtitle">
-        An interactive lesson that teaches you to read English-translated Chinese
-        menu names — cooking methods, regional styles, and flavor words — so you
-        can order with confidence.
-    </p>
+    <p class="home_subtitle">Decode Chinese menu names — one stage at a time.</p>
+
+    <!-- Entry-point shortcuts -->
+    <div class="home_entry_btns">
+        <a href="/learn/1?mode=learn_only" class="home_entry_btn home_entry_primary">Start Learning →</a>
+        <a href="/quiz/1?mode=quiz_only" class="home_entry_btn home_entry_secondary">Go to Quiz →</a>
+    </div>
 
     <!-- Progress timeline -->
     <div class="home_timeline">
@@ -51,10 +53,6 @@
                 <span class="home_stage_status_badge upcoming">🔒 Locked</span>
             </div>
             <div class="home_stage_title">{{ s.title }}</div>
-            <p class="home_stage_desc">{{ s.desc }}</p>
-            <div class="home_stage_locked_hint">
-                Complete {{ stages[loop.index0 - 1].label }} first
-            </div>
         </div>
 
         {% else %}
@@ -62,13 +60,12 @@
             <div class="home_stage_top">
                 <span class="home_stage_num">{{ s.label }}</span>
                 <span class="home_stage_status_badge {{ s.status }}">
-                    {% if s.status == 'done' %}✓ Completed{% else %}Up Next{% endif %}
+                    {% if s.status == 'done' %}✓ Done{% else %}Up Next{% endif %}
                 </span>
             </div>
             <div class="home_stage_title">{{ s.title }}</div>
-            <p class="home_stage_desc">{{ s.desc }}</p>
             <div class="home_stage_cta">
-                {% if s.status == 'done' %}Review →{% else %}Start →{% endif %}
+                {% if s.status == 'done' %}Review →{% else %}▶ Start{% endif %}
             </div>
         </a>
         {% endif %}

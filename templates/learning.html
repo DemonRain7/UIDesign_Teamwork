@@ -5,6 +5,7 @@
         const learningContents = {{ lesson | tojson }};
         const LESSON_ID = {{ lesson_number }};
         const TOTAL_LESSONS = {{ total_lessons }};
+        const LEARN_ONLY = {{ 'true' if learn_only else 'false' }};
     </script>
     <script src="{{ url_for('static', filename='logLearning.js') }}"></script>
 {% endblock %}
@@ -32,8 +33,9 @@
 
         <div class="learn_nav">
             <button type="button" class="learn_btn" id="prev_button">← Prev</button>
-            <button type="button" class="learn_btn learn_btn_primary" id="next_button">Next →</button>
+            <button type="button" class="learn_btn learn_btn_primary js_enter" id="next_button">Next →</button>
         </div>
+        <p class="keyboard_hint" style="text-align:right; margin-top:6px;"><kbd>↑</kbd><kbd>↓</kbd> to browse rows · Press <kbd>↵</kbd> Enter to continue</p>
 
     </div>
 </div>

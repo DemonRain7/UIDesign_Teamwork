@@ -49,8 +49,16 @@
     {% endif %}
 
     <div class="feedback_grid">
-        <div class="feedback_image">
+        <div class="feedback_image {% if question.multi_select %}feedback_image_multi{% endif %}">
+            {% if question.multi_select %}
+                {% for opt in question.options %}
+                    {% if opt.key in question.correct %}
+                    <img src="{{ opt.image }}" alt="{{ opt.name }}">
+                    {% endif %}
+                {% endfor %}
+            {% else %}
             <img src="{{ question.correct_image }}" alt="{{ question.dish }}">
+            {% endif %}
         </div>
 
         <div>
@@ -87,44 +95,40 @@
                     <strong>{{ opt.key }}) {{ opt.name }}</strong> — {{ opt.detail }}
                 </div>
                 {% endfor %}
-                {% if not is_correct and review_pills %}
-                <div class="review_rule_links">
-                    <span class="review_rule_label">Review the rule(s) you missed:</span>
-                    {% for pill in review_pills %}
-                    <a class="review_rule_link" href="{{ pill.url }}">
-                        ↻ {{ pill.rule_label }} (Lesson {{ pill.lesson }})
-                    </a>
-                    {% endfor %}
-                </div>
-                {% endif %}
             </div>
             {% else %}
             <div class="feedback_card">
                 <h3>Why</h3>
                 <p>{{ question.explanation }}</p>
-                {% if not is_correct and review_pills %}
-                <div class="review_rule_links">
-                    <span class="review_rule_label">Review the rule(s) you missed:</span>
-                    {% for pill in review_pills %}
-                    <a class="review_rule_link" href="{{ pill.url }}">
-                        ↻ {{ pill.rule_label }} (Lesson {{ pill.lesson }})
-                    </a>
-                    {% endfor %}
-                </div>
-                {% endif %}
             </div>
             {% endif %}
         </div>
     </div>
 
-    <!-- Continue button — label always names the destination explicitly so
-         the user knows whether they're heading into a Lesson, the Decode
-         page, the Results, or back to the score breakdown after a retake. -->
-    <div class="next_button {% if is_correct and not is_retake %}next_btn_pulse{% endif %}">
-        <a href="{{ next_url }}">{{ next_label[0] }}</a>
-        {% if next_label[1] %}
-        <p class="next_step_hint">{{ next_label[1] }}</p>
-        {% endif %}
+    <!-- Achievement banner after Q2 and Q3 -->
+    {% if question.id == 2 %}
+    <div class="achievement_banner">
+        <div class="achievement_icon">🏅</div>
+        <div>
+            <div class="achievement_title">Cooking Method Unlocked</div>
+            <div class="achievement_desc">You can now decode: <strong>Regional prefix</strong> (湘/粤/川) = flavor profile &nbsp;·&nbsp; <strong>Stir-fried (爆炒)</strong> = fast wok, dry &amp; fragrant</div>
+        </div>
+    </div>
+    {% elif question.id == 3 %}
+    <div class="achievement_banner">
+        <div class="achievement_icon">🏅</div>
+        <div>
+            <div class="achievement_title">Flavor Word Unlocked</div>
+            <div class="achievement_desc">You can now decode: <strong>粤 (Cantonese)</strong> = light &amp; fresh &nbsp;·&nbsp; <strong>蒸 (Steamed)</strong> = gentle moist heat, no crust, no heavy sauce</div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Next button + preview -->
+    <div class="next_button {% if is_correct %}next_btn_pulse{% endif %}">
+        <a href="{{ next_url }}" class="js_enter">
+            {% if question_number < total_questions %}Next →{% else %}See My Results →{% endif %}
+        </a>
     </div>
 
 </div>

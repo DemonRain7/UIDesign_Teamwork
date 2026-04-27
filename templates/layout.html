@@ -11,16 +11,20 @@
 
     <body {% if show_home_nav %}class="with_nav"{% endif %}>
         {% if show_home_nav %}
-        <div class="top_nav">
+        <div class="top_nav top_nav_stepper">
             <button type="button" class="top_nav_back" onclick="if(history.length>1){history.back();}else{window.location='/';}">← Back</button>
             <a href="/" class="top_nav_home">⌂ Home</a>
-            {% if jump_url %}
-            <a href="{{ jump_url }}" class="top_nav_jump">{{ jump_label }}</a>
-            {% endif %}
-            <div class="top_nav_progress">
-                <div class="top_nav_fill" style="width: {{ nav_progress }}%"></div>
+            <div class="path_stepper">
+                {% for node in stepper_nodes %}
+                <div class="stepper_node {% if node.key == stepper_current %}active{% elif node.done %}done{% endif %}">
+                    <div class="stepper_dot">{% if node.done %}✓{% endif %}</div>
+                    <div class="stepper_label">{{ node.label }}</div>
+                </div>
+                {% if not loop.last %}
+                <div class="stepper_line {% if node.done %}done{% endif %}"></div>
+                {% endif %}
+                {% endfor %}
             </div>
-            <span class="top_nav_label">{{ nav_label }}</span>
         </div>
         {% endif %}
 
@@ -37,7 +41,17 @@
         <!-- custom code -->
         {% block scripts %}{% endblock %}
         <script>
-            
+            // Global Enter-to-continue: fires on any page that has a .js_enter element,
+            // but only when the quiz question form (#quiz_form) is NOT present —
+            // that page handles its own keyboard shortcuts via logQuiz.js.
+            $(document).on('keydown', function (e) {
+                if ($('#quiz_form').length) return;
+                if (e.key !== 'Enter') return;
+                var tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+                if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON' || tag === 'A') return;
+                var $el = $('.js_enter').first();
+                if ($el.length) { e.preventDefault(); $el[0].click(); }
+            });
         </script>
     </body>
 </html>

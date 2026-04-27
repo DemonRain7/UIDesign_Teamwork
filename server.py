@@ -103,8 +103,9 @@ user_state = {
 # the user hasn't seen a lesson yet, so there's no rule to review.
 
 # After answering question N, where does the "Continue" button send the user?
-# Each tuple is (button_label, hint_subtitle). Phrased as the destination so
-# users aren't surprised when "Next →" actually goes to a Lesson page.
+# This is the linear forward flow. A separate "Review Lesson N" button on the
+# feedback page (driven by `question.rules`) lets the user optionally detour
+# back to revisit the rule the question tested.
 NEXT_LABELS = {
     1: ("Continue to Lesson 1 →", "Cooking Methods = Texture"),
     2: ("Continue to Lesson 2 →", "Flavor Words = Taste Preview"),
@@ -353,19 +354,24 @@ def quiz(n):
         else:
             next_label = NEXT_LABELS.get(n, ("Continue →", ""))
 
-        # Wrong-answer "Review this rule" pills. Each rule entry on the
-        # question (declared in quiz_data.json) becomes a deep-link of the
-        # form /learn/<lesson>?highlight=<rule_key>, so the lesson page
-        # auto-scrolls to the exact row. Hook (id=1) has rules=[] so nothing
-        # renders for it.
-        review_pills = [
-            {
-                "lesson": r["lesson"],
-                "rule_label": r["rule_label"],
-                "url": url_for('learn', n=r["lesson"]),
-            }
-            for r in question.get("rules", [])
-        ]
+        # Optional "Review Lesson N" button — gives the user a way to
+        # detour back to the lesson whose rule this question tested. Driven
+        # by `question.rules` in quiz_data.json. If multiple rules are
+        # declared, link to the highest-numbered lesson (the more advanced
+        # rule). Skipped on:
+        #   - Hook (no rules to review yet)
+        #   - The final question (user is one click away from results;
+        #     a lesson detour at this point is mis-timed)
+        #   - quiz_only mode (user explicitly opted out of lessons)
+        rules = question.get('rules', [])
+        if rules and not quiz_only and n < TOTAL_QUESTIONS:
+            review_lesson = max(r['lesson'] for r in rules)
+            review_url = url_for('learn', n=review_lesson)
+            review_label = f'↻ Review Lesson {review_lesson}'
+        else:
+            review_url = None
+            review_label = None
+
         return render_template(
             'quiz_feedback.html',
             question=question,
@@ -376,8 +382,9 @@ def quiz(n):
             total_questions=TOTAL_QUESTIONS,
             streak=current_streak,
             next_label=next_label,
-            review_pills=review_pills,
             is_retake=is_retake,
+            review_url=review_url,
+            review_label=review_label,
             **nav_ctx(jump=('quiz', n))
         )
 

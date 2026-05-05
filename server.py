@@ -7,13 +7,6 @@ app = Flask(__name__)
 
 
 def nav_ctx(jump=None):
-    """Return top-nav context vars (stepper) for non-home pages.
-
-    Three stepper variants depending on entry mode:
-      learn_only → 3 nodes: Home → Lesson 1 → Lesson 2
-      quiz_only  → 5 nodes: Hook → Quiz 1 → Quiz 2 → Final → Results
-      original   → 7 nodes: Hook → Lesson 1 → Quiz 1 → Lesson 2 → Quiz 2 → Decode → Final
-    """
     _qa  = user_state['quiz_answers']
     _ll  = user_state['learning_log']
     quiz_only  = user_state.get('quiz_only_mode',  False)
@@ -97,15 +90,6 @@ user_state = {
     "decode_visited": False,   # True once the decode reveal page is visited
 }
 
-# Each quiz question now declares its own `rules[]` directly inside
-# static/quiz_data.json — see the "rules" arrays. The feedback page renders
-# one Review-this-rule pill per entry. Hook (id=1) has rules=[] on purpose:
-# the user hasn't seen a lesson yet, so there's no rule to review.
-
-# After answering question N, where does the "Continue" button send the user?
-# This is the linear forward flow. A separate "Review Lesson N" button on the
-# feedback page (driven by `question.rules`) lets the user optionally detour
-# back to revisit the rule the question tested.
 NEXT_LABELS = {
     1: ("Continue to Lesson 1 →", "Cooking Methods = Texture"),
     2: ("Continue to Lesson 2 →", "Flavor Words = Taste Preview"),
@@ -143,12 +127,6 @@ def get_question(n):
             return q
     return None
 
-# ===========================================================================
-# HOME + LEARNING ROUTES
-# Owner: Ray Tang (backend) and Zhonghao Liu (frontend)
-# These stubs exist so the app runs end-to-end while the learning team builds
-# their pages. Replace the stub bodies, not the route signatures.
-# ===========================================================================
 TRANSITIONS = {
     1: {
         "badge": "Lesson 1 Complete",
@@ -277,14 +255,6 @@ def learn(n):
         learn_only=user_state['learn_only_mode'],
         **nav_ctx(jump=('learn', n))
     )
-# ===========================================================================
-# QUIZ ROUTES
-# Part 1 (Progressive Decoding, rounds 1 & 2) — Yu Qiu
-# Part 2 (Scenario Question)                  — Alice (Shurong Zhang)
-# Shared quiz infrastructure (routes, JSON schema, scoring, feedback page,
-# final result page) is scaffolded by Yu Qiu so Alice can refine Part 2's
-# copy, styling, and additional scenarios on top of it.
-# ===========================================================================
 @app.route('/quiz/<int:n>', methods=['GET', 'POST'])
 def quiz(n):
     question = get_question(n)
@@ -354,15 +324,6 @@ def quiz(n):
         else:
             next_label = NEXT_LABELS.get(n, ("Continue →", ""))
 
-        # Optional "Review Lesson N" button — gives the user a way to
-        # detour back to the lesson whose rule this question tested. Driven
-        # by `question.rules` in quiz_data.json. If multiple rules are
-        # declared, link to the highest-numbered lesson (the more advanced
-        # rule). Skipped on:
-        #   - Hook (no rules to review yet)
-        #   - The final question (user is one click away from results;
-        #     a lesson detour at this point is mis-timed)
-        #   - quiz_only mode (user explicitly opted out of lessons)
         rules = question.get('rules', [])
         if rules and not quiz_only and n < TOTAL_QUESTIONS:
             review_lesson = max(r['lesson'] for r in rules)
@@ -405,8 +366,6 @@ def quiz(n):
         "question_id": n
     })
 
-    # On image-matching steps, echo back the description the user chose in
-    # the previous step. This is the concrete fix from HW9 user testing.
     echoed_description = None
     if question.get('echo_previous_description'):
         prev_id = question['echo_previous_description']

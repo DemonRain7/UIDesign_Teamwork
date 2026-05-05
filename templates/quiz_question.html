@@ -25,7 +25,6 @@
     <form method="POST" id="quiz_form">
     <div class="quiz_split">
 
-        <!-- Left: context + question info + submit -->
         <div class="quiz_split_left">
 
             {% if question.step == "scenario" %}
@@ -62,7 +61,6 @@
 
         </div>
 
-        <!-- Right: option cards -->
         <div class="quiz_split_right">
             {% if question.part == "hook" %}
             <div class="hook_question_cjk">鱼香肉丝</div>

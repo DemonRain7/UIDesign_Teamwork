@@ -21,13 +21,11 @@
     <h1 class="home_title">Your Menu Decoding Journey</h1>
     <p class="home_subtitle">Decode Chinese menu names — one stage at a time.</p>
 
-    <!-- Entry-point shortcuts -->
     <div class="home_entry_btns">
         <a href="/learn/1?mode=learn_only" class="home_entry_btn home_entry_primary">Start Learning →</a>
         <a href="/quiz/1?mode=quiz_only" class="home_entry_btn home_entry_secondary">Go to Quiz →</a>
     </div>
 
-    <!-- Progress timeline -->
     <div class="home_timeline">
         {% for s in stages %}
         <div class="home_tl_node {{ s.status }}">
@@ -42,7 +40,6 @@
         {% endfor %}
     </div>
 
-    <!-- Stage cards -->
     <div class="home_stages">
         {% for s in stages %}
 
@@ -73,7 +70,6 @@
         {% endfor %}
     </div>
 
-    <!-- Main CTA -->
     <div class="home_main_cta">
         {% if all_done %}
         <a href="{{ url_for('quiz_result') }}" class="learn_btn learn_btn_primary">See My Results →</a>

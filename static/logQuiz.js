@@ -1,4 +1,3 @@
-// Quiz client-side behaviour — Yu Qiu / Alice
 $(function () {
     var isMulti = $('.option-card.multi').length > 0;
 

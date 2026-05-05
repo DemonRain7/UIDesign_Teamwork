@@ -17,14 +17,12 @@
         </div>
     </div>
 
-    <!-- Streak badge -->
     {% if (streak | default(0)) >= 2 %}
     <div style="text-align:center;">
         <span class="streak_badge">🔥 {{ streak | default(0) }} in a row!</span>
     </div>
     {% endif %}
 
-    <!-- Correct / wrong badge -->
     <span class="feedback_badge {% if is_correct %}correct{% else %}incorrect{% endif %}">
         {% if question.part == "hook" %}
             {% if is_correct %}✓ Good instincts — let's see why{% else %}✗ Surprising, right? Here's the truth…{% endif %}
@@ -105,7 +103,6 @@
         </div>
     </div>
 
-    <!-- Achievement banner after Q2 and Q3 -->
     {% if question.id == 2 %}
     <div class="achievement_banner">
         <div class="achievement_icon">🏅</div>
@@ -124,7 +121,6 @@
     </div>
     {% endif %}
 
-    <!-- Action row: optional Review Lesson detour + main Continue button -->
     <div class="feedback_actions">
         {% if review_url %}
         <a href="{{ review_url }}" class="btn_review_lesson">{{ review_label }}</a>

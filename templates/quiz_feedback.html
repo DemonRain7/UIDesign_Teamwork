@@ -4,6 +4,13 @@
 <div class="main_container quiz_wide">
 <div class="quiz_container quiz_container_wide {% if is_correct %}animate_correct{% else %}animate_wrong{% endif %}">
 
+    {% if is_retake %}
+    <div class="retake_ribbon">
+        <span>↻</span> Retake Mode — your score has been updated
+        <a href="{{ next_url }}">← Back to Results</a>
+    </div>
+    {% endif %}
+
     <div class="progress_header">
         <div>
             <span class="badge badge-pill quiz-badge">QUIZ</span>
@@ -103,6 +110,30 @@
             {% endif %}
         </div>
     </div>
+
+    {% if question.step != 'scenario' %}
+    <div class="options_state_row">
+        <div class="options_state_label">All Options</div>
+        {% for opt in question.options %}
+        {% if question.multi_select %}
+            {% set opt_correct = opt.key in question.correct %}
+            {% set opt_chosen = chosen and opt.key in chosen %}
+        {% else %}
+            {% set opt_correct = (opt.key == question.correct) %}
+            {% set opt_chosen = (opt.key == chosen) %}
+        {% endif %}
+        <div class="option-card option-card-feedback
+            {%- if opt_correct %} correct
+            {%- elif opt_chosen %} incorrect
+            {%- else %} neutral{% endif %}">
+            <div class="option-header">
+                <span class="option-key">{{ opt.key }}</span>
+                <span class="option-text">{{ opt.text }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     {% if question.id == 2 %}
     <div class="achievement_banner">

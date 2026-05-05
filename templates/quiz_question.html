@@ -17,9 +17,7 @@
             {% endif %}
             &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }}
         </div>
-        <div class="progress_track">
-            <div class="progress_fill" style="width: {{ (question_number / total_questions * 100) | int }}%"></div>
-        </div>
+        <hr style="color: #C8932B;">
     </div>
 
     <form method="POST" id="quiz_form">

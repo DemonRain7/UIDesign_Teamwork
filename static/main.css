@@ -19,6 +19,7 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    zoom: 0.95;
 }
 
 .main_container {
@@ -1267,6 +1268,23 @@ body.with_nav {
     align-items: center;
     gap: 6px;
     min-width: 60px;
+    text-decoration: none;
+    color: inherit;
+}
+
+a.stepper_node.done {
+    cursor: pointer;
+}
+
+a.stepper_node.done:hover .stepper_dot {
+    background: #a87920;
+    border-color: #a87920;
+    transform: scale(1.1);
+    transition: transform .15s ease, background .15s ease;
+}
+
+a.stepper_node.done:hover .stepper_label {
+    color: #a87920;
 }
 
 .stepper_dot {

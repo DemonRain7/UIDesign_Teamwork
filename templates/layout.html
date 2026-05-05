@@ -15,10 +15,19 @@
             <a href="/" class="top_nav_home">⌂ Home</a>
             <div class="path_stepper">
                 {% for node in stepper_nodes %}
-                <div class="stepper_node {% if node.key == stepper_current %}active{% elif node.done %}done{% endif %}">
+                {% set node_class = 'active' if node.key == stepper_current else ('done' if node.done else '') %}
+                {% if node.done and node.url %}
+                <a href="{{ node.url }}" class="stepper_node {{ node_class }}">
+                {% else %}
+                <div class="stepper_node {{ node_class }}">
+                {% endif %}
                     <div class="stepper_dot">{% if node.done %}✓{% endif %}</div>
                     <div class="stepper_label">{{ node.label }}</div>
+                {% if node.done and node.url %}
+                </a>
+                {% else %}
                 </div>
+                {% endif %}
                 {% if not loop.last %}
                 <div class="stepper_line {% if node.done %}done{% endif %}"></div>
                 {% endif %}

@@ -15,21 +15,6 @@
     </div>
     {% endif %}
 
-    <div class="progress_header">
-        <div>
-            <span class="badge badge-pill quiz-badge">QUIZ</span>
-        </div>
-        <div class="progress_label">
-            {% if question.part == "hook" %}The Hook — Warm-up
-            {% elif question.part == 1 %}Part 1 — Progressive Decoding &nbsp;·&nbsp; Quiz {{ question.round }}
-            {% elif question.step == "decode" %}Part 2 — Put It All Together
-            {% else %}Part 2 — Final Scenario
-            {% endif %}
-            &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }}
-        </div>
-        <hr style="color: #C8932B;">
-    </div>
-
     <form method="POST" id="quiz_form">
     <div class="quiz_split">
 

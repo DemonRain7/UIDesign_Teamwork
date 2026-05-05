@@ -11,20 +11,6 @@
     </div>
     {% endif %}
 
-    <div class="progress_header">
-        <div>
-            <span class="badge badge-pill quiz-badge">QUIZ</span>
-        </div>
-        <div class="progress_label">
-            {% if question.part == "hook" %}The Hook — Warm-up
-            {% elif question.part == 1 %}Part 1 — Progressive Decoding · Quiz {{ question.round }}
-            {% else %}Part 2 — Final Scenario
-            {% endif %}
-            &nbsp;·&nbsp; Question {{ question_number }} of {{ total_questions }} · Answer
-        </div>
-        <hr style="color: #C8932B;">
-    </div>
-
     {% if (streak | default(0)) >= 2 %}
     <div style="text-align:center;">
         <span class="streak_badge">🔥 {{ streak | default(0) }} in a row!</span>

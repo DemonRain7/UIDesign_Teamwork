@@ -6,6 +6,31 @@ from datetime import datetime
 app = Flask(__name__)
 
 
+_STEPPER_URLS = {
+    'full': {
+        'hook':    '/quiz/1?mode=full',
+        'lesson1': '/learn/1?mode=full',
+        'quiz1':   '/quiz/2?mode=full',
+        'lesson2': '/learn/2?mode=full',
+        'quiz2':   '/quiz/3?mode=full',
+        'decode':  '/quiz/decode?mode=full',
+        'final':   '/quiz/4?mode=full',
+    },
+    'quiz_only': {
+        'hook':    '/quiz/1?mode=quiz_only',
+        'quiz1':   '/quiz/2',
+        'quiz2':   '/quiz/3',
+        'final':   '/quiz/4',
+        'results': '/quiz/result',
+    },
+    'learn_only': {
+        'home':    '/',
+        'lesson1': '/learn/1?mode=learn_only',
+        'lesson2': '/learn/2',
+    },
+}
+
+
 def nav_ctx(jump=None):
     _qa  = user_state['quiz_answers']
     _ll  = user_state['learning_log']
@@ -15,6 +40,7 @@ def nav_ctx(jump=None):
     step_key = None
 
     if learn_only:
+        url_map = _STEPPER_URLS['learn_only']
         stepper_nodes = [
             {'key': 'home',    'label': 'Home',     'done': True},
             {'key': 'lesson1', 'label': 'Lesson 1', 'done': any(l['lesson'] == 1 for l in _ll)},
@@ -26,6 +52,7 @@ def nav_ctx(jump=None):
                 step_key = f'lesson{jn}'
 
     elif quiz_only:
+        url_map = _STEPPER_URLS['quiz_only']
         stepper_nodes = [
             {'key': 'hook',    'label': 'Hook',    'done': 1 in _qa},
             {'key': 'quiz1',   'label': 'Quiz 1',  'done': 2 in _qa},
@@ -42,6 +69,7 @@ def nav_ctx(jump=None):
             }.get(src)
 
     else:
+        url_map = _STEPPER_URLS['full']
         # Original 7-node path
         stepper_nodes = [
             {'key': 'hook',    'label': 'Hook',     'done': 1 in _qa},
@@ -61,6 +89,9 @@ def nav_ctx(jump=None):
                 'decode':     'decode',
                 'result':     'final',
             }.get(src)
+
+    for node in stepper_nodes:
+        node['url'] = url_map.get(node['key'])
 
     return {
         "show_home_nav":   True,

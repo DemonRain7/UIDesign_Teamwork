@@ -1860,3 +1860,13 @@ body.with_nav {
     font-style: italic;
     margin: 8px 0 0;
 }
+
+.learning-badge {
+    background-color: #C8932B;
+    margin-bottom: 5px;
+}
+
+.quiz-badge {
+    background-color: #1F2A3D;
+    margin-bottom: 5px;
+}

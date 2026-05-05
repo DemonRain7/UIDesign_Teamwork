@@ -8,6 +8,13 @@
 <div class="main_container quiz_wide">
 <div class="quiz_container quiz_container_wide">
 
+    {% if is_retake %}
+    <div class="retake_ribbon">
+        <span>↻</span> Retake Mode — your score will update on submit
+        <a href="{{ url_for('quiz_result') }}">← Back to Results</a>
+    </div>
+    {% endif %}
+
     <div class="progress_header">
         <div>
             <span class="badge badge-pill quiz-badge">QUIZ</span>
@@ -36,6 +43,7 @@
             {% endif %}
 
             <div class="quiz_header">
+                {% if is_retake %}<div class="retake_eyebrow">↻ Retake</div>{% endif %}
                 {% if question.id == 2 %}
                 <h1 class="quiz_title">Quiz 1: What Is Hunan-style Stir-fried Beef（湘式炒牛肉）?</h1>
                 {% elif question.id == 3 %}

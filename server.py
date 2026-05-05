@@ -377,12 +377,14 @@ def quiz(n):
                     echoed_description = opt['text']
                     break
 
+    is_retake = (user_state.get('retake_target') == n)
     return render_template(
         'quiz_question.html',
         question=question,
         question_number=n,
         total_questions=TOTAL_QUESTIONS,
         echoed_description=echoed_description,
+        is_retake=is_retake,
         **nav_ctx(jump=('quiz', n))
     )
 

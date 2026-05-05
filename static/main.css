@@ -186,7 +186,100 @@ body.with_nav {
 .option-card.selected {
     background: #FFFBF0;
     border-color: #C8932B;
-    box-shadow: 0 0 0 3px rgba(200,147,43,.2), 0 4px 12px rgba(200,147,43,.1);
+    box-shadow:
+        0 0 0 2px #C8932B,
+        0 0 0 5px rgba(200,147,43,.22),
+        inset 0 0 12px rgba(200,147,43,.07),
+        0 4px 12px rgba(200,147,43,.12);
+}
+
+/* ===== Correct / Incorrect / Neutral states (feedback page) ===== */
+.option-card.correct {
+    background: #fffbef;
+    border-color: #C8932B;
+    box-shadow: 0 0 0 2px #C8932B, 0 0 0 5px rgba(200,147,43,.2);
+    pointer-events: none;
+    cursor: default;
+    position: relative;
+}
+
+.option-card.correct::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 22px;
+    height: 22px;
+    background: #C8932B;
+    color: #fff;
+    border-radius: 0 10px 0 6px;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 22px;
+}
+
+.option-card.correct .option-key {
+    background: #C8932B;
+}
+
+.option-card.incorrect {
+    background: #fff5f5;
+    border-color: #b02a2a;
+    box-shadow: 0 0 0 2px #b02a2a, 0 0 0 5px rgba(176,42,42,.18);
+    pointer-events: none;
+    cursor: default;
+    position: relative;
+}
+
+.option-card.incorrect::after {
+    content: '✗';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 22px;
+    height: 22px;
+    background: #b02a2a;
+    color: #fff;
+    border-radius: 0 10px 0 6px;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 22px;
+}
+
+.option-card.incorrect .option-key {
+    background: #b02a2a;
+}
+
+.option-card.neutral {
+    opacity: 0.42;
+    filter: grayscale(35%);
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Option cards row on feedback page — no hover, no images */
+.option-card-feedback {
+    pointer-events: none;
+    cursor: default;
+}
+
+.options_state_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 12px 0 4px;
+}
+
+.options_state_label {
+    grid-column: 1 / -1;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: #9a8a6e;
+    margin-bottom: 2px;
 }
 
 .option-card input[type="radio"] {
@@ -405,15 +498,6 @@ body.with_nav {
 }
 .option_review.safe .tag { color: #2f7d32; }
 .option_review.avoid .tag { color: #b02a2a; }
-
-.feedback_actions {
-    margin-top: 14px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
 
 .next_button {
     margin-top: 0;
@@ -1826,9 +1910,11 @@ body.with_nav {
 
 .home_stage_card.upcoming {
     cursor: default;
-    opacity: .55;
-    filter: grayscale(30%);
-    border-top-color: #d0c9b8;
+    opacity: .58;
+    filter: grayscale(70%) saturate(0.4);
+    border-top-color: #bbb4a6;
+    background: #f2efe8;
+    pointer-events: none;
 }
 
 .home_stage_card.upcoming:hover {
@@ -1869,4 +1955,54 @@ body.with_nav {
 .quiz-badge {
     background-color: #1F2A3D;
     margin-bottom: 5px;
+}
+
+/* ===== Retake mode ===== */
+.retake_ribbon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #C8932B, #e0a93c);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 7px 36px;
+    /* bleed to quiz_container_wide edges: negate its 16px top / 36px side padding */
+    margin: -16px -36px 16px;
+    border-radius: 18px 18px 0 0;
+}
+
+.retake_ribbon a {
+    color: rgba(255,255,255,.85);
+    text-decoration: underline;
+    font-weight: 600;
+    margin-left: auto;
+    letter-spacing: .4px;
+    font-size: 11px;
+    text-transform: none;
+}
+
+.retake_eyebrow {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: #C8932B;
+    border: 1.5px solid rgba(200,147,43,.55);
+    border-radius: 20px;
+    padding: 2px 10px;
+    margin-bottom: 6px;
+}
+
+/* ===== Spacing consistency ===== */
+.feedback_actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }

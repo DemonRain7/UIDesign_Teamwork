@@ -22,6 +22,14 @@ body {
     zoom: 0.95;
 }
 
+.quiz_interactive {
+    zoom: 0.9474;
+}
+
+.quiz_feedback_scale {
+    zoom: 0.87;
+}
+
 .main_container {
     margin: auto;
     width: 860px;

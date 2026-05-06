@@ -8,9 +8,11 @@
 <div class="main_container quiz_wide quiz_interactive">
 <div class="quiz_container quiz_container_wide">
 
+    {% if not is_retake %}
     <div>
         <span class="badge badge-pill quiz-badge">QUIZ</span>
     </div>
+    {% endif %}
 
     {% if is_retake %}
     <div class="retake_ribbon">

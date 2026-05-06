@@ -343,17 +343,25 @@ def quiz(n):
             3: ("Go to Final Challenge →", "Protect your spice-averse friend"),
         }
 
-        # If the user came in via "Retry this question" from the result page,
-        # short-circuit the normal forward flow and send them back to results.
-        is_retake = (user_state.get('retake_target') == n)
-        if is_retake:
-            user_state['retake_target'] = None
-            next_url = url_for('quiz_result')
-            next_label = ("← Back to Results", "Return to your score breakdown")
-        elif quiz_only:
+        # Default next_label based on the linear flow (quiz_only or full).
+        if quiz_only:
             next_label = NEXT_LABELS_QUIZ_ONLY.get(n, ("Continue →", ""))
         else:
             next_label = NEXT_LABELS.get(n, ("Continue →", ""))
+
+        # Retake handling. The "Retry this question" button lives on BOTH the
+        # feedback page (mid-flow) and the result page (post-completion). Only
+        # send the user back to results when the retake originated from
+        # there — detect that by whether every question now has an answer.
+        is_retake = (user_state.get('retake_target') == n)
+        all_answered = all(i in user_state['quiz_answers'] for i in range(1, TOTAL_QUESTIONS + 1))
+        if is_retake:
+            user_state['retake_target'] = None
+            if all_answered:
+                next_url = url_for('quiz_result')
+                next_label = ("← Back to Results", "Return to your score breakdown")
+            # else: keep the normal forward next_url + next_label so the user
+            # continues into Lesson 2 / Decode / next quiz as if no retake.
 
         rules = question.get('rules', [])
         if rules and not quiz_only and n < TOTAL_QUESTIONS:

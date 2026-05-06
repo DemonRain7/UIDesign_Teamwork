@@ -7,7 +7,7 @@
       "step": "image",
       "dish": "Fish-Fragrant Shredded Pork",
       "title": "The Hook: What Is \u9c7c\u9999\u8089\u4e1d?",
-      "prompt": "\u9c7c\u9999\u8089\u4e1d literally means \u201cFish-Fragrant Shredded Pork.\u201d Take a guess \u2014 which of these dishes do you think it is?",
+      "prompt": "Here's what each character means: \u9c7c = fish \u00b7 \u9999 = fragrant \u00b7 \u8089 = meat from animals \u00b7 \u4e1d = shredded. Now take a guess \u2014 which of these four dishes do you think \u9c7c\u9999\u8089\u4e1d is?",
       "options": [
         {"key": "A", "text": "Whole fish gently steamed with ginger, scallion, and a light soy drizzle.", "image": "/static/images/quiz1_A_steamed_fish.png"},
         {"key": "B", "text": "Twice-cooked pork belly stir-fried with green peppers \u2014 smoky, rich, and savory.", "image": "/static/images/quiz1_B_huiguo_rou.jpg"},

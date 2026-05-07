@@ -978,7 +978,7 @@ body.with_nav {
 }
 
 .hook_reveal_chinese {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 800;
     color: #C8932B;
     letter-spacing: 5px;
@@ -1013,7 +1013,7 @@ body.with_nav {
 }
 
 .hook_question_cjk {
-    font-size: 64px;
+    font-size: 40px;
     font-weight: 800;
     color: #C8932B;
     text-align: center;

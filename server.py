@@ -183,7 +183,7 @@ TRANSITIONS = {
             ("鱼香 Yu-xiang", "No fish! Sweet-sour-savory sauce with pickled chili"),
         ],
         "bridge": "You decoded 'stir-fried' from Lesson 1 — but how did you know '鱼香' means no fish? That's what Lesson 2 just gave you.",
-        "tease": "Quiz 2: Does '鱼香肉丝' (Fish-Fragrant Shredded Pork) actually contain fish? Only one way to find out.",
+        "tease": "Quiz 2: Does '鱼香肉丝' (Fish-Fragrant Shredded Meat) actually contain fish? Only one way to find out.",
         "cta": "Take Quiz 2 →",
         "next_url": "/quiz/1"
     }

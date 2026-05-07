@@ -36,9 +36,9 @@
             <div class="quiz_header">
                 {% if is_retake %}<div class="retake_eyebrow">↻ Retake</div>{% endif %}
                 {% if question.id == 2 %}
-                <h1 class="quiz_title">Quiz 1: What Is Hunan-style Stir-fried Beef（湘式炒牛肉）?</h1>
+                <h1 class="quiz_title">Quiz 1: What Is Hunan-style Stir-fried Beef?</h1>
                 {% elif question.id == 3 %}
-                <h1 class="quiz_title">Quiz 2: What Is Cantonese Steamed Fish（粤式蒸鱼）?</h1>
+                <h1 class="quiz_title">Quiz 2: What Is Cantonese Steamed Fish?</h1>
                 {% else %}
                 <h1 class="quiz_title">{{ question.title }}</h1>
                 {% endif %}
@@ -63,11 +63,11 @@
 
         <div class="quiz_split_right">
             {% if question.part == "hook" %}
-            <div class="hook_question_cjk">鱼香肉丝</div>
+            <div class="hook_question_cjk">Fish-Fragrant Shredded Meat</div>
             {% elif question.id == 2 %}
-            <div class="hook_question_cjk">湘式炒牛肉</div>
+            <div class="hook_question_cjk">Hunan-Style Stir-Fried Beef</div>
             {% elif question.id == 3 %}
-            <div class="hook_question_cjk">粤式蒸鱼</div>
+            <div class="hook_question_cjk">Cantonese-Style Steamed Fish</div>
             {% endif %}
             <div class="option-grid">
                 {% for opt in question.options %}

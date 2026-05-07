@@ -5,18 +5,18 @@
       "id": 1,
       "part": "hook",
       "step": "image",
-      "dish": "Fish-Fragrant Shredded Pork",
-      "title": "The Hook: What Is \u9c7c\u9999\u8089\u4e1d?",
-      "prompt": "Here's what each character means: \u9c7c = fish \u00b7 \u9999 = fragrant \u00b7 \u8089 = meat from animals \u00b7 \u4e1d = shredded. Now take a guess \u2014 which of these four dishes do you think \u9c7c\u9999\u8089\u4e1d is?",
+      "dish": "Fish-Fragrant Shredded Meat",
+      "title": "The Hook: What is fish-fragrant shredded meat?",
+      "prompt": "Which of these four dishes do you think it is?",
       "options": [
         {"key": "A", "text": "Whole fish gently steamed with ginger, scallion, and a light soy drizzle.", "image": "/static/images/quiz1_A_steamed_fish.png"},
         {"key": "B", "text": "Twice-cooked pork belly stir-fried with green peppers \u2014 smoky, rich, and savory.", "image": "/static/images/quiz1_B_huiguo_rou.jpg"},
-        {"key": "C", "text": "Stir-fried shredded pork in a glossy reddish-brown sweet-sour-savory sauce \u2014 no fish at all.", "image": "/static/images/quiz1_C_yuxiang.png"},
+        {"key": "C", "text": "Stir-fried shredded meat in a glossy reddish-brown sweet-sour-savory sauce \u2014 no fish at all.", "image": "/static/images/quiz1_C_yuxiang.png"},
         {"key": "D", "text": "Shredded beef quickly wok-tossed with fresh green chili strips.", "image": "/static/images/quiz1_D_stir_fried.jpg"}
       ],
       "correct": "C",
       "correct_image": "/static/images/quiz1_C_yuxiang.png",
-      "explanation": "\u9c7c\u9999 (y\u00fa-xi\u0101ng) means \u2018fish-fragrant\u2019 \u2014 but there is NO fish in this dish. It is a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies. By the end of this lesson you\u2019ll know exactly how to decode names like this.",
+      "explanation": "There is NO fish in this dish. It is a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies. By the end of this lesson you'll know exactly how to decode names like this.",
       "rules": []
     },
     {

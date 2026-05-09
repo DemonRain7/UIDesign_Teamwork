@@ -33,18 +33,6 @@
         {% endif %}
     </span>
 
-    <!-- ===== HOOK: special revelation block ===== -->
-    {% if question.part == "hook" %}
-    <div class="hook_reveal">
-        <div class="hook_reveal_chinese">Fish-Fragrant Shredded Meat</div>
-        <div class="hook_reveal_headline">There is NO fish in this dish.</div>
-        <p class="hook_reveal_sub">
-            It's actually a sweet-sour-savory-spicy sauce made with garlic, ginger, and pickled chilies.
-            Zero fish. Lesson 1 will teach you how to decode names like this.
-        </p>
-    </div>
-    {% endif %}
-
     <div class="feedback_grid">
         <div class="feedback_image {% if question.multi_select %}feedback_image_multi{% endif %}">
             {% if question.multi_select %}
@@ -123,24 +111,6 @@
             </div>
         </div>
         {% endfor %}
-    </div>
-    {% endif %}
-
-    {% if question.id == 2 %}
-    <div class="achievement_banner">
-        <div class="achievement_icon">🏅</div>
-        <div>
-            <div class="achievement_title">Cooking Method Unlocked</div>
-            <div class="achievement_desc">You can now decode: <strong>Regional prefix</strong> (湘/粤/川) = flavor profile &nbsp;·&nbsp; <strong>Stir-fried (爆炒)</strong> = fast wok, dry &amp; fragrant</div>
-        </div>
-    </div>
-    {% elif question.id == 3 %}
-    <div class="achievement_banner">
-        <div class="achievement_icon">🏅</div>
-        <div>
-            <div class="achievement_title">Flavor Word Unlocked</div>
-            <div class="achievement_desc">You can now decode: <strong>粤 (Cantonese)</strong> = light &amp; fresh &nbsp;·&nbsp; <strong>蒸 (Steamed)</strong> = gentle moist heat, no crust, no heavy sauce</div>
-        </div>
     </div>
     {% endif %}
 

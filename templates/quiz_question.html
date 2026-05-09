@@ -26,13 +26,6 @@
 
         <div class="quiz_split_left">
 
-            {% if question.step == "scenario" %}
-            <div class="scenario_scene">
-                <div class="scenario_scene_label">Final Challenge — Real-world Scenario</div>
-                <p>You're at the restaurant. Your friend leans over and whispers: <strong style="color:#e8c87a;">"I can't eat anything spicy — please help me order."</strong> The waiter is waiting.</p>
-            </div>
-            {% endif %}
-
             <div class="quiz_header">
                 {% if is_retake %}<div class="retake_eyebrow">↻ Retake</div>{% endif %}
                 {% if question.id == 2 %}

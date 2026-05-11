@@ -73,10 +73,10 @@
       "title": "Final Scenario: Your Friend Cannot Eat Spicy Food",
       "prompt": "Your friend cannot eat spicy food. You are ordering together at a Chinese restaurant. Select ALL dishes they must AVOID.",
       "options": [
-        {"key": "A", "name": "Hunan Steamed Cured Pork", "text": "Hunan Steamed Cured Pork", "detail": "Hunan prefix = chili-garlic-smoky. The cured pork is steamed with dried chilies and garlic \u2014 direct, unforgiving heat.", "tag": "AVOID", "image": "/static/images/quiz4_A_xiang_la_rou.webp"},
-        {"key": "B", "name": "Mala Maoxuewang", "text": "Mala Maoxuewang", "detail": "Mala = numbing + burning. A Sichuan hotpot-style dish with two layers of spice: chili burn and peppercorn numbness.", "tag": "AVOID", "image": "/static/images/quiz4_B_mao_xue_wang.jpg"},
-        {"key": "C", "name": "Cantonese White-cut Chicken", "text": "Cantonese White-cut Chicken", "detail": "Cantonese = light / fresh. Poached in plain water with ginger and scallion, served with a mild dipping sauce. No chili.", "tag": "SAFE", "image": "/static/images/quiz4_C_bai_qie_ji.jpg"},
-        {"key": "D", "name": "Fish-Fragrant Eggplant", "text": "Fish-Fragrant Eggplant", "detail": "fish-fragrant = sweet-sour-savory with mild pickled chili. Much gentler than Hunan or mala \u2014 the chili is in the sauce, not the heat.", "tag": "SAFE", "image": "/static/images/quiz4_D_yuxiang_eggplant.jpg"}
+        {"key": "A", "name": "Hunan Steamed Cured Pork", "text": "Hunan Steamed Cured Pork", "detail": "Hunan prefix = chili-garlic-smoky. The cured pork is steamed with dried chilies and garlic.", "tag": "AVOID", "image": "/static/images/quiz4_A_xiang_la_rou.webp"},
+        {"key": "B", "name": "Mala Maoxuewang", "text": "Mala Maoxuewang", "detail": "Mala = numbing + burning. A Sichuan hotpot-style dish with chili burn and peppercorn numbness.", "tag": "AVOID", "image": "/static/images/quiz4_B_mao_xue_wang.jpg"},
+        {"key": "C", "name": "Cantonese White-cut Chicken", "text": "Cantonese White-cut Chicken", "detail": "Cantonese = light / fresh. Poached in plain water with ginger and scallion.", "tag": "SAFE", "image": "/static/images/quiz4_C_bai_qie_ji.jpg"},
+        {"key": "D", "name": "Fish-Fragrant Eggplant", "text": "Fish-Fragrant Eggplant", "detail": "fish-fragrant = sweet-sour-savory with mild pickled chili. Much gentler than Hunan or mala.", "tag": "SAFE", "image": "/static/images/quiz4_D_yuxiang_eggplant.jpg"}
       ],
       "correct": ["A", "B"],
       "correct_image": "/static/images/quiz4_B_mao_xue_wang.jpg",

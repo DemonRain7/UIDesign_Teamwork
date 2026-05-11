@@ -113,7 +113,6 @@ user_state = {
     "quiz_answers": {},      # {question_id: {chosen, correct, timestamp}}
     "quiz_score": 0,
     "quiz_total": 0,
-    "streak": 0,
     "retake_target": None,   # set when the user is retaking a single question;
                              # after they re-submit it we send them back to results.
     "quiz_only_mode": False,   # True when user enters via "Go to Quiz" — skips lessons
@@ -310,11 +309,6 @@ def quiz(n):
             1 for a in user_state['quiz_answers'].values() if a['correct']
         )
         user_state['quiz_total'] = TOTAL_QUESTIONS
-        if is_correct:
-            user_state['streak'] += 1
-        else:
-            user_state['streak'] = 0
-        current_streak = user_state['streak']
 
         quiz_only = user_state.get('quiz_only_mode', False)
         if quiz_only:
@@ -380,7 +374,6 @@ def quiz(n):
             next_url=next_url,
             question_number=n,
             total_questions=TOTAL_QUESTIONS,
-            streak=current_streak,
             next_label=next_label,
             is_retake=is_retake,
             review_url=review_url,
@@ -398,7 +391,6 @@ def quiz(n):
         user_state['quiz_answers'] = {}
         user_state['quiz_score'] = 0
         user_state['quiz_total'] = 0
-        user_state['streak'] = 0
         user_state['retake_target'] = None
     user_state['quiz_visits'].append({
         "timestamp": datetime.now().isoformat(),
@@ -469,7 +461,6 @@ def quiz_retake(n):
     user_state['quiz_score'] = sum(
         1 for a in user_state['quiz_answers'].values() if a['correct']
     )
-    user_state['streak'] = 0
     user_state['retake_target'] = n
     return redirect(url_for('quiz', n=n))
 
@@ -479,7 +470,6 @@ def quiz_retake_all():
     user_state['quiz_answers'] = {}
     user_state['quiz_score'] = 0
     user_state['quiz_total'] = 0
-    user_state['streak'] = 0
     user_state['retake_target'] = None
     user_state['quiz_only_mode'] = True
     user_state['learn_only_mode'] = False
@@ -493,7 +483,6 @@ def reset():
     user_state['quiz_answers'] = {}
     user_state['quiz_score'] = 0
     user_state['quiz_total'] = 0
-    user_state['streak'] = 0
     user_state['retake_target'] = None
     user_state['quiz_only_mode'] = False
     user_state['learn_only_mode'] = False

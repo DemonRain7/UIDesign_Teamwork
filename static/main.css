@@ -927,11 +927,6 @@ body.with_nav {
     50%       { box-shadow: 0 0 0 8px rgba(200,147,43,.18), 0 2px 8px rgba(200,147,43,.35); }
 }
 
-@keyframes streakPop {
-    from { transform: scale(0.6); opacity: 0; }
-    to   { transform: scale(1);   opacity: 1; }
-}
-
 @keyframes bannerSlideDown {
     from { opacity: 0; transform: translateY(-10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -949,22 +944,6 @@ body.with_nav {
 
 .next_btn_pulse a {
     animation: btnPulse 1.8s ease infinite;
-}
-
-/* Streak badge */
-.streak_badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: linear-gradient(135deg, #e65c00, #f9a825);
-    color: #fff;
-    border-radius: 20px;
-    padding: 6px 18px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .3px;
-    margin-bottom: 18px;
-    animation: streakPop 0.4s cubic-bezier(.22,1,.36,1);
 }
 
 /* Hook revelation block */

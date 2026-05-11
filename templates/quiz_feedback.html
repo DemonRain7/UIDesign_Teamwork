@@ -17,12 +17,6 @@
     </div>
     {% endif %}
 
-    {% if (streak | default(0)) >= 2 %}
-    <div style="text-align:center;">
-        <span class="streak_badge">🔥 {{ streak | default(0) }} in a row!</span>
-    </div>
-    {% endif %}
-
     <span class="feedback_badge {% if is_correct %}correct{% else %}incorrect{% endif %}">
         {% if question.part == "hook" %}
             {% if is_correct %}✓ Good instincts — let's see why{% else %}✗ Surprising, right? Here's the truth…{% endif %}
